@@ -1,0 +1,25 @@
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--on-primary);
+    border-radius: 100%;
+    width: 56px;
+    appearance: none;
+    height: 56px;
+    margin: 0;
+}
+
+.theme-toggle-btn::before {
+    font-family: "Material Symbols Rounded";
+    color: var(--bg-primary);
+    position: absolute;
+    pointer-events: none;
+    content: "light_mode";
+    font-size: 24px;
+}
+
+.theme-toggle-btn:checked::before {
+    content: "dark_mode";
+}
