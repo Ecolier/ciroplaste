@@ -5,5 +5,8 @@
     "ciroplaste-crm",
     "ciroplaste-design"
   ],
+  "scripts": {
+    "dev": "yarn workspace @ciroplaste/design serve & yarn workspace @ciroplaste/crm keystone dev & yarn workspace @ciroplaste/web dev"
+  },
   "packageManager": "yarn@4.5.0"
 }

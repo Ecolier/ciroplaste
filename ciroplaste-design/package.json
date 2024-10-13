@@ -1,7 +1,15 @@
 {
   "name": "@ciroplaste/design",
   "type": "module",
+  "scripts": {
+    "build": "node ./build.js",
+    "serve": "node ./serve.js",
+    "clean": "rm -rf build"
+  },
   "devDependencies": {
     "style-dictionary": "^4.1.3"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
   }
 }

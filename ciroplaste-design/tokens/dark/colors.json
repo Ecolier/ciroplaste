@@ -1,0 +1,7 @@
+{
+  "colors": {
+    "$type": "color",
+    "background": { "$value": "#141314" },
+    "on-background": { "$value": "#e6e1e3" }
+  }
+}
