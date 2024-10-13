@@ -1,0 +1,7 @@
+{
+  "name": "@ciroplaste/design",
+  "type": "module",
+  "devDependencies": {
+    "style-dictionary": "^4.1.3"
+  }
+}

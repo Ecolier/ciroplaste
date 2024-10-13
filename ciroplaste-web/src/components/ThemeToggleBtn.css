@@ -1,14 +1,21 @@
 .theme-toggle-btn {
+    font-family: var(--crp-theme-v2-title-m-font-family);
+    font-size: var(--crp-theme-v2-title-m-font-size);
+    font-weight: var(--crp-theme-v2-title-m-font-weight);
+    letter-spacing: var(--crp-theme-v2-title-m-letter-spacing);
+    line-height: var(--crp-theme-v2-title-m-line-height);
+    font-variation-settings: "GRAD" var(--crp-theme-v2-title-m-font-variation-GRAD), "opsz" var(--crp-theme-v2-title-m-font-variation-opsz);
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 100px;
+    color: var(--crp-theme-color-on-surface-variant);
+    font-family: var(--crp-theme-display-font-family);
     cursor: pointer;
-    background-color: var(--on-primary);
-    border-radius: 100%;
-    width: 56px;
     appearance: none;
-    height: 56px;
-    margin: 0;
 }
 
 .theme-toggle-btn::before {

@@ -1,11 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Article, { articleLoader } from './routes/article.tsx'
-import Root from './components/Root.tsx'
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from './apollo.tsx'
+import Root from './components/Root.tsx';
+
+
+import './typography.css'
+import './colors.css'
+import './index.css'
 
 const router = createBrowserRouter([
   {

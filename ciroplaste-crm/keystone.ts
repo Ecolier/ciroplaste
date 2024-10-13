@@ -15,7 +15,7 @@ export default config({
       access: allowAll,
       fields: {
         title: text({ validation: { isRequired: true } }),
-        subtitle: text({ validation: { isRequired: true } }),
+        subtitle: text(),
         body: text({ validation: { isRequired: true }, ui: {displayMode: 'textarea' } }),
       },
     }),

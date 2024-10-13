@@ -1,0 +1,172 @@
+:root {
+    --crp-theme-display-font-family: "Lora", sans-serif;
+    --crp-theme-text-font-family: "Noto Sans", sans-serif;
+    --crp-theme-google-symbol-font-family: "Google Symbols";
+    --crp-theme-v2-hero-font-family: var(--crp-theme-display-font-family);
+    --crp-theme-v2-hero-font-size: 96px;
+    --crp-theme-v2-hero-line-height: 1;
+    --crp-theme-v2-hero-font-weight: 475;
+    --crp-theme-v2-hero-font-variation-GRAD: 0;
+    --crp-theme-v2-hero-font-variation-opsz: 18;
+    --crp-theme-v2-hero-letter-spacing: 0;
+    --crp-theme-v2-display-xl-font-family: var(--crp-theme-display-font-family);
+    --crp-theme-v2-display-xl-font-size: 88px;
+    --crp-theme-v2-display-xl-line-height: 96px;
+    --crp-theme-v2-display-xl-font-weight: 475;
+    --crp-theme-v2-display-xl-font-variation-GRAD: 0;
+    --crp-theme-v2-display-xl-font-variation-opsz: 18;
+    --crp-theme-v2-display-xl-letter-spacing: 0;
+    --crp-theme-v2-display-l-font-family: var(--crp-theme-display-font-family);
+    --crp-theme-v2-display-l-font-size: 57px;
+    --crp-theme-v2-display-l-line-height: 64px;
+    --crp-theme-v2-display-l-font-weight: 475;
+    --crp-theme-v2-display-l-font-variation-GRAD: 0;
+    --crp-theme-v2-display-l-font-variation-opsz: 18;
+    --crp-theme-v2-display-l-letter-spacing: 0;
+    --crp-theme-v2-display-m-font-family: var(--crp-theme-display-font-family);
+    --crp-theme-v2-display-m-font-size: 45px;
+    --crp-theme-v2-display-m-line-height: 52px;
+    --crp-theme-v2-display-m-font-weight: 475;
+    --crp-theme-v2-display-m-font-variation-GRAD: 0;
+    --crp-theme-v2-display-m-font-variation-opsz: 18;
+    --crp-theme-v2-display-m-letter-spacing: 0;
+    --crp-theme-v2-display-s-font-family: var(--crp-theme-display-font-family);
+    --crp-theme-v2-display-s-font-size: 36px;
+    --crp-theme-v2-display-s-line-height: 44px;
+    --crp-theme-v2-display-s-font-weight: 475;
+    --crp-theme-v2-display-s-font-variation-GRAD: 0;
+    --crp-theme-v2-display-s-font-variation-opsz: 18;
+    --crp-theme-v2-display-s-letter-spacing: 0;
+    --crp-theme-v2-headline-l-font-family: var(--crp-theme-display-font-family);
+    --crp-theme-v2-headline-l-font-size: 32px;
+    --crp-theme-v2-headline-l-line-height: 40px;
+    --crp-theme-v2-headline-l-font-weight: 475;
+    --crp-theme-v2-headline-l-font-variation-GRAD: 0;
+    --crp-theme-v2-headline-l-font-variation-opsz: 18;
+    --crp-theme-v2-headline-l-letter-spacing: 0;
+    --crp-theme-v2-headline-m-font-family: var(--crp-theme-display-font-family);
+    --crp-theme-v2-headline-m-font-size: 28px;
+    --crp-theme-v2-headline-m-line-height: 36px;
+    --crp-theme-v2-headline-m-font-weight: 475;
+    --crp-theme-v2-headline-m-font-variation-GRAD: 0;
+    --crp-theme-v2-headline-m-font-variation-opsz: 18;
+    --crp-theme-v2-headline-m-letter-spacing: 0;
+    --crp-theme-v2-headline-s-font-family: var(--crp-theme-display-font-family);
+    --crp-theme-v2-headline-s-font-size: 24px;
+    --crp-theme-v2-headline-s-line-height: 32px;
+    --crp-theme-v2-headline-s-font-weight: 475;
+    --crp-theme-v2-headline-s-font-variation-GRAD: 0;
+    --crp-theme-v2-headline-s-font-variation-opsz: 18;
+    --crp-theme-v2-headline-s-letter-spacing: 0;
+    --crp-theme-v2-title-l-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-title-l-font-size: 22px;
+    --crp-theme-v2-title-l-line-height: 30px;
+    --crp-theme-v2-title-l-font-weight: 400;
+    --crp-theme-v2-title-l-font-variation-GRAD: 0;
+    --crp-theme-v2-title-l-font-variation-opsz: 17;
+    --crp-theme-v2-title-l-letter-spacing: 0;
+    --crp-theme-v2-title-m-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-title-m-font-size: 16px;
+    --crp-theme-v2-title-m-line-height: 24px;
+    --crp-theme-v2-title-m-font-weight: 500;
+    --crp-theme-v2-title-m-font-variation-GRAD: 0;
+    --crp-theme-v2-title-m-font-variation-opsz: 17;
+    --crp-theme-v2-title-m-letter-spacing: 0;
+    --crp-theme-v2-title-s-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-title-s-font-size: 14px;
+    --crp-theme-v2-title-s-line-height: 20px;
+    --crp-theme-v2-title-s-font-weight: 500;
+    --crp-theme-v2-title-s-font-variation-GRAD: 0;
+    --crp-theme-v2-title-s-font-variation-opsz: 17;
+    --crp-theme-v2-title-s-letter-spacing: 0;
+    --crp-theme-v2-label-l-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-label-l-font-size: 14px;
+    --crp-theme-v2-label-l-line-height: 20px;
+    --crp-theme-v2-label-l-font-weight: 500;
+    --crp-theme-v2-label-l-font-variation-GRAD: 0;
+    --crp-theme-v2-label-l-font-variation-opsz: 17;
+    --crp-theme-v2-label-l-letter-spacing: 0;
+    --crp-theme-v2-label-m-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-label-m-font-size: 12px;
+    --crp-theme-v2-label-m-line-height: 16px;
+    --crp-theme-v2-label-m-font-weight: 500;
+    --crp-theme-v2-label-m-font-variation-GRAD: 0;
+    --crp-theme-v2-label-m-font-variation-opsz: 17;
+    --crp-theme-v2-label-m-letter-spacing: .1px;
+    --crp-theme-v2-label-s-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-label-s-font-size: 11px;
+    --crp-theme-v2-label-s-line-height: 16px;
+    --crp-theme-v2-label-s-font-weight: 500;
+    --crp-theme-v2-label-s-font-variation-GRAD: 0;
+    --crp-theme-v2-label-s-font-variation-opsz: 17;
+    --crp-theme-v2-label-s-letter-spacing: .1px;
+    --crp-theme-v2-body-l-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-body-l-font-size: 16px;
+    --crp-theme-v2-body-l-line-height: 24px;
+    --crp-theme-v2-body-l-font-weight: 400;
+    --crp-theme-v2-body-l-font-variation-GRAD: 0;
+    --crp-theme-v2-body-l-font-variation-opsz: 17;
+    --crp-theme-v2-body-l-letter-spacing: 0;
+    --crp-theme-v2-body-m-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-body-m-font-size: 14px;
+    --crp-theme-v2-body-m-line-height: 20px;
+    --crp-theme-v2-body-m-font-weight: 400;
+    --crp-theme-v2-body-m-font-variation-GRAD: 0;
+    --crp-theme-v2-body-m-font-variation-opsz: 17;
+    --crp-theme-v2-body-m-letter-spacing: 0;
+    --crp-theme-v2-body-s-font-family: var(--crp-theme-text-font-family);
+    --crp-theme-v2-body-s-font-size: 12px;
+    --crp-theme-v2-body-s-line-height: 16px;
+    --crp-theme-v2-body-s-font-weight: 400;
+    --crp-theme-v2-body-s-font-variation-GRAD: 0;
+    --crp-theme-v2-body-s-font-variation-opsz: 17;
+    --crp-theme-v2-body-s-letter-spacing: .1px;
+    --crp-theme-v2-code-l-font-family: var(--crp-theme-mono-font-family);
+    --crp-theme-v2-code-l-font-size: 16px;
+    --crp-theme-v2-code-l-line-height: 24px;
+    --crp-theme-v2-code-l-font-weight: 400;
+    --crp-theme-v2-code-l-letter-spacing: 0;
+    --crp-theme-v2-code-m-font-family: var(--crp-theme-mono-font-family);
+    --crp-theme-v2-code-m-font-size: 14px;
+    --crp-theme-v2-code-m-line-height: 20px;
+    --crp-theme-v2-code-m-font-weight: 400;
+    --crp-theme-v2-code-m-letter-spacing: 0;
+    --crp-theme-v2-code-snippet-font-family: var(--crp-theme-mono-font-family);
+    --crp-theme-v2-code-snippet-font-size: 15px;
+    --crp-theme-v2-code-snippet-line-height: 32px;
+    --crp-theme-v2-code-snippet-font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+}
+
+@media screen and (min-width: 601px) and (max-width: 1294px) {
+    p, p a, p.medium, p.medium a {
+        font-family: var(--crp-theme-v2-body-l-font-family);
+        font-size: var(--crp-theme-v2-body-l-font-size);
+        font-weight: var(--crp-theme-v2-body-l-font-weight);
+        letter-spacing: var(--crp-theme-v2-body-l-letter-spacing);
+        line-height: var(--crp-theme-v2-body-l-line-height);
+        font-variation-settings: "GRAD" var(--crp-theme-v2-body-l-font-variation-GRAD), "opsz" var(--crp-theme-v2-body-l-font-variation-opsz);
+    }
+}
+
+@media screen and (min-width: 601px) and (min-width: 601px) and (max-width: 1294px) {
+    h1 {
+        font-family: var(--crp-theme-v2-display-xl-font-family);
+        font-size: var(--crp-theme-v2-display-xl-font-size);
+        font-weight: var(--crp-theme-v2-display-xl-font-weight);
+        letter-spacing: var(--crp-theme-v2-display-xl-letter-spacing);
+        line-height: var(--crp-theme-v2-display-xl-line-height);
+        font-variation-settings: "GRAD" var(--crp-theme-v2-display-xl-font-variation-GRAD), "opsz" var(--crp-theme-v2-display-xl-font-variation-opsz);
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1294px) {
+    h2 {
+        font-family: var(--crp-theme-v2-display-m-font-family);
+        font-size: var(--crp-theme-v2-display-m-font-size);
+        font-weight: var(--crp-theme-v2-display-m-font-weight);
+        letter-spacing: var(--crp-theme-v2-display-m-letter-spacing);
+        line-height: var(--crp-theme-v2-display-m-line-height);
+        font-variation-settings: "GRAD" var(--crp-theme-v2-display-m-font-variation-GRAD), "opsz" var(--crp-theme-v2-display-m-font-variation-opsz);
+    }
+}
