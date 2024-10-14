@@ -15,10 +15,8 @@ function Root() {
   }, [theme]);
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
-      <div className={theme}>
-        <Navbar />
-        <Outlet />
-      </div>
+      <Navbar />
+      <Outlet />
     </ThemeContext.Provider>
   )
 }

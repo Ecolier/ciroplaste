@@ -6,9 +6,6 @@ import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from './apollo.tsx'
 import Root from './components/Root.tsx';
 
-
-import './typography.css'
-import './colors.css'
 import './index.css'
 
 const router = createBrowserRouter([

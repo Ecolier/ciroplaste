@@ -2,11 +2,10 @@
   "name": "@ciroplaste/ciroplaste",
   "workspaces": [
     "ciroplaste-web",
-    "ciroplaste-crm",
-    "ciroplaste-design"
+    "ciroplaste-crm"
   ],
   "scripts": {
-    "dev": "yarn workspace @ciroplaste/design serve & yarn workspace @ciroplaste/crm keystone dev & yarn workspace @ciroplaste/web dev"
+    "dev": "yarn workspace @ciroplaste/crm keystone dev & yarn workspace @ciroplaste/web dev"
   },
   "packageManager": "yarn@4.5.0"
 }
