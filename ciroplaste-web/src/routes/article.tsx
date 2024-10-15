@@ -22,10 +22,21 @@ function Article() {
   const queryRef = useLoaderData();
   const { data } = useReadQuery(queryRef);
   return (
-    <div className="flex flex-col mt-20 max-w-screen-xl p-2.5 flex flex-wrap justify-between mx-auto">
-        <h1 className="font-serif text-7xl font-semibold mb-1 dark:text-white">{data?.article?.title}</h1>
-        <h2 className="text-3xl mb-4 dark:text-slate-300">{data?.article?.subtitle}</h2>
-        <p className="dark:text-white">{data?.article?.body}</p>
+    <div className="flex flex-col items-center w-full m-2">
+      <main className="w-full">
+        <div className="flex flex-col items-center w-full">
+          <div className="max-md:p-8 mb-8 items-center flex flex-col p-14 rounded-3xl bg-zinc-500 bg-[url('/DSCF0752.jpg')] bg-cover bg-center bg-blend-soft-light w-full">
+            <h1 className="max-md:text-6xl font-serif text-center text-8xl font-semibold mb-4 text-zinc-100">{data?.article?.title}</h1>
+            <h2 className="text-2xl text-zinc-100">{data?.article?.subtitle}</h2> 
+          </div>
+          <div className="mt-6 w-full max-w-2xl">
+            <div className="mx-6">
+              <h2 className="text-zinc-800 dark:text-zinc-300 text-5xl font-medium mb-4">Introduction</h2>
+              <p className="text-zinc-800 dark:text-zinc-300">{data?.article?.body}</p>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   )
 }

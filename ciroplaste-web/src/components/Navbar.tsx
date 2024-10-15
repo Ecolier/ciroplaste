@@ -1,19 +1,32 @@
-import ThemeToggleBtn from "./ThemeToggleBtn";
+import IconButton from "./IconButton";
+import NavbarSection from "./NavbarSection";
+import ThemeButton from "./ThemeButton";
 
 function Navbar() {
   return (
-    <nav className="top-0 bg-white dark:bg-slate-950 border-gray-200 fixed inset-x-0">
-      <div className="max-w-screen-xl p-2.5 flex flex-wrap items-center justify-between mx-auto ">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Ciroplaste
-          </span>
-        </a>
-        <div className="flex items-center gap-4">
-          <ThemeToggleBtn />
+    <>
+      <header className="bg-white dark:bg-zinc-950 fixed flex flex-col justify-between w-full">
+        <div className="flex relative h-16 w-full">
+          <NavbarSection>
+          <IconButton>
+            <span className="material-symbols-rounded">menu</span>
+          </IconButton>
+            <a
+              href="/"
+              className="px-2 ml-3.5 "
+            >
+              <span className="dark:text-zinc-200 text-zinc-800">
+                Ciroplaste
+              </span>
+            </a>
+          </NavbarSection>
+          <NavbarSection justify="end">
+            <ThemeButton />
+          </NavbarSection>
         </div>
-      </div>
-    </nav>
+      </header>
+      <div className="pt-16"></div>
+    </>
   );
 }
 

@@ -5,7 +5,7 @@
     "ciroplaste-crm"
   ],
   "scripts": {
-    "dev": "yarn workspace @ciroplaste/crm keystone dev & yarn workspace @ciroplaste/web dev"
+    "dev": "yarn workspace @ciroplaste/crm keystone dev & yarn workspace @ciroplaste/web dev --host 0.0.0.0"
   },
   "packageManager": "yarn@4.5.0"
 }

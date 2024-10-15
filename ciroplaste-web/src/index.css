@@ -4,14 +4,9 @@
 
 @layer base {
   body {
-    @apply dark:bg-slate-900 bg-slate-50
+    @apply dark:bg-zinc-900 bg-zinc-50 h-full
   }
-}
-
-html {
-  height: 100%;
-}
-
-body {
-  min-height: 100%;
+  html {
+    @apply h-full
+  }
 }

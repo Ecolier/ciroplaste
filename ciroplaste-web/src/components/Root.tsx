@@ -15,8 +15,10 @@ function Root() {
   }, [theme]);
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
-      <Navbar />
-      <Outlet />
+        <Navbar />
+        <div className="flex grow justify-center w-full">
+          <Outlet />
+        </div>
     </ThemeContext.Provider>
   )
 }
