@@ -1,44 +1,57 @@
-import { gql, useQuery, useReadQuery } from '@apollo/client';
-import { useLoaderData, useParams } from 'react-router-dom';
-import { preloadQuery } from '../apollo';
+import { QueryRef, useReadQuery } from "@apollo/client";
+import { useLoaderData } from "react-router-dom";
+import TitleCard from "../components/TitleCard";
+import {
+  DocumentRenderer,
+  DocumentRendererProps,
+} from "@keystone-6/document-renderer";
+import { Post } from "../types/post";
 
-const GET_ARTICLE = gql`
-  query GetArticle($where: ArticleWhereUniqueInput!) {
-  article(where: $where) {
-    title
-    subtitle
-    body
-  }
-}
-`;
-
-export async function articleLoader({params: id}) {
-  return preloadQuery(GET_ARTICLE, {
-    variables: { where: id },
-  });
-}
+const renderers: DocumentRendererProps["renderers"] = {
+  block: {
+    heading({ level, children }) {
+      const Comp = `h${level}` as const;
+      return (
+        <Comp className="text-zinc-800 dark:text-zinc-300 max-md:text-4xl text-6xl font-medium mb-4">
+          {children}
+        </Comp>
+      );
+    },
+    paragraph({ children }) {
+      return (
+        <p className="text-zinc-800 dark:text-zinc-300 mb-4">{children}</p>
+      );
+    },
+  },
+};
 
 function Article() {
-  const queryRef = useLoaderData();
-  const { data } = useReadQuery(queryRef);
+  const queryRef = useLoaderData() as QueryRef<Post>;
+  const { data, error } = useReadQuery<Post>(queryRef);
+  const { post } = data;
   return (
     <div className="flex flex-col items-center w-full m-2">
       <main className="w-full">
         <div className="flex flex-col items-center w-full">
-          <div className="max-md:p-8 mb-8 items-center flex flex-col p-14 rounded-3xl bg-zinc-500 bg-[url('/DSCF0752.jpg')] bg-cover bg-center bg-blend-soft-light w-full">
-            <h1 className="max-md:text-6xl font-serif text-center text-8xl font-semibold mb-4 text-zinc-100">{data?.article?.title}</h1>
-            <h2 className="text-2xl text-zinc-100">{data?.article?.subtitle}</h2> 
+          <div className="mb-8">
+            <TitleCard
+              title={post?.title}
+              slug={post?.slug}
+              img={post?.image.url}
+            />
           </div>
           <div className="mt-6 w-full max-w-2xl">
             <div className="mx-6">
-              <h2 className="text-zinc-800 dark:text-zinc-300 text-5xl font-medium mb-4">Introduction</h2>
-              <p className="text-zinc-800 dark:text-zinc-300">{data?.article?.body}</p>
+              <DocumentRenderer
+                document={post?.content.document}
+                renderers={renderers}
+              />
             </div>
           </div>
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default Article
+export default Article;

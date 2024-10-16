@@ -1,24 +1,38 @@
-import { config, list } from '@keystone-6/core';
-import { allowAll } from '@keystone-6/core/access';
-import { text } from '@keystone-6/core/fields';
+// Welcome to Keystone!
+//
+// This file is what Keystone uses as the entry-point to your headless backend
+//
+// Keystone imports the default export of this file, expecting a Keystone configuration object
+//   you can find out more at https://keystonejs.com/docs/apis/config
+
+import { config } from "@keystone-6/core";
+
+// to keep this file tidy, we define our schema in a different file
+import { lists } from "./src/schema";
 
 export default config({
   server: {
-    cors: { origin: ['http://localhost:5173', 'http://172.20.10.2:5173', 'http://172.20.10.3:5173', 'http://169.254.72.103:5173'], credentials: true },
-    options: {host: '0.0.0.0'}
+    cors: true,
   },
   db: {
-    provider: 'sqlite',
-    url: 'file:./keystone.db',
+    // we're using sqlite for the fastest startup experience
+    //   for more information on what database might be appropriate for you
+    //   see https://keystonejs.com/docs/guides/choosing-a-database#title
+    provider: "sqlite",
+    url: "file:./keystone.db",
   },
-  lists: {
-    Article: list({
-      access: allowAll,
-      fields: {
-        title: text({ validation: { isRequired: true } }),
-        subtitle: text(),
-        body: text({ validation: { isRequired: true }, ui: {displayMode: 'textarea' } }),
+  lists,
+  storage: {
+    local_images: {
+      kind: 'local',
+      type: 'image',
+      generateUrl: path => `http://172.20.10.3:3000/images${path}`,
+      serverRoute: {
+        path: '/images',
       },
-    }),
-  },
+      storagePath: 'public/images',
+    },
+    /** more storage */
+  }
+  
 });

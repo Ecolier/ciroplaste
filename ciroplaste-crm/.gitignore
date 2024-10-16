@@ -1,2 +1,5 @@
+node_modules
 .keystone/
-*.db
+keystone.db
+*.log
+public/

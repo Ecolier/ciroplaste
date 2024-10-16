@@ -1,7 +1,16 @@
 {
   "name": "@ciroplaste/crm",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "keystone dev",
+    "start": "keystone start",
+    "build": "keystone build"
+  },
   "dependencies": {
-    "@keystone-6/core": "^6.3.0",
-    "typescript": "^5.6.3"
+    "@keystone-6/auth": "^8.0.0",
+    "@keystone-6/core": "^6.0.0",
+    "@keystone-6/fields-document": "^9.0.0",
+    "typescript": "^5.5.0"
   }
 }
