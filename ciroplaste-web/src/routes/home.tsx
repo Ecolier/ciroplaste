@@ -9,7 +9,7 @@ function Home() {
   return (
     <div className="flex flex-col items-center w-full m-2">
       {articles?.map((article, index) => (
-        <a key={index} href={`/article/${article.id}`} className='mb-4'>
+        <a key={index} href={`/article/${article.id}`} className="mb-4 w-full">
           <TitleCard
             title={article.title}
             slug={article.subtitle}

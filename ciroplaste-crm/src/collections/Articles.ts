@@ -21,7 +21,7 @@ const Articles: CollectionConfig = {
     },
     {
         name: 'content',
-        type: 'richText'
+        type: 'richText',
     },
     {
         name: 'author',

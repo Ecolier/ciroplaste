@@ -1,9 +1,9 @@
 services:
 
-  ciroplaste-web: 
+  web: 
     build: ciroplaste-web
 
-  ciroplaste-crm:
+  crm:
     image: node:18-alpine
     build: ciroplaste-crm
     ports:

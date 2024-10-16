@@ -28,5 +28,5 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
-  cors: ['http://172.20.10.3:5173'],
+  cors: ['http://172.20.10.3:5173', 'http://172.20.10.2:5173', 'http://localhost:5173'],
 })

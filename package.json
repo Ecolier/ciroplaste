@@ -5,12 +5,15 @@
     "ciroplaste-crm"
   ],
   "scripts": {
-    "dev": "yarn workspace @ciroplaste/crm keystone dev & yarn workspace @ciroplaste/web dev --host 0.0.0.0"
+    "dev": "concurrently \"yarn dev:web --host 0.0.0.0\" \"yarn dev:crm\"",
+    "dev:web": "yarn workspace @ciroplaste/web dev",
+    "dev:crm": "yarn workspace @ciroplaste/crm dev"
   },
   "packageManager": "yarn@4.5.0",
   "devDependencies": {
     "@eslint/js": "^9.12.0",
     "@types/eslint__js": "^8.42.3",
+    "concurrently": "^9.0.1",
     "eslint": "^9.12.0",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.9.0"
