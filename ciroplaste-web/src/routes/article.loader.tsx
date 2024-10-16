@@ -2,25 +2,24 @@ import { gql } from "@apollo/client";
 import { preloadQuery } from "../apollo";
 
 const GET_ARTICLE = gql`
-  query Post($where: PostWhereUniqueInput!) {
-    post(where: $where) {
-      content {
-        document
-      }
-      slug
+  query Article($id: String!) {
+    Article(id: $id) {
       title
-      author {
-        name
+      subtitle
+      callout {
+        value {
+          ... on Media {
+            url
+          }
+        }
       }
-      image {
-        url
-      }
+      content
     }
   }
 `;
 
 export async function articleLoader({ params: id }) {
   return preloadQuery(GET_ARTICLE, {
-    variables: { where: id },
+    variables: id,
   });
 }

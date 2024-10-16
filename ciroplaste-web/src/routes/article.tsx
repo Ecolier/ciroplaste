@@ -28,24 +28,21 @@ const renderers: DocumentRendererProps["renderers"] = {
 function Article() {
   const queryRef = useLoaderData() as QueryRef<Post>;
   const { data, error } = useReadQuery<Post>(queryRef);
-  const { post } = data;
+  const { Article: article } = data;
   return (
     <div className="flex flex-col items-center w-full m-2">
       <main className="w-full">
         <div className="flex flex-col items-center w-full">
           <div className="mb-8">
             <TitleCard
-              title={post?.title}
-              slug={post?.slug}
-              img={post?.image.url}
+              title={article?.title}
+              slug={article?.subtitle}
+              img={`http://172.20.10.3:3000${article.callout.value.url}`}
             />
           </div>
           <div className="mt-6 w-full max-w-2xl">
             <div className="mx-6">
-              <DocumentRenderer
-                document={post?.content.document}
-                renderers={renderers}
-              />
+
             </div>
           </div>
         </div>
