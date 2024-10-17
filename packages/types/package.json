@@ -1,0 +1,7 @@
+{
+  "name": "@crp/types",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "CMS_TYPES_PATH=$INIT_CWD/index.ts yarn cms:generate:types"
+  }
+}

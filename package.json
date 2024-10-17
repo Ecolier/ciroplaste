@@ -1,13 +1,13 @@
 {
-  "name": "@ciroplaste/ciroplaste",
+  "name": "crp",
   "workspaces": [
-    "ciroplaste-web",
-    "ciroplaste-crm"
+    "services/**/*",
+    "packages/**/*"
   ],
   "scripts": {
-    "dev": "concurrently \"yarn dev:web --host 0.0.0.0\" \"yarn dev:crm\"",
-    "dev:web": "yarn workspace @ciroplaste/web dev",
-    "dev:crm": "yarn workspace @ciroplaste/crm dev"
+    "dev": "concurrently \"yarn dev:web --host 0.0.0.0\" \"yarn dev:cms\"",
+    "dev:web": "yarn workspace @crp/web dev",
+    "dev:cms": "yarn workspace @crp/cms dev"
   },
   "packageManager": "yarn@4.5.0",
   "devDependencies": {

@@ -19,7 +19,7 @@ export default buildConfig({
   editor: lexicalEditor({}),
   collections: [Users, Articles, Media],
   typescript: {
-    outputFile: path.resolve(__dirname, 'payload-types.ts'),
+    outputFile: process.env.CMS_TYPES_PATH ?? path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),

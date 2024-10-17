@@ -1174,22 +1174,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ciroplaste/ciroplaste@workspace:.":
+"@crp/cms@workspace:services/cms":
   version: 0.0.0-use.local
-  resolution: "@ciroplaste/ciroplaste@workspace:."
-  dependencies:
-    "@eslint/js": "npm:^9.12.0"
-    "@types/eslint__js": "npm:^8.42.3"
-    concurrently: "npm:^9.0.1"
-    eslint: "npm:^9.12.0"
-    typescript: "npm:^5.6.3"
-    typescript-eslint: "npm:^8.9.0"
-  languageName: unknown
-  linkType: soft
-
-"@ciroplaste/crm@workspace:ciroplaste-crm":
-  version: 0.0.0-use.local
-  resolution: "@ciroplaste/crm@workspace:ciroplaste-crm"
+  resolution: "@crp/cms@workspace:services/cms"
   dependencies:
     "@payloadcms/bundler-webpack": "npm:^1.0.0"
     "@payloadcms/db-mongodb": "npm:^1.0.0"
@@ -1207,11 +1194,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@ciroplaste/web@workspace:ciroplaste-web":
+"@crp/types@workspace:^, @crp/types@workspace:packages/types":
   version: 0.0.0-use.local
-  resolution: "@ciroplaste/web@workspace:ciroplaste-web"
+  resolution: "@crp/types@workspace:packages/types"
+  languageName: unknown
+  linkType: soft
+
+"@crp/web@workspace:services/web":
+  version: 0.0.0-use.local
+  resolution: "@crp/web@workspace:services/web"
   dependencies:
     "@apollo/client": "npm:^3.11.8"
+    "@crp/types": "workspace:^"
     "@eslint/js": "npm:^9.11.1"
     "@lexical/headless": "npm:^0.18.0"
     "@lexical/html": "npm:^0.18.0"
@@ -5536,6 +5530,19 @@ __metadata:
   checksum: 10c0/5738c312387081c98d69c98e105b6327b069197f864a60593245d64c8089c8a0a744e16349281210d56835bb9274130d825a78b2ad6853ca13cfbeffc0c31750
   languageName: node
   linkType: hard
+
+"crp@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "crp@workspace:."
+  dependencies:
+    "@eslint/js": "npm:^9.12.0"
+    "@types/eslint__js": "npm:^8.42.3"
+    concurrently: "npm:^9.0.1"
+    eslint: "npm:^9.12.0"
+    typescript: "npm:^5.6.3"
+    typescript-eslint: "npm:^8.9.0"
+  languageName: unknown
+  linkType: soft
 
 "crypt@npm:0.0.2":
   version: 0.0.2
