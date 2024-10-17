@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 let lastTheme: string;
 
 function Root() {
-  const savedTheme = localStorage.getItem('theme')
-  const [theme, setTheme] = useState(savedTheme ? savedTheme : 'dark');
+  const savedTheme = localStorage.getItem("theme");
+  const [theme, setTheme] = useState(savedTheme ? savedTheme : "dark");
   useEffect(() => {
-    localStorage.setItem('theme', theme)
+    localStorage.setItem("theme", theme);
     const root = document.documentElement;
     root.classList.remove(lastTheme);
     root.classList.add(theme);

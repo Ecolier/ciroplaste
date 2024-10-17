@@ -4,6 +4,7 @@ import { preloadQuery } from "../apollo";
 const GET_ARTICLE = gql`
   query Article($id: String!) {
     Article(id: $id) {
+      id
       title
       subtitle
       callout {

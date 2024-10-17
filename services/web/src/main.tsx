@@ -11,6 +11,11 @@ import './index.css'
 import { articlesLoader } from './routes/home.loader.tsx';
 import Home from './routes/home.tsx';
 
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
+
 const router = createBrowserRouter([
   {
     path: "/",

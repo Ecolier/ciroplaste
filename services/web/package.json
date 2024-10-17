@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
+    "@gsap/react": "^2.1.1",
     "@lexical/headless": "^0.18.0",
     "@lexical/html": "^0.18.0",
     "graphql": "^16.9.0",

@@ -1207,6 +1207,7 @@ __metadata:
     "@apollo/client": "npm:^3.11.8"
     "@crp/types": "workspace:^"
     "@eslint/js": "npm:^9.11.1"
+    "@gsap/react": "npm:^2.1.1"
     "@lexical/headless": "npm:^0.18.0"
     "@lexical/html": "npm:^0.18.0"
     "@types/react": "npm:^18.3.10"
@@ -2160,6 +2161,16 @@ __metadata:
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 10c0/94e9d75c1f178bbae8d874f5a9361708a3350c8def7eaeb6920f2c820e82403b7d4f55b3735856d68e145e86c85cbfe2adc444fdc25519cd51f108697e99346c
+  languageName: node
+  linkType: hard
+
+"@gsap/react@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@gsap/react@npm:2.1.1"
+  dependencies:
+    gsap: "npm:^3.12.5"
+    react: "npm:>=16"
+  checksum: 10c0/11d1303e41d26a188efbf69bdef229654b52adf796ac53cd41742747b4094778eb37e4347e68baaff18946ac9b7419510575684f76ab7780087e68e3ccb6125c
   languageName: node
   linkType: hard
 
@@ -7292,6 +7303,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gsap@npm:^3.12.5":
+  version: 3.12.5
+  resolution: "gsap@npm:3.12.5"
+  checksum: 10c0/cb38e89bd577fc18c9cf77e4aeb83617603b1e0fa768fe8ca1acd836fd852936722e186a88c9cf6ece42e53407edd45324be2bfe35a41f424c5f2c2b33fd1a98
+  languageName: node
+  linkType: hard
+
 "gzip-size@npm:^6.0.0":
   version: 6.0.0
   resolution: "gzip-size@npm:6.0.0"
@@ -11068,7 +11086,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.0.0, react@npm:^18.3.1":
+"react@npm:>=16, react@npm:^18.0.0, react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:

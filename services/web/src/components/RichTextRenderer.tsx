@@ -2,9 +2,13 @@ import React from "react";
 import { RichText, RichTextNode } from "../types/richTextNode";
 
 interface Components {
-  heading: (props: { children: JSX.Element[]; key: number, Tag: keyof JSX.IntrinsicElements }) => JSX.Element;
-  paragraph: (props: { children: JSX.Element[]; key: number }) => JSX.Element;
-  upload: (props: { url: string; alt: string; key: number }) => JSX.Element;
+  heading?: (props: {
+    children: JSX.Element[];
+    key: number;
+    Tag: keyof JSX.IntrinsicElements;
+  }) => JSX.Element;
+  paragraph?: (props: { children: JSX.Element[]; key: number }) => JSX.Element;
+  upload?: (props: { url: string; alt: string; key: number }) => JSX.Element;
 }
 
 interface RichTextRendererProps {
@@ -13,13 +17,20 @@ interface RichTextRendererProps {
 }
 
 const flatten = (nodes: RichTextNode[], components: Components, _level = 0) =>
-  nodes.flatMap((node, index): JSX.Element => {
+  nodes.flatMap((node, index): JSX.Element | undefined => {
     if (node.type === "upload") {
-      return components.upload({ url: node.value.url, alt: node.value.alt, key: index });
+      if (!components.upload) {
+        return;
+      }
+      return components.upload({
+        url: node.value.url,
+        alt: node.value.alt,
+        key: index,
+      });
     }
     const children = node.children;
     if (node.type === "text") {
-      const key = `${_level}_${index}`
+      const key = `${_level}_${index}`;
       if (node.format === 1) {
         return <strong key={key}>{node.text}</strong>;
       }
@@ -38,8 +49,18 @@ const flatten = (nodes: RichTextNode[], components: Components, _level = 0) =>
       const fragments = flatten(children, components, _level);
       switch (node.type) {
         case "heading":
-          return components.heading({ children: fragments, key: index, Tag: node.tag });
+          if (!components.heading) {
+            return;
+          }
+          return components.heading({
+            children: fragments,
+            key: index,
+            Tag: node.tag,
+          });
         case "paragraph":
+          if (!components.paragraph) {
+            return;
+          }
           return components.paragraph({ children: fragments, key: index });
       }
     }
@@ -53,7 +74,9 @@ function RichTextRenderer({ document, components }: RichTextRendererProps) {
   if (!children || children.length === 0) {
     return;
   }
-  const elements = flatten(children, components);
+  const elements = flatten(children, components).filter(
+    (elem) => elem !== undefined,
+  );
   return <>{elements}</>;
 }
 
