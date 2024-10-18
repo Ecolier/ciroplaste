@@ -108,15 +108,15 @@ function ArticleRenderer({ article }: ArticleRendererProps) {
   return (
     <div className="mt-6">
       <div
-        className={`fixed w-full top-16 left-0 px-8 py-4 bg-white dark:bg-zinc-950 ${Object.entries(fixedHeadings).length !== 0 ? `flex` : `hidden`}`}
+        className={`fixed overflow-x-scroll w-full top-16 left-0 px-8 py-4 bg-white dark:bg-zinc-950 ${Object.entries(fixedHeadings).length !== 0 ? `flex` : `hidden`}`}
       >
         {Object.entries(fixedHeadings).map(([k, v], index) => {
           return (
             <>
-              <span className="dark:text-zinc-200 text-zinc-700">
+              <span className="dark:text-zinc-200 text-zinc-700 flex-shrink-0">
                 {v[3].childNodes[0].nodeValue}
               </span>
-              <span className="dark:text-zinc-200 text-zinc-700 material-symbols-rounded">
+              <span className="dark:text-zinc-200 text-zinc-700 material-symbols-rounded flex-shrink-0">
                 chevron_right
               </span>
             </>
