@@ -1,85 +1,137 @@
 import RichTextRenderer from "../components/RichTextRenderer";
 import { Article as ArticleModel } from "@crp/types";
 import { RichText } from "../types/richTextNode";
-import { createRef, useEffect, useRef, useState } from "react";
+import { createRef, Ref, useEffect, useRef, useState } from "react";
 
 interface ArticleRendererProps {
   article: ArticleModel;
 }
 
+interface HeadingRefList {
+  [key: string]: Ref<HTMLHeadingElement>;
+}
+
+type HeadingRectPair = [el: HTMLHeadingElement, rect: DOMRect];
+
+type HeadingRectList = {
+  [key: string]: HeadingRectPair[];
+};
+
 function ArticleRenderer({ article }: ArticleRendererProps) {
-  const headingRefs = useRef(new Map<Number, React.Ref<HTMLHeadingElement>>());
-  const [fixedHeadings, setFixedHeadings] = useState({})
+  const headingRefs = useRef<HeadingRefList>({});
+  const [fixedHeadings, setFixedHeadings] = useState({});
   useEffect(() => {
-    const data = Array.from(headingRefs.current.entries()).reduce((acc, [key, ref], index) => {
-        const level = ref.current.tagName.match(/\d+/)[0]
-        const rects = ref.current.getClientRects();
+    const createdMap = new Map();
 
-        let tupleForLevel = [];
-        if (acc[level] && acc[level].length !== 0) {
-          tupleForLevel = acc[level];
+    const format = (objects) =>
+      Object.entries(objects).map(([key, ref]) => {
+        const element = ref.current as HTMLHeadingElement;
+        const elementTag = element.tagName;
+        const elementBounds = element.getBoundingClientRect();
+        return [parseInt(key), elementTag, elementBounds.y, element];
+      });
+
+    const findNext = (objects, key, tag) =>
+      objects.find(
+        ([matchingKey, matchingTag]) =>
+          matchingTag === tag && matchingKey !== key && matchingKey > key,
+      );
+
+    const findNextNoTag = (objects, key) =>
+      objects.find(
+        ([matchingKey, matchingTag]) =>
+          matchingKey !== key && matchingKey > key,
+      );
+
+    const data = format(headingRefs.current).reduce(
+      (map, [key, elementTag, elementY, element]) => {
+        const matching = findNext(format(headingRefs.current), key, elementTag);
+        const [matchingKey, matchingTag, matchingY, matchingEl] = matching
+          ? matching
+          : [];
+        const endY = matchingY ?? Infinity;
+        const containedBy = format(headingRefs.current).filter(
+          ([matchingKey, matchingTag, my]) => {
+            const matching = findNext(
+              format(headingRefs.current),
+              matchingKey,
+              matchingTag,
+            );
+            const [endKey, endTag, yEnd, matchingEl] = matching ? matching : [];
+            const endYa = yEnd ?? Infinity;
+            return elementY > my && elementY < endYa;
+          },
+        );
+
+        let final = endY;
+        if (endY === Infinity) {
+          const temp = findNextNoTag(format(headingRefs.current), key);
+          const [_z, _é, _da] = temp ? temp : [];
+          final = _da;
         }
-        const rectsAcc = [...tupleForLevel, [ref.current, rects]]
 
-        return {...acc, [level]: rectsAcc};
-      }, {})
+        if (final === undefined) {
+          final = Infinity;
+        }
+
+        map.set(
+          [elementY, final],
+          [...containedBy, [key, elementTag, elementY, element]],
+        );
+        return map;
+      },
+      createdMap,
+    );
+
+    const fff = Array.from(data).flatMap(([key, _]) => {
+      return key;
+    });
+    const globalMinY = Math.min(...fff);
+    const globalMaxY = Math.max(...fff);
+
     document.addEventListener("scroll", (ev) => {
-      Object.entries(data).forEach(([level, tupleList], index) => {
-        tupleList.forEach(([el, rects], i) => {
-          const next = tupleList[i + 1];
-          let ret = {}
-          if (!next) {
-            for (const firstR of rects) {
-                if(window.scrollY > firstR.y) {
-                  ret = {...ret, [level]: el.childNodes[0].nodeValue}
-                } else {
-                  setFixedHeadings((prevState) => {
-                    const {[level]: remove, ...rest} = prevState;
-                    ret = rest;
-                  })
-                }
-            }
+      if (window.scrollY > globalMinY && window.scrollY < globalMaxY) {
+        Array.from(data).forEach(([[minY, maxY], val]) => {
+          if (window.scrollY > minY && window.scrollY < maxY) {
+            setFixedHeadings((prevState) => {
+              return val;
+            });
           }
-          if (next) {
-            const [nextEl, nextRec] = next;
-            for (const firstR of rects) {
-              for (const secR of nextRec) {
-                if(window.scrollY > firstR.y && window.scrollY < secR.y) {
-                  ret = {...ret, [level]: el.childNodes[0].nodeValue}
-                } else {
-                  setFixedHeadings((prevState) => {
-                    const {[level]: remove, ...rest} = prevState;
-                    return rest;
-                  })
-                }
-              }
-            }
-          }
-          setFixedHeadings((prevState) => ({...prevState, ...ret}))
-        })
-      })
+        });
+      } else {
+        setFixedHeadings((prevState) => {
+          return {};
+        });
+      }
     });
   }, []);
   return (
     <div className="mt-6">
-      <div className={`fixed w-full top-16 left-0 px-8 py-4 bg-white dark:bg-zinc-950 ${Object.entries(fixedHeadings).length !== 0 ? `flex` : `hidden`}`}>
+      <div
+        className={`fixed w-full top-16 left-0 px-8 py-4 bg-white dark:bg-zinc-950 ${Object.entries(fixedHeadings).length !== 0 ? `flex` : `hidden`}`}
+      >
         {Object.entries(fixedHeadings).map(([k, v], index) => {
-          console.log(k, v)
-          return <>
-            <span className="dark:text-zinc-200 text-zinc-700">{v}</span>
-            <span className="dark:text-zinc-200 text-zinc-700 material-symbols-rounded">chevron_right</span>
-          </>
-        }
-        )}
+          return (
+            <>
+              <span className="dark:text-zinc-200 text-zinc-700">
+                {v[3].childNodes[0].nodeValue}
+              </span>
+              <span className="dark:text-zinc-200 text-zinc-700 material-symbols-rounded">
+                chevron_right
+              </span>
+            </>
+          );
+        })}
       </div>
       <RichTextRenderer
         document={article.content as RichText}
         components={{
           heading({ children, key, Tag }) {
-            headingRefs.current.set(key, createRef());
+            const ref = createRef<HTMLHeadingElement>();
+            headingRefs.current[key] = ref;
             return (
               <Tag
-                ref={headingRefs.current.get(key)}
+                ref={ref}
                 id={`heading_${article.id}_${key}`}
                 key={key}
                 className={`text-zinc-800 dark:text-zinc-300 ${Tag === "h1" ? "max-md:text-4xl text-6xl font-medium" : "max-md:text-2xl text-4xl"} mb-4`}
