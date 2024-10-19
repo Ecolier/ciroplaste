@@ -18,8 +18,27 @@ function Root() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <Navbar />
-      <div className="flex grow justify-center w-full">
+      <div className="flex grow justify-center w-full flex-col">
         <Outlet />
+        <div className="mt-32 flex flex-col items-center w-full mx-4">
+          <footer>
+            <section>
+              <div>
+                Ciroplaste is the personal Portfolio of Evan Gruère. Feel free to get in touch or hire me !
+              </div>
+              <ul>
+                <li>socials</li>
+                <li>Instagram</li>
+                <li>Telegram</li>
+              </ul>
+              <ul>
+                <li>About</li>
+                <li>About me</li>
+                <li>Contact</li>
+              </ul>
+            </section>
+          </footer>
+        </div>
       </div>
     </ThemeContext.Provider>
   );

@@ -4,9 +4,16 @@ import TitleCard from "../components/TitleCard";
 import { Article as ArticleModel } from "@crp/types";
 import ArticleRenderer from "../components/ArticleRenderer";
 import ArticleOutline from "../components/ArticleOutline";
-import { useEffect, useRef, useState } from "react";
+import { createRef, RefObject, useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import useSpy from "../components/useSpy";
+import FloatingOutline, { HeadingLink } from "../components/FloatingOutline";
+import RichTextRenderer from "../components/RichTextRenderer";
+
+interface HeadingRefList {
+  [key: string]: RefObject<HTMLHeadingElement>;
+}
 
 function Article() {
   const queryRef = useLoaderData() as QueryRef<{ Article: ArticleModel }>;
@@ -22,8 +29,32 @@ function Article() {
         scrollTo: { y: `#heading_${article.id}_${key}`, offsetY: 72 },
       });
     });
+  const headingRefs = useRef<HeadingRefList>({});
+  const [activeSpiedHeadings, setActiveSpiedHeadings] = useState<HeadingLink[]>(
+    [],
+  );
+  useSpy({
+    elementRefs: headingRefs.current,
+    onFocus: (spiedElements) => {
+      const headings = Object.entries(spiedElements).reduce(
+        (arr, [key, { element }]) => {
+          const childNode = element.childNodes[0];
+          if (childNode !== null) {
+            return [...arr, { id: key, text: childNode.nodeValue }];
+          }
+          return [...arr];
+        },
+        [],
+      );
+      setActiveSpiedHeadings(headings);
+    },
+  });
   return (
     <div className="flex flex-col items-center w-full m-2" ref={container}>
+      <FloatingOutline
+        headings={activeSpiedHeadings}
+        onClick={({ id }) => scrollTo(id)()}
+      ></FloatingOutline>
       <main className="w-full">
         <div className="flex flex-col items-center w-full">
           <div className="mb-8">
@@ -40,7 +71,44 @@ function Article() {
                 article={article}
                 onClick={(key) => scrollTo(key)()}
               ></ArticleOutline>
-              <ArticleRenderer article={article}></ArticleRenderer>
+              <RichTextRenderer
+                document={article.content as RichText}
+                components={{
+                  heading({ children, key, Tag }) {
+                    const ref = createRef<HTMLHeadingElement>();
+                    headingRefs.current[key] = ref;
+                    return (
+                      <Tag
+                        ref={ref}
+                        id={`heading_${article.id}_${key}`}
+                        key={key}
+                        className={`text-zinc-800 dark:text-zinc-300 ${Tag === "h1" ? "max-md:text-4xl text-6xl font-medium" : "max-md:text-2xl text-4xl"} mb-4`}
+                      >
+                        {children}
+                      </Tag>
+                    );
+                  },
+                  paragraph: ({ children, key }) => (
+                    <p
+                      key={key}
+                      className="text-zinc-800 dark:text-zinc-300 mb-8"
+                    >
+                      {children}
+                    </p>
+                  ),
+                  upload: ({ url, alt, key }) => (
+                    <div key={key}>
+                      <img
+                        className="mb-2"
+                        src={`http://172.20.10.3:3000${url}`}
+                      ></img>
+                      <p className="text-right text-zinc-600 dark:text-zinc-500 mb-8 text-sm">
+                        {alt}
+                      </p>
+                    </div>
+                  ),
+                }}
+              />
             </div>
           </div>
         </div>
