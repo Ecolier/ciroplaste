@@ -10,3 +10,9 @@
     @apply h-full
   }
 }
+
+@layer utilities {
+  .auto-overflow-anchoring {
+    overflow-anchor: auto;
+  }
+}

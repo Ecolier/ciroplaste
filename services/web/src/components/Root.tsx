@@ -18,9 +18,9 @@ function Root() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <Navbar />
-      <div className="flex grow justify-center w-full flex-col">
+      <div className="flex grow justify-center flex-col">
         <Outlet />
-        <div className="mt-32 flex flex-col items-center w-full mx-4">
+        {/* <div className="mt-32 flex flex-col items-center w-full mx-4">
           <footer>
             <section>
               <div>
@@ -38,7 +38,7 @@ function Root() {
               </ul>
             </section>
           </footer>
-        </div>
+        </div> */}
       </div>
     </ThemeContext.Provider>
   );

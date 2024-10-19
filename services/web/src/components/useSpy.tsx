@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Ref, RefObject, useEffect, useState } from "react";
 
 interface ElementRefList {
@@ -7,6 +8,7 @@ interface ElementRefList {
 interface ScrollSpyProps {
   elementRefs: ElementRefList;
   onFocus: (elementRefs: KeyedElements) => void;
+  offset?: number;
 }
 
 type MinMaxPair = [minY: number, maxY: number];
@@ -23,7 +25,7 @@ export type KeyedElements = {
   [key: string]: SpiedElement;
 };
 
-function useSpy({ elementRefs, onFocus }: ScrollSpyProps) {
+function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
   const formatRefs = (elementRefs: ElementRefList): SpiedElement[] =>
     Object.entries(elementRefs).map(([key, ref]) => {
       const element = ref.current as HTMLHeadingElement;
@@ -33,7 +35,7 @@ function useSpy({ elementRefs, onFocus }: ScrollSpyProps) {
         ref,
         key: parseInt(key),
         tag: elementTag,
-        y: elementBounds.y,
+        y: (elementBounds.y + window.scrollY) - (offset ? offset + 1 : 0),
         element,
       };
     });
@@ -61,57 +63,70 @@ function useSpy({ elementRefs, onFocus }: ScrollSpyProps) {
     return [Math.min(...n), Math.max(...n)];
   };
 
-  useEffect(() => {
-    const zoneMap = new Map<MinMaxPair, KeyedElements[]>();
+  const calculateSpiedZones = (
+    spiedElements: SpiedElement[],
+  ): Map<MinMaxPair, KeyedElements[]> =>
+    spiedElements.reduce((map, { key, tag, y, element, ref }) => {
+      // Get every ancestors of element from its y position
+      const ancestors = filterAncestors(spiedElements, y);
 
-    const formattedRefs = formatRefs(elementRefs);
-    const spiedZones = formattedRefs.reduce(
-      (map, { key, tag, y, element, ref }) => {
-        // Get every ancestors of element from its y position
-        const ancestors = filterAncestors(formattedRefs, y);
+      let endY = Infinity;
 
-        let endY = Infinity;
+      // Find closing element with matching tag
+      const nextWithTag = findClosing(spiedElements, key, tag);
+      if (nextWithTag) {
+        endY = nextWithTag.y;
 
-        // Find closing element with matching tag
-        const nextWithTag = findClosing(formattedRefs, key, tag);
-        if (nextWithTag) {
-          endY = nextWithTag.y;
-
-          // Or just the next element
-        } else {
-          const nextFallback = findClosing(formattedRefs, key);
-          if (nextFallback) {
-            endY = nextFallback.y;
-          }
+        // Or just the next element
+      } else {
+        const nextFallback = findClosing(spiedElements, key);
+        if (nextFallback) {
+          endY = nextFallback.y;
         }
+      }
 
-        const keyedAncestors = ancestors.reduce(
-          (acc, spiedElement) => ({
-            ...acc,
-            [`${spiedElement.key}`]: spiedElement,
-          }),
-          {} as KeyedElements[],
-        );
+      const keyedAncestors = ancestors.reduce(
+        (acc, spiedElement) => ({
+          ...acc,
+          [`${spiedElement.key}`]: spiedElement,
+        }),
+        {} as KeyedElements[],
+      );
 
-        map.set([y, endY], {
-          ...keyedAncestors,
-          ...{ [`${key}`]: { key, tag, y, element, ref } },
-        });
-        return map;
-      },
-      zoneMap,
-    );
+      map.set([y, endY], {
+        ...keyedAncestors,
+        ...{ [`${key}`]: { key, tag, y, element, ref } },
+      });
+      return map;
+    }, new Map<MinMaxPair, KeyedElements[]>());
 
-    const [globalMinY, globalMaxY] = minMaxPair(
-      Array.from(spiedZones).flatMap(([key, _]) => key),
-    );
+  const calculateMinMaxY = (zoneMap: Map<MinMaxPair, KeyedElements[]>) => minMaxPair (
+    Array.from(zoneMap).flatMap(([key, _]) => key),
+  );
+
+  useEffect(() => {
+    let formattedRefs: SpiedElement[]
+    let zoneMap: Map<MinMaxPair, KeyedElements[]>
+    let [globalMinY, globalMaxY]: MinMaxPair = [0, 0]
+    let availableSpyZones: [MinMaxPair, KeyedElements[]][]
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      formattedRefs = formatRefs(elementRefs);
+      zoneMap = calculateSpiedZones(formattedRefs);
+      [globalMinY, globalMaxY] = calculateMinMaxY(zoneMap);
+      availableSpyZones = Array.from(zoneMap);
+    });
+
+    resizeObserver.observe(document.body);
 
     let prevZoneIndex = -1;
-    let availableSpyZones = Array.from(spiedZones);
 
     document.addEventListener(
       "scroll",
-      () => {
+      _.throttle(() => {
+
+        console.log('fired')
+
         // Reset spied elements if we're out of scope
         if (window.scrollY < globalMinY || window.scrollY > globalMaxY) {
           if (prevZoneIndex === -1) {
@@ -119,10 +134,13 @@ function useSpy({ elementRefs, onFocus }: ScrollSpyProps) {
           }
           onFocus([]);
           prevZoneIndex = -1;
-          availableSpyZones = Array.from(spiedZones);
+          availableSpyZones = Array.from(zoneMap);
           return;
         }
-
+        
+        if (!availableSpyZones) {
+          return
+        }
         const currZoneIndex = availableSpyZones.findIndex(
           ([[minY, maxY]]) => window.scrollY > minY && window.scrollY < maxY,
         );
@@ -145,9 +163,11 @@ function useSpy({ elementRefs, onFocus }: ScrollSpyProps) {
         prevZone !== undefined && nextAvailableZones.push(prevZone);
         const nextZone = availableSpyZones[currZoneIndex + 1];
         nextZone !== undefined && nextAvailableZones.push(nextZone);
-      },
-      { passive: true },
+      }, 200),
+      { passive: true }
     );
+
+    return () => resizeObserver.disconnect();
   }, []);
 }
 

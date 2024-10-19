@@ -35,6 +35,7 @@ function Article() {
   );
   useSpy({
     elementRefs: headingRefs.current,
+    offset: 73,
     onFocus: (spiedElements) => {
       const headings = Object.entries(spiedElements).reduce(
         (arr, [key, { element }]) => {
@@ -50,7 +51,7 @@ function Article() {
     },
   });
   return (
-    <div className="flex flex-col items-center w-full m-2" ref={container}>
+    <div className="flex flex-col items-center m-2" ref={container}>
       <FloatingOutline
         headings={activeSpiedHeadings}
         onClick={({ id }) => scrollTo(id)()}
