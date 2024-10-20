@@ -5,7 +5,7 @@ import ThemeButton from "./ThemeButton";
 function Navbar() {
   return (
     <>
-      <header className="bg-white dark:bg-zinc-950 fixed flex flex-col justify-between w-full">
+      <header className="z-10 backdrop-blur-3xl bg-white/75 dark:bg-zinc-950 fixed flex flex-col justify-between w-full">
         <div className="flex relative h-16 w-full">
           <NavbarSection>
           <IconButton>
@@ -25,7 +25,6 @@ function Navbar() {
           </NavbarSection>
         </div>
       </header>
-      <div className="pt-16"></div>
     </>
   );
 }

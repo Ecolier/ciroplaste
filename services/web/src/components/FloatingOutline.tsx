@@ -20,13 +20,13 @@ function FloatingOutline({ headings, onClick }: FloatingOutlineProps) {
   return (
     <div
     
-      className={`fixed rounded-3xl drop-shadow-sm bottom-8 left-2 right-2 px-6 py-4 bg-slate-300 text-slate-950 dark:bg-zinc-950 ${headings.length !== 0 ? `flex` : `hidden`}`}
+      className={`fixed rounded-3xl drop-shadow-sm bottom-8 left-2 right-2 px-6 py-4 bg-slate-300 text-slate-950 dark:bg-slate-600 ${headings.length !== 0 ? `flex` : `hidden`}`}
     >
       <div className="flex overflow-x-scroll" ref={containerRef}>
       {headings.map((heading, index) => {
         return (
           <div key={index} className="flex items-center flex-shrink-0">
-            <span className={`dark:text-zinc-200 cursor-pointer text-zinc-700 ${headings[index + 1] ? `` : `font-semibold`}`} onClick={() => onClick && onClick(heading)}>{heading.text}</span>
+            <span className={`dark:text-zinc-200 cursor-pointer text-zinc-900 ${headings[index + 1] ? `` : `font-semibold`}`} onClick={() => onClick && onClick(heading)}>{heading.text}</span>
             {headings[index + 1] && (
               <span className="dark:text-zinc-200 text-zinc-700 material-symbols-rounded">
                 chevron_right
