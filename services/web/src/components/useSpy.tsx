@@ -124,9 +124,6 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
     document.addEventListener(
       "scroll",
       _.throttle(() => {
-
-        console.log('fired')
-
         // Reset spied elements if we're out of scope
         if (window.scrollY < globalMinY || window.scrollY > globalMaxY) {
           if (prevZoneIndex === -1) {

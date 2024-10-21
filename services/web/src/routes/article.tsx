@@ -2,7 +2,6 @@ import { QueryRef, useReadQuery } from "@apollo/client";
 import { useLoaderData } from "react-router-dom";
 import TitleCard from "../components/TitleCard";
 import { Article as ArticleModel } from "@crp/types";
-import ArticleRenderer from "../components/ArticleRenderer";
 import ArticleOutline from "../components/ArticleOutline";
 import { createRef, RefObject, useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
@@ -16,7 +15,6 @@ interface HeadingRefList {
 }
 
 function Article() {
-  ResizeObserver;
   const queryRef = useLoaderData() as QueryRef<{ Article: ArticleModel }>;
   const {
     data: { Article: article },
@@ -61,7 +59,7 @@ function Article() {
         ></FloatingOutline>
         <main className="w-full">
           <div className="flex flex-col items-center w-full">
-            <div className="mb-8">
+            <div className="mb-8 min-h-80 h-[25vh]">
               <TitleCard
                 title={article?.title}
                 slug={article?.subtitle}

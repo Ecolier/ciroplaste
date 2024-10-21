@@ -1,13 +1,7 @@
-version: '3'
-
 services:
 
-  ciroplaste-web: 
-    build: ciroplaste-web
-
-  ciroplaste-crm:
+  cms:
     image: node:18-alpine
-    build: ciroplaste-crm
     ports:
       - '3000:3000'
     volumes:
