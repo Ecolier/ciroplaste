@@ -93,7 +93,7 @@ function Home() {
             <TitleCard
               title={article.title}
               slug={article.subtitle}
-              img={`http://167.235.69.195:3000${article.callout.value.url}`}
+              img={`https://content.ciroplaste.com${article.callout.value.url}`}
             ></TitleCard>
           </a>
         ))}

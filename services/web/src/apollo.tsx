@@ -1,7 +1,7 @@
 import { ApolloClient, createQueryPreloader, InMemoryCache } from "@apollo/client";
 
 const apolloClient = new ApolloClient({
-  uri: 'http://167.235.69.195:3000/api/graphql',
+  uri: 'https://content.ciroplaste.com/api/graphql',
   cache: new InMemoryCache(),
 });
 

@@ -10,6 +10,8 @@ services:
       - mongo
     env_file:
       - services/cms/.env
+    volumes:
+      - media:/app/media
     networks:
       - node_network
 
@@ -40,6 +42,7 @@ services:
 
 volumes:
   data:
+  media:
 
 networks:
   node_network:

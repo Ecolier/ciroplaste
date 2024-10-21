@@ -46,6 +46,9 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 payloadcms
 
+RUN mkdir media
+RUN chown payloadcms media
+
 USER payloadcms
 
 COPY --from=app-builder --chown=payloadcms:nodejs /app/services/cms/.env ./
