@@ -49,11 +49,12 @@ RUN adduser --system --uid 1001 payloadcms
 USER payloadcms
 
 COPY --from=app-builder --chown=payloadcms:nodejs /app/services/cms/.env ./
+
 COPY --from=app-installer --chown=payloadcms:nodejs /app/node_modules ./node_modules
 COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/package.json ./
-COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/build ./build
-COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/dist ./dist
-COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/media ./media
+COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/build/ ./build
+COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/dist/ ./dist
+COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/media/ ./media
 
 EXPOSE 3000
 
