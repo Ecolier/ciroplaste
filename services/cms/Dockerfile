@@ -1,4 +1,4 @@
-FROM node:23-alpine AS app-builder
+FROM node:22.6-alpine AS app-builder
 
 RUN apk add --no-cache git jq && corepack enable
 
@@ -52,9 +52,8 @@ COPY --from=app-builder --chown=payloadcms:nodejs /app/services/cms/.env ./
 
 COPY --from=app-installer --chown=payloadcms:nodejs /app/node_modules ./node_modules
 COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/package.json ./
-COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/build/ ./build
-COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/dist/ ./dist
-COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/media/ ./media
+COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/build ./build
+COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/dist ./dist
 
 EXPOSE 3000
 
