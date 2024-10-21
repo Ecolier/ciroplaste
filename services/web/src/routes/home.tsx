@@ -93,7 +93,7 @@ function Home() {
             <TitleCard
               title={article.title}
               slug={article.subtitle}
-              img={`http://172.20.10.3:3000${article.callout.value.url}`}
+              img={`http://167.235.69.195:3000${article.callout.value.url}`}
             ></TitleCard>
           </a>
         ))}

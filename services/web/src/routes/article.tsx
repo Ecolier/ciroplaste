@@ -63,7 +63,7 @@ function Article() {
               <TitleCard
                 title={article?.title}
                 slug={article?.subtitle}
-                img={`http://172.20.10.3:3000${article.callout.value.url}`}
+                img={`http://167.235.69.195:3000${article.callout.value.url}`}
               />
             </div>
             <div className="mt-6 w-full max-w-2xl">
@@ -102,7 +102,7 @@ function Article() {
                       <div key={key}>
                         <img
                           className="mb-2"
-                          src={`http://172.20.10.3:3000${url}`}
+                          src={`http://167.235.69.195:3000${url}`}
                         ></img>
                         <p className="text-right text-zinc-600 dark:text-zinc-500 mb-8 text-sm">
                           {alt}
