@@ -11,11 +11,23 @@ services:
       - content
     environment:
       - PAYLOAD_SECRET_FILE=/run/secrets/payload_secret
+      - PAYLOAD_SMTP_USERNAME_FILE=/run/secrets/payload_smtp_username
+      - PAYLOAD_SMTP_PASSWORD_FILE=/run/secrets/payload_smtp_password
     volumes:
       - media:/app/media
     secrets:
       - source: cms_secret
         target: payload_secret
+        uid: '1001'
+        gid: '1001'
+        mode: 0440 
+      - source: cms_smtp_username
+        target: payload_smtp_username
+        uid: '1001'
+        gid: '1001'
+        mode: 0440 
+      - source: cms_smtp_password
+        target: payload_smtp_password
         uid: '1001'
         gid: '1001'
         mode: 0440 
@@ -37,3 +49,7 @@ volumes:
 secrets:
   cms_secret:
     environment: CMS_SECRET
+  cms_smtp_username:
+    environment: CMS_SMTP_USERNAME
+  cms_smtp_password:
+    environment: CMS_SMTP_PASSWORD

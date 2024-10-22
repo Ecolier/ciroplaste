@@ -6,7 +6,7 @@
       "outputs": ["build", "dist"]
     },
     "dev": {
-      "env": ["DATABASE_URI", "PAYLOAD_SECRET_FILE"],
+      "env": ["DATABASE_URI", "PAYLOAD_SECRET_FILE", "PAYLOAD_SMTP_USERNAME_FILE", "PAYLOAD_SMTP_PASSWORD_FILE"],
       "cache": false,
       "persistent": true
     }
