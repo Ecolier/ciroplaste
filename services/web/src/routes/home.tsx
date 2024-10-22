@@ -93,7 +93,7 @@ function Home() {
             <TitleCard
               title={article.title}
               slug={article.subtitle}
-              img={`https://content.ciroplaste.com${article.callout.value.url}`}
+              img={`${import.meta.env.VITE_CONTENT_BASE_URL}${article.callout.value.url}`}
             ></TitleCard>
           </a>
         ))}

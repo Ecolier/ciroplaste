@@ -1,0 +1,34 @@
+services:
+
+  cms:
+    build:
+      context: .
+      dockerfile: services/cms/Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - content
+    environment:
+      - PAYLOAD_SECRET=/run/secrets/cms_secret
+    volumes:
+      - media:/app/media
+    secrets:
+      - cms_secret
+
+  content:
+    image: mongo:latest
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - data:/data/db
+
+volumes:
+  data:
+  media:
+
+secrets:
+  cms_secret:
+    environment: CMS_SECRET

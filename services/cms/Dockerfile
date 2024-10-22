@@ -51,8 +51,6 @@ RUN chown payloadcms media
 
 USER payloadcms
 
-COPY --from=app-builder --chown=payloadcms:nodejs /app/services/cms/.env ./
-
 COPY --from=app-installer --chown=payloadcms:nodejs /app/node_modules ./node_modules
 COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/package.json ./
 COPY --from=app-installer --chown=payloadcms:nodejs /app/services/cms/build ./build

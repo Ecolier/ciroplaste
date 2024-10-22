@@ -63,7 +63,7 @@ function Article() {
               <TitleCard
                 title={article?.title}
                 slug={article?.subtitle}
-                img={`https://content.ciroplaste.com${article.callout.value.url}`}
+                img={`${import.meta.env.VITE_CONTENT_BASE_URL}${article.callout.value.url}`}
               />
             </div>
             <div className="mt-6 w-full max-w-2xl">
@@ -102,7 +102,7 @@ function Article() {
                       <div key={key}>
                         <img
                           className="mb-2"
-                          src={`https://content.ciroplaste.com${url}`}
+                          src={`${import.meta.env.VITE_CONTENT_BASE_URL}${url}`}
                         ></img>
                         <p className="text-right text-zinc-600 dark:text-zinc-500 mb-8 text-sm">
                           {alt}
