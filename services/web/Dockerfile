@@ -11,7 +11,7 @@ COPY --link . .
 
 RUN turbo prune --scope=@crp/web --docker --out-dir=./out/web
 
-FROM node:22.6-alpine AS dev
+FROM node:22.6-alpine AS development
 
 RUN corepack enable
 

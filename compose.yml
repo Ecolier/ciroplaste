@@ -4,16 +4,21 @@ services:
     build:
       context: .
       dockerfile: services/cms/Dockerfile
+    restart: unless-stopped
     ports:
       - 3000:3000
     depends_on:
       - content
     environment:
-      - PAYLOAD_SECRET=/run/secrets/cms_secret
+      - PAYLOAD_SECRET_FILE=/run/secrets/payload_secret
     volumes:
       - media:/app/media
     secrets:
-      - cms_secret
+      - source: cms_secret
+        target: payload_secret
+        uid: '1001'
+        gid: '1001'
+        mode: 0440 
 
   content:
     image: mongo:latest

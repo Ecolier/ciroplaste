@@ -4,15 +4,21 @@ services:
     build:
       context: .
       dockerfile: services/web/Dockerfile
+      target: development
     ports:
       - 5173:5173
     environment:
       - NODE_ENV=development
     volumes:
-      - ./services/web/src:/app/services/web/src
+      - ./services/web:/app/services/web
     depends_on:
       - cms
 
   cms:
+    build: 
+      target: development
+    volumes:
+      - ./services/cms:/app/services/cms
     env_file:
       - services/cms/.env.development
+
