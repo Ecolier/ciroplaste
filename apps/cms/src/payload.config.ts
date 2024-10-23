@@ -10,7 +10,13 @@ import Articles from './collections/Articles'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import Media from './collections/Media'
 
+const baseUrl = process.env.PAYLOAD_PUBLIC_BASE_URL;
+
 export default buildConfig({
+  routes: {
+    admin: `${baseUrl}/admin`,
+    api: `${baseUrl}/api`
+  },
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
@@ -18,6 +24,7 @@ export default buildConfig({
   editor: lexicalEditor({}),
   collections: [Users, Articles, Media],
   typescript: {
+    declare: false,
     outputFile: process.env.CMS_TYPES_PATH ?? path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
@@ -27,5 +34,5 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
-  cors: ['http://172.20.10.3:5173', 'http://172.20.10.2:5173', 'http://localhost:5173', 'http://172.20.10.3:4173', 'http://172.20.10.2:4173', 'http://localhost:4173', 'https://ciroplaste.com'],
+  cors: ['http://172.20.10.3', 'http://172.20.10.2', 'http://localhost', 'https://ciroplaste.com'],
 })

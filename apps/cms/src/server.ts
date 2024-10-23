@@ -18,9 +18,11 @@ try {
 
 const app = express()
 
+const baseUrl = process.env.PAYLOAD_PUBLIC_BASE_URL;
+
 // Redirect root to Admin panel
-app.get('/', (_, res) => {
-  res.redirect('/admin')
+app.get(baseUrl ?? '/', (_, res) => {
+  res.redirect(`${baseUrl}/admin`)
 })
 
 const start = async () => {

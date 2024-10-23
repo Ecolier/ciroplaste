@@ -1,16 +1,20 @@
 services:
 
+  proxy:
+    volumes:
+      - ./local.conf:/etc/nginx/conf.d/default.conf
+
   web:
     build:
       context: .
-      dockerfile: services/web/Dockerfile
+      dockerfile: apps/web/Dockerfile
       target: development
     ports:
       - 5173:5173
     environment:
       - NODE_ENV=development
     volumes:
-      - ./services/web:/app/services/web
+      - ./apps/web:/app/apps/web
     depends_on:
       - cms
 
@@ -18,7 +22,7 @@ services:
     build: 
       target: development
     volumes:
-      - ./services/cms:/app/services/cms
+      - ./apps/cms:/app/apps/cms
     env_file:
-      - services/cms/.env.development
+      - apps/cms/.env.development
 

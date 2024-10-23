@@ -1,0 +1,21 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "outputs": ["build", "dist"]
+    },
+    "dev": {
+      "env": [
+        "DATABASE_URI",
+        "PAYLOAD_SECRET",
+        "PAYLOAD_SECRET_FILE",
+        "PAYLOAD_SMTP_USERNAME_FILE",
+        "PAYLOAD_SMTP_PASSWORD_FILE",
+        "PAYLOAD_PUBLIC_BASE_URL"
+      ],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

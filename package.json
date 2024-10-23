@@ -1,8 +1,8 @@
 {
   "name": "crp",
   "workspaces": [
-    "services/**/*",
-    "packages/**/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "build": "turbo run build",

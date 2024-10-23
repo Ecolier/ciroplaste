@@ -15,4 +15,11 @@
   .auto-overflow-anchoring {
     overflow-anchor: auto;
   }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hidden {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
 }

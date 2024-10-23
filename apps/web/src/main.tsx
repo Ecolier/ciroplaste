@@ -6,6 +6,7 @@ import { articleLoader } from './routes/article.loader.tsx';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from './apollo.tsx'
 import Root from './components/Root.tsx';
+import './i18n.tsx';
 
 import './index.css'
 import { articlesLoader } from './routes/home.loader.tsx';
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
       }
     ]
   },
-]);
+], { basename: import.meta.env.BASE_URL });
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

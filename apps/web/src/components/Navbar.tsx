@@ -12,7 +12,7 @@ function Navbar() {
             <span className="material-symbols-rounded">menu</span>
           </IconButton>
             <a
-              href="/"
+              href={`${import.meta.env.BASE_URL}`}
               className="px-2 ml-3.5 "
             >
               <span className="dark:text-zinc-200 text-zinc-800">

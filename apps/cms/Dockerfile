@@ -72,9 +72,9 @@ RUN chown payloadcms media
 USER payloadcms
 
 COPY --from=build --chown=payloadcms:nodejs /app/node_modules ./node_modules
-COPY --from=build --chown=payloadcms:nodejs /app/services/cms/package.json ./
-COPY --from=build --chown=payloadcms:nodejs /app/services/cms/build ./build
-COPY --from=build --chown=payloadcms:nodejs /app/services/cms/dist ./dist
+COPY --from=build --chown=payloadcms:nodejs /app/apps/cms/package.json ./
+COPY --from=build --chown=payloadcms:nodejs /app/apps/cms/build ./build
+COPY --from=build --chown=payloadcms:nodejs /app/apps/cms/dist ./dist
 
 EXPOSE 3000
 

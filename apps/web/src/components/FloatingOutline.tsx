@@ -22,7 +22,7 @@ function FloatingOutline({ headings, onClick }: FloatingOutlineProps) {
     
       className={`fixed rounded-3xl drop-shadow-sm bottom-8 left-2 right-2 px-6 py-4 bg-slate-300 text-slate-950 dark:bg-slate-600 ${headings.length !== 0 ? `flex` : `hidden`}`}
     >
-      <div className="flex overflow-x-scroll" ref={containerRef}>
+      <div className="flex scrollbar-hidden overflow-x-scroll" ref={containerRef}>
       {headings.map((heading, index) => {
         return (
           <div key={index} className="flex items-center flex-shrink-0">
