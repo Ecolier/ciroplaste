@@ -22,7 +22,7 @@ const baseUrl = process.env.PAYLOAD_PUBLIC_BASE_URL;
 
 // Redirect root to Admin panel
 app.get(baseUrl ?? '/', (_, res) => {
-  res.redirect(`${baseUrl}/admin`)
+  res.redirect(baseUrl ? `${baseUrl}/admin` : '/admin')
 })
 
 const start = async () => {

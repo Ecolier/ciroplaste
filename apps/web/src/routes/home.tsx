@@ -2,6 +2,7 @@ import { QueryRef, useReadQuery } from "@apollo/client";
 import { useLoaderData } from "react-router-dom";
 import TitleCard from "../components/TitleCard";
 import Hero from "../components/Hero";
+import { Suspense } from "react";
 
 function Home() {
   const queryRef = useLoaderData() as QueryRef;

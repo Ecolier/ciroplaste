@@ -14,8 +14,8 @@ const baseUrl = process.env.PAYLOAD_PUBLIC_BASE_URL;
 
 export default buildConfig({
   routes: {
-    admin: `${baseUrl}/admin`,
-    api: `${baseUrl}/api`
+    admin: baseUrl ? `${baseUrl}/admin` : '/admin',
+    api: baseUrl ? `${baseUrl}/api` : '/api',
   },
   admin: {
     user: Users.slug,
