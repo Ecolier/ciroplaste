@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import TitleCard from "../components/TitleCard";
 import Hero from "../components/Hero";
 import { Suspense } from "react";
+import config from "../config";
 
 function Home() {
   const queryRef = useLoaderData() as QueryRef;
@@ -34,13 +35,13 @@ function Home() {
         {articles?.map((article, index) => (
           <a
             key={index}
-            href={`${import.meta.env.BASE_URL}article/${article.id}`}
+            href={`${config.service.content.url}article/${article.id}`}
             className="mb-4 w-full"
           >
             <TitleCard
               title={article.title}
               slug={article.subtitle}
-              img={`${import.meta.env.VITE_CONTENT_BASE_URL}${article.callout.value.url}`}
+              img={`${config.service.content.url}${article.callout.value.url}`}
             ></TitleCard>
           </a>
         ))}

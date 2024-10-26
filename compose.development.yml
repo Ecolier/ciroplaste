@@ -2,10 +2,43 @@ services:
 
   proxy:
     volumes:
-      - ./production.conf:/etc/nginx/conf.d/default.conf
+      - ./development.conf:/etc/nginx/conf.d/default.conf
+      - ./assets:/home/www-data/assets
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: development
+    ports:
+      - 5173:5173
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./apps/web:/app/apps/web
+    depends_on:
+      - cms
 
   cms:
     build: 
-      target: production
+      target: development
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./apps/cms:/app/apps/cms
     env_file:
-      - apps/cms/.env.production
+      - apps/cms/.env.development
+
+secrets:
+  cms_secret:
+    environment: CMS_SECRET
+  email_username:
+    environment: EMAIL_USERNAME
+  email_password:
+    environment: EMAIL_PASSWORD
+  storage_account:
+    environment: STORAGE_ACCOUNT
+  storage_key:
+    environment: STORAGE_KEY
+  storage_secret: 
+    environment: STORAGE_SECRET

@@ -9,23 +9,26 @@ services:
       - 3000:3000
     depends_on:
       - content
-    environment:
-      - PAYLOAD_SECRET_FILE=/run/secrets/payload_secret
-      - PAYLOAD_SMTP_USERNAME_FILE=/run/secrets/payload_smtp_username
-      - PAYLOAD_SMTP_PASSWORD_FILE=/run/secrets/payload_smtp_password
     volumes:
       - media:/app/media
     secrets:
-      - source: cms_secret
-        target: payload_secret
-      - source: smtp_username
-        target: payload_smtp_username
-      - source: smtp_password
-        target: payload_smtp_password
+      - cms_secret
+      - email_username
+      - email_password
+      - storage_account
+      - storage_key
+      - storage_secret
+    environment:
+      - SECRET_FILE=/run/secrets/cms_secret
+      - EMAIL_USERNAME_FILE=/run/secrets/email_username
+      - EMAIL_PASSWORD_FILE=/run/secrets/email_password
+      - STORAGE_ACCOUNT_FILE=/run/secrets/storage_account
+      - STORAGE_KEY_FILE=/run/secrets/storage_key
+      - STORAGE_SECRET_FILE=/run/secrets/storage_secret
   
   proxy:
-    restart: unless-stopped
     image: nginx:1.27
+    restart: unless-stopped
     ports:
       - 80:80
     depends_on:
@@ -47,10 +50,6 @@ volumes:
   data:
   media:
 
-secrets:
-  cms_secret:
-    environment: CMS_SECRET
-  smtp_username:
-    environment: CMS_SMTP_USERNAME
-  smtp_password:
-    environment: CMS_SMTP_PASSWORD
+networks:
+  default:
+    driver: bridge

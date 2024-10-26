@@ -7,7 +7,7 @@ const Media: CollectionConfig = {
   },
   slug: "media",
   upload: {
-    staticURL: "/media",
+    staticURL: "https://assets.ciroplaste.com",
     staticDir: path.resolve(__dirname, "..", "..", "media"),
   },
   fields: [

@@ -3,6 +3,7 @@ import { initReactI18next } from "react-i18next";
 
 import Backend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
+import config from "./config";
 
 i18n
   .use(Backend)
@@ -12,7 +13,7 @@ i18n
     ns: ['web'],
     fallbackNS: 'web',
     backend: {
-      loadPath: 'http://localhost/i18n/{{lng}}/{{ns}}.json'
+      loadPath: `${config.service.i18n.url}/{{lng}}/{{ns}}.json`
     },
     fallbackLng: "en",
     debug: true,
