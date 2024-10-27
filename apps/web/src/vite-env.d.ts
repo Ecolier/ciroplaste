@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly VITE_CONTENT_BASE_URL: string;
   readonly VITE_ASSETS_BASE_URL: string;
+  readonly VITE_LOCALES_BASE_URL: string;
 }
 
 interface ImportMeta {

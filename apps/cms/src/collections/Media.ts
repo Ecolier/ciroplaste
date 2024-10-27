@@ -1,13 +1,15 @@
 import { CollectionConfig } from "payload/types";
 import path from "path";
 
+const assetsBaseUrl = process.env.ASSETS_BASE_URL;
+
 const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
   slug: "media",
   upload: {
-    staticURL: "https://assets.ciroplaste.com",
+    staticURL: assetsBaseUrl,
     staticDir: path.resolve(__dirname, "..", "..", "media"),
   },
   fields: [
@@ -16,6 +18,11 @@ const Media: CollectionConfig = {
       type: "text",
     },
   ],
+  hooks: {
+    beforeChange: [(args) => {
+      console.log(args)
+    }]
+  }
 };
 
 export default Media;

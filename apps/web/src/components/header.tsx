@@ -1,6 +1,6 @@
-import IconButton from "./IconButton";
-import NavbarSection from "./NavbarSection";
-import ThemeButton from "./ThemeButton";
+import IconButton from "./icon-button";
+import NavbarSection from "./header-section";
+import ThemeButton from "./theme-button";
 
 function Navbar() {
   return (

@@ -1,8 +1,9 @@
 import { ApolloClient, createQueryPreloader, InMemoryCache } from "@apollo/client";
-import config from "./config";
+
+const contentUrl = import.meta.env.VITE_CONTENT_BASE_URL;
 
 const apolloClient = new ApolloClient({
-  uri: `${config.service.content.url}/api/graphql`,
+  uri: `${contentUrl}/api/graphql`,
   cache: new InMemoryCache(),
 });
 

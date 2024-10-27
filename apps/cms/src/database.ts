@@ -1,5 +1,4 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import requireEnv from "./utils/require-env";
 import getEnv from "./utils/get-env";
 
 const url = getEnv('DATABASE_URI');

@@ -1,0 +1,33 @@
+{
+  "Articles": {
+    "__typename": "Articles",
+    "docs": [
+      {
+        "__typename": "Article",
+        "id": "671dfae27e97e90c98e5cdf0",
+        "title": "Dolor sit amet",
+        "subtitle": "Lorem Ipsum",
+        "callout": {
+          "__typename": "Article_Callout_Relationship",
+          "value": {
+            "__typename": "Media",
+            "url": "http://localhost/assets/media/DSCF0710.jpg"
+          }
+        }
+      },
+      {
+        "__typename": "Article",
+        "id": "671dfad97e97e90c98e5cdda",
+        "title": "Lorem Ipsum",
+        "subtitle": "Dolor sit amet",
+        "callout": {
+          "__typename": "Article_Callout_Relationship",
+          "value": {
+            "__typename": "Media",
+            "url": "http://localhost/assets/media/DSCF0732.jpg"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,30 +1,27 @@
 import fs from "fs";
 import requireEnv from "./require-env";
-import payload from "payload";
+import getEnv from "./get-env";
 
 const loadSecrets = (envs: readonly string[]) => {
   let secrets: {};
   secrets = envs.reduce((acc, env) => {
-    let secret: string;
-    try {
-      secret = requireEnv(env);
-
-      // Try with a file if the secret isn't found
-    } catch {
-
-      // Use standard Docker nomenclature for secret filenames
+    const secret = process.env[env];
+    if (!secret) {
       const secretFilename = `${env}_FILE`;
       console.log(`$${env} not found, trying with $${secretFilename}`);
-      const secretFilePath = requireEnv(secretFilename);
-      return {
-        ...acc,
-        [env]: fs
-          .readFileSync(secretFilePath, {
-            encoding: "utf8",
-            flag: "r",
-          })
-          .trim(),
-      };
+      const secretFilePath = process.env[secretFilename];
+      if (secretFilePath) {
+        return {
+          ...acc,
+          [env]: fs
+            .readFileSync(secretFilePath, {
+              encoding: "utf8",
+              flag: "r",
+            })
+            .trim(),
+        };
+      }
+      console.log(`$${env} not loaded`);
     }
     return { ...acc, [env]: secret };
   }, {});

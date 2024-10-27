@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import { preloadQuery } from "../apollo";
 
 const GET_ARTICLES = gql`
   query {
@@ -20,6 +19,4 @@ const GET_ARTICLES = gql`
 }
 `;
 
-export async function articlesLoader() {
-  return preloadQuery(GET_ARTICLES);
-}
+export default GET_ARTICLES;

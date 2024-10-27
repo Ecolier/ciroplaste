@@ -1,5 +1,5 @@
 import React from "react";
-import { RichText, RichTextNode } from "../types/richTextNode";
+import { RichText, RichTextNode } from "../../types/rich-text-node";
 
 interface Components {
   heading?: (props: {

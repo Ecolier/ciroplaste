@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import ThemeContext from "../contexts/theme-context";
-import IconButton from "./IconButton";
+import IconButton from "./icon-button";
 
 function ThemeButton() {
   const { theme, setTheme } = useContext(ThemeContext);

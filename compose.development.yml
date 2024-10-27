@@ -36,9 +36,3 @@ secrets:
     environment: EMAIL_USERNAME
   email_password:
     environment: EMAIL_PASSWORD
-  storage_account:
-    environment: STORAGE_ACCOUNT
-  storage_key:
-    environment: STORAGE_KEY
-  storage_secret: 
-    environment: STORAGE_SECRET

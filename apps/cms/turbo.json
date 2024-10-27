@@ -24,7 +24,8 @@
         "STORAGE_SECRET",
         "STORAGE_SECRET_FILE",
         "STORAGE_BUCKET",
-        "STORAGE_REGION"
+        "STORAGE_REGION",
+        "ASSETS_BASE_URL"
       ],
       "cache": false,
       "persistent": true

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Ref, RefObject, useEffect, useState } from "react";
+import { RefObject, useEffect } from "react";
 
 interface ElementRefList {
   [key: string]: RefObject<HTMLElement>;
@@ -101,16 +101,18 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
     }, new Map<MinMaxPair, KeyedElements[]>());
 
   const calculateMinMaxY = (zoneMap: Map<MinMaxPair, KeyedElements[]>) => minMaxPair (
-    Array.from(zoneMap).flatMap(([key, _]) => key),
+    Array.from(zoneMap).flatMap(([key]) => key),
   );
 
   useEffect(() => {
+
+    console.log('effect') 
     let formattedRefs: SpiedElement[]
     let zoneMap: Map<MinMaxPair, KeyedElements[]>
     let [globalMinY, globalMaxY]: MinMaxPair = [0, 0]
     let availableSpyZones: [MinMaxPair, KeyedElements[]][]
 
-    const resizeObserver = new ResizeObserver((entries) => {
+    const resizeObserver = new ResizeObserver(() => {
       formattedRefs = formatRefs(elementRefs);
       zoneMap = calculateSpiedZones(formattedRefs);
       [globalMinY, globalMaxY] = calculateMinMaxY(zoneMap);
@@ -149,17 +151,19 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
 
         prevZoneIndex = currZoneIndex;
         const currZone = availableSpyZones[currZoneIndex];
-        const [[_minY, _maxY], spiedElements] = currZone;
+        const [, spiedElements] = currZone;
 
         onFocus(spiedElements);
 
-        let nextAvailableZones = [currZone];
+        const nextAvailableZones = [currZone];
 
         // Make available only neighboring zones
         const prevZone = availableSpyZones[currZoneIndex - 1];
-        prevZone !== undefined && nextAvailableZones.push(prevZone);
+        if (prevZone !== undefined) nextAvailableZones.push(prevZone);
         const nextZone = availableSpyZones[currZoneIndex + 1];
-        nextZone !== undefined && nextAvailableZones.push(nextZone);
+        if (nextZone !== undefined) nextAvailableZones.push(nextZone);
+
+        return
       }, 200),
       { passive: true }
     );

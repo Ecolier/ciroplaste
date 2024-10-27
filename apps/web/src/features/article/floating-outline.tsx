@@ -16,10 +16,10 @@ function FloatingOutline({ headings, onClick }: FloatingOutlineProps) {
     if (containerRef.current) {
       containerRef.current.scrollLeft = containerRef.current?.scrollWidth
     }
-  }, [headings]);
+  }, [headings, containerRef]);
   return (
     <div
-      className={`fixed rounded-3xl drop-shadow-sm bottom-8 left-2 right-2 px-6 py-4 bg-slate-300 text-slate-950 dark:bg-slate-600 ${headings.length !== 0 ? `flex` : `hidden`}`}
+      className={`fixed drop-shadow-sm top-16 w-full px-6 py-4 text-zinc-900 backdrop-blur-3xl bg-white/75 dark:bg-zinc-950/75 ${headings.length !== 0 ? `flex` : `hidden`}`}
     >
       <div className="flex scrollbar-hidden overflow-x-scroll" ref={containerRef}>
       {headings.map((heading, index) => {

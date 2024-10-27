@@ -1,8 +1,8 @@
-import Marquee from "./Marquee";
+import Marquee from "./marquee";
 import { useTranslation } from "react-i18next";
 
 function Hero() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className="h-[50vh] min-h-[320px] mt-[72px] mb-9 mx-2 p-8 py-24 relative overflow-hidden flex flex-col justify-center items-center rounded-3xl">
       <span className="text-7xl font-bold mb-9 text-orange-950 dark:text-orange-50 font-serif">

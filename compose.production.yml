@@ -10,6 +10,14 @@ services:
       target: production
     env_file:
       - apps/cms/.env.production
+    secrets: 
+      - storage_account
+      - storage_key
+      - storage_secret
+    environment:
+      - STORAGE_ACCOUNT_FILE=/run/secrets/storage_account
+      - STORAGE_KEY_FILE=/run/secrets/storage_key
+      - STORAGE_SECRET_FILE=/run/secrets/storage_secret
 
 secrets:
   cms_secret:

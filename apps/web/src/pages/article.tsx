@@ -1,15 +1,16 @@
 import { QueryRef, useReadQuery } from "@apollo/client";
 import { useLoaderData } from "react-router-dom";
-import TitleCard from "../components/TitleCard";
-import { Article as ArticleModel } from "@crp/types";
-import ArticleOutline from "../components/ArticleOutline";
-import { createRef, RefObject, useEffect, useRef, useState } from "react";
+import Card from "../components/card";
+import { Article as ArticleModel, Media } from "@crp/types";
+import ArticleOutline from "../features/article/article-outline";
+import { createRef, RefObject, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import useSpy from "../components/useSpy";
-import FloatingOutline, { HeadingLink } from "../components/FloatingOutline";
-import RichTextRenderer from "../components/RichTextRenderer";
-import config from "../config";
+import useSpy from "../hooks/use-spy";
+import FloatingOutline, {
+  HeadingLink,
+} from "../features/article/floating-outline";
+import RichTextRenderer from "../features/article/article-renderer";
 
 interface HeadingRefList {
   [key: string]: RefObject<HTMLHeadingElement>;
@@ -61,10 +62,10 @@ function Article() {
         <main className="w-full">
           <div className="flex flex-col items-center w-full">
             <div className="mb-8 min-h-80 h-[25vh]">
-              <TitleCard
-                title={article?.title}
-                slug={article?.subtitle}
-                img={`${config.service.content.url}${article.callout.value.url}`}
+              <Card
+                title={article.title!}
+                text={article.subtitle!}
+                backgroundImageURL={`${import.meta.env.VITE_ASSETS_BASE_URL}${(article.callout!.value as Media).url}`}
               />
             </div>
             <div className="mt-6 w-full max-w-2xl">
@@ -103,7 +104,7 @@ function Article() {
                       <div key={key}>
                         <img
                           className="mb-2"
-                          src={`${config.service.content.url}${url}`}
+                          src={`${import.meta.env.VITE_CONTENT_BASE_URL}${url}`}
                         ></img>
                         <p className="text-right text-zinc-600 dark:text-zinc-500 mb-8 text-sm">
                           {alt}

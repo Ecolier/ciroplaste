@@ -1,9 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-
 import Backend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
-import config from "./config";
+
+const localesUrl = import.meta.env.VITE_LOCALES_BASE_URL;
 
 i18n
   .use(Backend)
@@ -13,7 +13,7 @@ i18n
     ns: ['web'],
     fallbackNS: 'web',
     backend: {
-      loadPath: `${config.service.i18n.url}/{{lng}}/{{ns}}.json`
+      loadPath: `${localesUrl}/{{lng}}/{{ns}}.json`
     },
     fallbackLng: "en",
     debug: true,
