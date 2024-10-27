@@ -17,7 +17,7 @@ function ArticleList({ articles }: ArticleListProps) {
           <Card
             title={article.title!}
             text={article.subtitle!}
-            backgroundImageURL={`${import.meta.env.VITE_ASSETS_BASE_URL}${(article.callout!.value as Media).url}`}
+            backgroundImageURL={`${(article.callout!.value as Media).url}`}
           />
         </a>
       ))}

@@ -65,7 +65,7 @@ function Article() {
               <Card
                 title={article.title!}
                 text={article.subtitle!}
-                backgroundImageURL={`${import.meta.env.VITE_ASSETS_BASE_URL}${(article.callout!.value as Media).url}`}
+                backgroundImageURL={`${(article.callout!.value as Media).url}`}
               />
             </div>
             <div className="mt-6 w-full max-w-2xl">
