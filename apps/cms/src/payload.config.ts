@@ -25,5 +25,6 @@ export default buildConfig({
     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
   },
   plugins: [cloudStorage],
-  db
+  db,
+  cors: ['https://ciroplaste.com']
 });
