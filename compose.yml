@@ -33,8 +33,6 @@ services:
   content:
     image: mongo:latest
     restart: unless-stopped
-    ports:
-      - 27017:27017
     command:
       - --storageEngine=wiredTiger
     volumes:
@@ -43,7 +41,3 @@ services:
 volumes:
   data:
   media:
-
-networks:
-  default:
-    driver: bridge

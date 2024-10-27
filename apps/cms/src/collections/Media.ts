@@ -17,12 +17,7 @@ const Media: CollectionConfig = {
       name: "alt",
       type: "text",
     },
-  ],
-  hooks: {
-    beforeChange: [(args) => {
-      console.log(args)
-    }]
-  }
+  ]
 };
 
 export default Media;
