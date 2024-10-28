@@ -1,22 +1,21 @@
 import { gql } from "@apollo/client";
 
-const GET_ARTICLES = gql`
-  query {
-  Articles {
-  	docs {
+const GET_STORY = gql`
+  query Article($id: String!) {
+    Article(id: $id) {
       id
       title
       subtitle
       callout {
         value {
           ... on Media {
-          	url
-        	}
+            url
+          }
         }
       }
+      content
     }
   }
-}
 `;
 
-export default GET_ARTICLES;
+export default GET_STORY;

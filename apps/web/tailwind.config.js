@@ -21,6 +21,7 @@ export default {
     fontFamily: {
       sans: ['Noto Sans', 'sans-serif'],
       serif: ['Lora', 'serif'],
+      symbols: ['Ciroplaste Symbols']
     },
   },
   plugins: [],

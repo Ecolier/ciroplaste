@@ -14,10 +14,10 @@ import {
 } from "@apollo/client";
 import { MockLink } from "@apollo/client/testing";
 import articles from "./articles.mock.json";
-import GET_ARTICLES from "../src/queries/get-articles-query";
+import GET_STORIES from "../src/queries/get-stories";
 
 const link = new MockLink([
-  { request: { query: GET_ARTICLES }, result: {data: articles}},
+  { request: { query: GET_STORIES }, result: {data: articles}},
 ]);
 
 const client = new ApolloClient({
@@ -30,7 +30,7 @@ const router = createMemoryRouter([
     path: "/",
     element: <Home />,
     loader: () => {
-      return createQueryPreloader(client)(GET_ARTICLES);
+      return createQueryPreloader(client)(GET_STORIES);
     },
   }
 ]);

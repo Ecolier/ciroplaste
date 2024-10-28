@@ -104,7 +104,7 @@ function Article() {
                       <div key={key}>
                         <img
                           className="mb-2"
-                          src={`${import.meta.env.VITE_CONTENT_BASE_URL}${url}`}
+                          src={`${url}`}
                         ></img>
                         <p className="text-right text-zinc-600 dark:text-zinc-500 mb-8 text-sm">
                           {alt}

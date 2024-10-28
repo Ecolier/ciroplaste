@@ -13,9 +13,11 @@ function Navbar() {
               <span className="material-symbols-rounded">menu</span>
             </IconButton>
             <Link to={"/"}>
-              <span className="dark:text-zinc-200 text-zinc-800 px-2 ml-3.5">
-                Ciroplaste
-              </span>
+              <IconButton>
+                <span className="font-symbols">
+                  &#xe900;
+                </span>
+              </IconButton>
             </Link>
           </NavbarSection>
           <NavbarSection justify="end">
