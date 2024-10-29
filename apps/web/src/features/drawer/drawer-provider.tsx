@@ -9,7 +9,7 @@ function DrawerProvider({ children }: PropsWithChildren) {
       value={{ state: "Closed", toggle: () => setIsActive(!isActive) }}
     >
       <Drawer isActive={isActive} />
-      <div className="flex flex-col h-screen overflow-y-auto">
+      <div className="flex flex-col h-dvh overflow-y-auto">
         {children}
       </div>
     </DrawerContext.Provider>
