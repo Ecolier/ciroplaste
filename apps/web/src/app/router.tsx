@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { articleLoader } from "../pages/loaders/article-loader";
-import { homeLoader } from "../pages/loaders/home-loader";
+import { articleLoader } from "../pages/article/article-loader";
+import { homeLoader } from "../pages/home/home-loader";
 import Root from "./root";
 
 const router = createBrowserRouter(
@@ -13,7 +13,7 @@ const router = createBrowserRouter(
           path: "/",
           loader: homeLoader,
           async lazy() {
-            let {default: Home} = await import('../pages/home');
+            let {default: Home} = await import('../pages/home/home');
             return {Component: Home};
           },
         },
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
           path: "article/:id",
           loader: articleLoader,
           async lazy() {
-            let {default: Article} = await import('../pages/article');
+            let {default: Article} = await import('../pages/article/article');
             return {Component: Article};
           },
         },

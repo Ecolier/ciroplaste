@@ -11,7 +11,7 @@ interface ArticleOutlineProps {
 function ArticleOutline({ article, className, onClick }: ArticleOutlineProps) {
   return (
     <div className={`${className}`}>
-      <p className="text-xs text-zinc-700 dark:text-zinc-400 mb-2">
+      <p className="text-xs text-chalk-700 dark:text-chalk-400 mb-2">
         On this page
       </p>
       <ul>
@@ -21,7 +21,7 @@ function ArticleOutline({ article, className, onClick }: ArticleOutlineProps) {
             heading({ children, key }) {
               return (
                 <li key={key} className="flex items-center py-2 cursor-pointer" onClick={() => onClick(key)}>
-                  <a className="text-zinc-800 dark:text-zinc-300">
+                  <a className="text-chalk-800 dark:text-chalk-300">
                     {children}
                   </a>
                 </li>

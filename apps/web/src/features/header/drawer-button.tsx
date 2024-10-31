@@ -1,13 +1,19 @@
 import { useContext } from "react";
-import IconButton from "../../components/icon-button";
 import DrawerContext from "../drawer/drawer-context";
+import HeaderButton from "./header-button";
 
-function DrawerButton() {
-  const { toggle } = useContext(DrawerContext);
+type DrawerButtonProps = {
+  className?: string;
+};
+
+function DrawerButton({ className }: DrawerButtonProps) {
+  const { isActive, toggle } = useContext(DrawerContext);
   return (
-    <IconButton onClick={() => toggle()}>
-      <span className="material-symbols-rounded">menu</span>
-    </IconButton>
+    <HeaderButton className={className} onClick={() => toggle()}>
+      <span className="material-symbols-rounded">
+        {isActive ? <>menu_open</> : <>menu</>}
+      </span>
+    </HeaderButton>
   );
 }
 

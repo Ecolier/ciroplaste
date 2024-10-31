@@ -27,8 +27,9 @@
   }
 
   body {
-    @apply dark:bg-zinc-900 bg-zinc-50 h-full
+    @apply dark:bg-chalk-950 bg-chalk-50 h-full
   }
+
   html {
     @apply h-full
   }

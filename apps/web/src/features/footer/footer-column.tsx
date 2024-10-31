@@ -14,21 +14,21 @@ type FooterColumnProps = {
 function FooterColumn({ title, links }: FooterColumnProps) {
   return (
     <ul className="flex flex-col mt-2 gap-y-4">
-      <li className="text-zinc-700 dark:text-zinc-400 text-sm">{title}</li>
+      <li className="text-chalk-700 dark:text-chalk-400 text-sm">{title}</li>
       {links.map((link, index) => (
         <li key={index}>
           {link.external !== undefined && link.external === true ? (
             <a
               href={link.url}
               target="_blank"
-              className="text-blue-700 dark:text-blue-400 underline"
+              className="text-iris-500 dark:text-iris-400 underline"
               rel="noopener noreferrer"
             >
               {" "}
               {link.label}{" "}
             </a>
           ) : (
-            <Link to={link.url}><span className="text-blue-700 dark:text-blue-400 underline">{link.label}</span></Link>
+            <Link to={link.url}><span className="text-iris-500 dark:text-iris-400 underline">{link.label}</span></Link>
           )}
         </li>
       ))}

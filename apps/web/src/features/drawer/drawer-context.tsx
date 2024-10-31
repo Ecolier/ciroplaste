@@ -1,14 +1,12 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 
-type DrawerState = "Opened" | "Closed";
-
 interface DrawerContextProps {
-  state: DrawerState;
+  isActive: boolean;
   toggle: Dispatch<SetStateAction<void>>;
 }
 
 const DrawerContext = createContext<DrawerContextProps>({
-  state: "Closed",
+  isActive: false,
   toggle: () => {}
 });
 

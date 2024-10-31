@@ -13,8 +13,8 @@ function Footer() {
       <Squiggle />
       <footer className="px-6 py-16 grid grid-cols-2">
         <div className="col-span-3">
-          <span className="font-symbols text-5xl text-zinc-800 dark:text-zinc-300">&#xe900;</span>
-          <p className="my-3 text-sm text-zinc-700 dark:text-zinc-400">{t("Reason for this website")}</p>
+          <span className="font-symbols text-5xl text-chalk-800 dark:text-chalk-300">&#xe900;</span>
+          <p className="my-3 text-sm text-chalk-700 dark:text-chalk-400">{t("Reason for this website")}</p>
         </div>
         <FooterColumn
           title={t('Social')}
