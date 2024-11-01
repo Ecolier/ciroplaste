@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import IconButton, { IconButtonProps } from "../../components/icon-button";
-import HeaderContext from "./header-context";
+import useHeader from "./header-context";
 
 function HeaderButton({ children, className, ...props }: IconButtonProps) {
-  const { transparent } = useContext(HeaderContext);
+  const { transparent } = useHeader();
   return (
     <IconButton
       {...props}

@@ -1,17 +1,19 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 interface HeaderContextProps {
-  setTransparent: React.Dispatch<React.SetStateAction<boolean>>;
-  setFullscreen: React.Dispatch<React.SetStateAction<boolean>>;
   transparent: boolean;
-  fullscreen: boolean;
 }
 
-const HeaderContext = createContext<HeaderContextProps>({
-  setTransparent: () => {},
-  setFullscreen: () => {},
+export const HeaderContext = createContext<HeaderContextProps>({
   transparent: false,
-  fullscreen: false,
 });
 
-export default HeaderContext;
+const useHeader = () => {
+  const context = useContext(HeaderContext);
+  if (context === undefined) {
+    throw new Error("useHeader() must be called within a HeaderProvider");
+  }
+  return context;
+};
+
+export default useHeader;

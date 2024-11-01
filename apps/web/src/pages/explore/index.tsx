@@ -1,19 +1,8 @@
 import { QueryRef, useReadQuery } from "@apollo/client";
 import { useLoaderData } from "react-router-dom";
 import StoriesList from "./stories-list";
-import HeaderContext from "../../features/header/header-context";
-import { useContext, useEffect } from "react";
-import FooterContext from "../../features/footer/footer-context";
 
 function Explore() {
-  const { setFullscreen, setTransparent } = useContext(HeaderContext);
-  const { setFloating } = useContext(FooterContext);
-
-  useEffect(() => {
-    setFullscreen(false);
-    setTransparent(false);
-    setFloating(false);
-  });
   const queryRef = useLoaderData() as QueryRef;
   const { data } = useReadQuery(queryRef);
   const {

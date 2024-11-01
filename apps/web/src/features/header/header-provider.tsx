@@ -1,13 +1,16 @@
-import { PropsWithChildren, useState } from "react";
-import Header from "./header";
-import HeaderContext from "./header-context";
+import { PropsWithChildren } from "react";
+import { HeaderContext } from "./header-context";
 
-function HeaderProvider({ children }: PropsWithChildren) {
-  const [transparent, setTransparent] = useState(false);
-  const [fullscreen, setFullscreen] = useState(false);
+type HeaderProviderProps = PropsWithChildren & {
+  transparent?: boolean;
+};
+
+function HeaderProvider({
+  transparent = false,
+  children,
+}: HeaderProviderProps) {
   return (
-    <HeaderContext.Provider value={{ setFullscreen, setTransparent, transparent, fullscreen }}>
-      <Header fullscreen={fullscreen} transparent={transparent} />
+    <HeaderContext.Provider value={{ transparent }}>
       {children}
     </HeaderContext.Provider>
   );

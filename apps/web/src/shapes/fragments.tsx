@@ -1,4 +1,4 @@
-function HeroMask() {
+function Fragments() {
   return (
     <svg viewBox="0 0 1328 885" fill="none" xmlns="http://www.w3.org/2000/svg">
       <mask id="svgmask1">
@@ -37,4 +37,4 @@ function HeroMask() {
   );
 }
 
-export default HeroMask;
+export default Fragments;

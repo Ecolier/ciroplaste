@@ -1,23 +1,23 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { articleLoader, storyLoader } from "../pages/story/story-loader";
-import { homeLoader } from "../pages/home/home-loader";
-import Root from "./root";
+import {storyLoader } from "../pages/story/story-loader";
+import { landingLoader } from "../pages/landing/landing-loader";
+import Layout from "./layout";
 import { exploreLoader } from "../pages/explore/explore-loader";
 
 const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: <Root />,
+      loader: landingLoader,
+      async lazy() {
+        let {default: Landing} = await import('../pages/landing');
+        return {Component: Landing};
+      },
+    },
+    {
+      path: "/",
+      element: <Layout />,
       children: [
-        {
-          path: "/",
-          loader: homeLoader,
-          async lazy() {
-            let {default: Home} = await import('../pages/home');
-            return {Component: Home};
-          },
-        },
         {
           path: "/explore",
           loader: exploreLoader,

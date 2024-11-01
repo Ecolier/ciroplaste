@@ -1,15 +1,12 @@
 import DrawerButton from "./drawer-button";
 import HeaderButton from "./header-button";
+import useHeader from "./header-context";
 import HeaderSection from "./header-section";
 import ThemeButton from "./theme-button";
 import { Link } from "react-router-dom";
 
-type HeaderProps = {
-  transparent: boolean;
-  fullscreen: boolean;
-};
-
-function Header({ transparent = false, fullscreen = false }: HeaderProps) {
+function Header() {
+  const {transparent} = useHeader();
   return (
     <>
       <header
