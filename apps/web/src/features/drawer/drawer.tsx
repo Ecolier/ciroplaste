@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import DrawerContext from "./drawer-context";
-import { motion, AnimatePresence } from "framer-motion";
 import DrawerButton from "../header/drawer-button";
 import NavigationList from "./navigation-list";
 import { useTranslation } from "react-i18next";

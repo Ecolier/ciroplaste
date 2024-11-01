@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {storyLoader } from "../pages/story/story-loader";
-import { landingLoader } from "../pages/landing/landing-loader";
 import Layout from "./layout";
 import { exploreLoader } from "../pages/explore/explore-loader";
 
@@ -8,10 +7,9 @@ const router = createBrowserRouter(
   [
     {
       path: "/",
-      loader: landingLoader,
       async lazy() {
-        let {default: Landing} = await import('../pages/landing');
-        return {Component: Landing};
+        let {default: LandingLayout} = await import('../pages/landing/landing-layout');
+        return {Component: LandingLayout};
       },
     },
     {
@@ -22,7 +20,7 @@ const router = createBrowserRouter(
           path: "/explore",
           loader: exploreLoader,
           async lazy() {
-            let {default: Explore} = await import('../pages/explore');
+            let {default: Explore} = await import('../pages/explore/explore');
             return {Component: Explore};
           },
         },

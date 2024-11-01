@@ -53,7 +53,7 @@ function Story() {
   });
   return (
     <>
-      <div className="flex flex-col items-center m-2" ref={container}>
+      <div className="flex flex-col items-center m-2 pt-[72px]" ref={container}>
         <FloatingOutline
           headings={activeSpiedHeadings}
           onClick={({ id }) => scrollTo(id)()}

@@ -10,7 +10,7 @@ function StoriesList({ stories }: StoriesListProps) {
   return (
     <>
       {stories?.map((story, index) => (
-        <div key={index} className="mb-4 w-full">
+        <div key={index} className="mb-2 w-full">
           <Link to={`/story/${story.id}`}>
             <StoryCard
               title={story.title!}

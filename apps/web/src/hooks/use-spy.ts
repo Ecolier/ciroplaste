@@ -1,4 +1,4 @@
-import _ from "lodash";
+import {throttle} from "lodash";
 import { RefObject, useEffect } from "react";
 
 interface ElementRefList {
@@ -125,7 +125,7 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
 
     document.addEventListener(
       "scroll",
-      _.throttle(() => {
+      throttle(() => {
         // Reset spied elements if we're out of scope
         if (window.scrollY < globalMinY || window.scrollY > globalMaxY) {
           if (prevZoneIndex === -1) {
