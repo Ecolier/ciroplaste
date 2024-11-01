@@ -14,7 +14,7 @@ function Drawer({ isActive }: DrawerProps) {
   return (
     <>
       <aside
-        className={`fixed w-80 top-0 bottom-0 bg-chalk-100 dark:bg-chalk-900 rounded-r-2xl z-30 shadow-md transition-transform ${isActive ? `translate-x-0` : `-translate-x-80`}`}
+        className={`fixed w-80 top-0 bottom-0 bg-chalk-100 dark:bg-chalk-900 rounded-r-2xl z-40 shadow-md transition-transform ${isActive ? `translate-x-0` : `-translate-x-80`}`}
       >
         <nav className="mt-2">
           <DrawerButton className="ml-3 mb-2" />
@@ -64,7 +64,7 @@ function Drawer({ isActive }: DrawerProps) {
       </aside>
       <div
         onClick={() => toggle()}
-        className={`fixed top-0 left-0 w-full h-full bg-chalk-950/50 z-20 transition-opacity ${isActive ? `opacity-100` : `opacity-0 invisible`}`}
+        className={`fixed top-0 left-0 w-full h-full bg-chalk-950/50 z-30 transition-opacity ${isActive ? `opacity-100` : `opacity-0 invisible`}`}
       ></div>
     </>
   );

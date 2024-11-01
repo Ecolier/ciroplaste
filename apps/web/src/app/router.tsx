@@ -28,7 +28,7 @@ const router = createBrowserRouter(
           path: "story/:id",
           loader: storyLoader,
           async lazy() {
-            let {default: Story} = await import('../pages/story');
+            let {default: Story} = await import('../pages/story/story');
             return {Component: Story};
           },
         },

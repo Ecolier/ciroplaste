@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import Card from "../../components/card";
 import { Article as ArticleModel, Media } from "@crp/types";
 import ArticleOutline from "../../features/article/article-outline";
-import { createRef, RefObject, useRef, useState } from "react";
+import { createRef, RefObject, useContext, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import useSpy from "../../hooks/use-spy";
@@ -11,12 +11,15 @@ import FloatingOutline, {
   HeadingLink,
 } from "../../features/article/floating-outline";
 import RichTextRenderer from "../../features/article/article-renderer";
+import DrawerContext from "../../features/drawer/drawer-context";
 
 interface HeadingRefList {
   [key: string]: RefObject<HTMLHeadingElement>;
 }
 
 function Story() {
+  const { containerRef } = useContext(DrawerContext);
+  console.log(containerRef.current);
   const queryRef = useLoaderData() as QueryRef<{ Article: ArticleModel }>;
   const {
     data: { Article: article },
@@ -25,7 +28,7 @@ function Story() {
   const { contextSafe } = useGSAP({ scope: container });
   const scrollTo = (key: number) =>
     contextSafe(() => {
-      gsap.to(window, {
+      gsap.to(containerRef.current, {
         duration: 0.2,
         scrollTo: { y: `#heading_${article.id}_${key}`, offsetY: 72 },
       });
@@ -35,9 +38,11 @@ function Story() {
     [],
   );
   useSpy({
+    containerRef,
     elementRefs: headingRefs.current,
     offset: 73,
     onFocus: (spiedElements) => {
+      console.log(spiedElements);
       const headings = Object.entries(spiedElements).reduce(
         (arr, [key, { element }]) => {
           const childNode = element.childNodes[0];
@@ -53,7 +58,7 @@ function Story() {
   });
   return (
     <>
-      <div className="flex flex-col items-center m-2 pt-[72px]" ref={container}>
+      <div className="flex flex-col items-center pt-[72px]" ref={container}>
         <FloatingOutline
           headings={activeSpiedHeadings}
           onClick={({ id }) => scrollTo(id)()}
@@ -101,10 +106,7 @@ function Story() {
                     ),
                     upload: ({ url, alt, key }) => (
                       <div key={key}>
-                        <img
-                          className="mb-2"
-                          src={`${url}`}
-                        ></img>
+                        <img className="mb-2" src={`${url}`}></img>
                         <p className="text-right text-chalk-600 dark:text-chalk-500 mb-8 text-sm">
                           {alt}
                         </p>

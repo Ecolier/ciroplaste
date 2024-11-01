@@ -1,4 +1,4 @@
-import {throttle} from "lodash";
+import { throttle } from "lodash";
 import { RefObject, useEffect } from "react";
 
 interface ElementRefList {
@@ -6,6 +6,7 @@ interface ElementRefList {
 }
 
 interface ScrollSpyProps {
+  containerRef: RefObject<HTMLElement>;
   elementRefs: ElementRefList;
   onFocus: (elementRefs: KeyedElements) => void;
   offset?: number;
@@ -25,7 +26,7 @@ export type KeyedElements = {
   [key: string]: SpiedElement;
 };
 
-function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
+function useSpy({ containerRef, elementRefs, onFocus, offset }: ScrollSpyProps) {
   const formatRefs = (elementRefs: ElementRefList): SpiedElement[] =>
     Object.entries(elementRefs).map(([key, ref]) => {
       const element = ref.current as HTMLHeadingElement;
@@ -35,7 +36,7 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
         ref,
         key: parseInt(key),
         tag: elementTag,
-        y: (elementBounds.y + window.scrollY) - (offset ? offset + 1 : 0),
+        y: elementBounds.y + containerRef.current!.scrollTop - (offset ? offset + 1 : 0),
         element,
       };
     });
@@ -100,17 +101,14 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
       return map;
     }, new Map<MinMaxPair, KeyedElements[]>());
 
-  const calculateMinMaxY = (zoneMap: Map<MinMaxPair, KeyedElements[]>) => minMaxPair (
-    Array.from(zoneMap).flatMap(([key]) => key),
-  );
+  const calculateMinMaxY = (zoneMap: Map<MinMaxPair, KeyedElements[]>) =>
+    minMaxPair(Array.from(zoneMap).flatMap(([key]) => key));
 
   useEffect(() => {
-
-    console.log('effect') 
-    let formattedRefs: SpiedElement[]
-    let zoneMap: Map<MinMaxPair, KeyedElements[]>
-    let [globalMinY, globalMaxY]: MinMaxPair = [0, 0]
-    let availableSpyZones: [MinMaxPair, KeyedElements[]][]
+    let formattedRefs: SpiedElement[];
+    let zoneMap: Map<MinMaxPair, KeyedElements[]>;
+    let [globalMinY, globalMaxY]: MinMaxPair = [0, 0];
+    let availableSpyZones: [MinMaxPair, KeyedElements[]][];
 
     const resizeObserver = new ResizeObserver(() => {
       formattedRefs = formatRefs(elementRefs);
@@ -123,11 +121,15 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
 
     let prevZoneIndex = -1;
 
-    document.addEventListener(
+    const containerElem = containerRef.current!;
+
+    containerElem.addEventListener(
       "scroll",
       throttle(() => {
+
+        console.log(containerElem.scrollTop)
         // Reset spied elements if we're out of scope
-        if (window.scrollY < globalMinY || window.scrollY > globalMaxY) {
+        if (containerElem.scrollTop < globalMinY || containerElem.scrollTop > globalMaxY) {
           if (prevZoneIndex === -1) {
             return;
           }
@@ -136,12 +138,12 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
           availableSpyZones = Array.from(zoneMap);
           return;
         }
-        
+
         if (!availableSpyZones) {
-          return
+          return;
         }
         const currZoneIndex = availableSpyZones.findIndex(
-          ([[minY, maxY]]) => window.scrollY > minY && window.scrollY < maxY,
+          ([[minY, maxY]]) => containerElem.scrollTop > minY && containerElem.scrollTop < maxY,
         );
 
         // Don't process event if we haven't changed zones or can't find one
@@ -163,9 +165,9 @@ function useSpy({ elementRefs, onFocus, offset }: ScrollSpyProps) {
         const nextZone = availableSpyZones[currZoneIndex + 1];
         if (nextZone !== undefined) nextAvailableZones.push(nextZone);
 
-        return
+        return;
       }, 200),
-      { passive: true }
+      { passive: true },
     );
 
     return () => resizeObserver.disconnect();

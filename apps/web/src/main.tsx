@@ -8,10 +8,10 @@ import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import App from './app';
 
+gsap.registerPlugin(ScrollToPlugin);
+
 const root = document.getElementById('root');
 if (!root) throw new Error('No root element found');
-
-gsap.registerPlugin(ScrollToPlugin);
 
 createRoot(root).render(
   <StrictMode>
