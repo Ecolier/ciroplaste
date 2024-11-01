@@ -15,7 +15,7 @@ function Drawer({ isActive }: DrawerProps) {
   return (
     <>
       <aside
-        className={`-translate-x-80 fixed w-80 top-0 bottom-0 bg-chalk-100 dark:bg-chalk-900 rounded-r-2xl z-30 shadow-md will-change-transform ${isActive ? `animate-slideIn translate-x-0` : `animate-slideOut -translate-x-80`}`}
+        className={`fixed w-80 top-0 bottom-0 bg-chalk-100 dark:bg-chalk-900 rounded-r-2xl z-30 shadow-md transition-transform ${isActive ? `translate-x-0` : `-translate-x-80`}`}
       >
         <nav className="mt-2">
           <DrawerButton className="ml-3 mb-2" />
@@ -28,6 +28,15 @@ function Drawer({ isActive }: DrawerProps) {
                   iconElement: (
                     <span className="font-symbols text-chalk-800 dark:text-chalk-300 mr-4">
                       &#xe900;
+                    </span>
+                  ),
+                },
+                {
+                  label: t("Explore"),
+                  href: "/explore",
+                  iconElement: (
+                    <span className="material-symbols-rounded text-chalk-800 dark:text-chalk-300 mr-4">
+                      explore
                     </span>
                   ),
                 },
@@ -56,7 +65,7 @@ function Drawer({ isActive }: DrawerProps) {
       </aside>
       <div
         onClick={() => toggle()}
-        className={`fixed top-0 left-0 w-full h-full bg-chalk-950/50 z-20 ${isActive ? `animate-fadeIn opacity-100` : `animate-fadeOut opacity-0 hidden`}`}
+        className={`fixed top-0 left-0 w-full h-full bg-chalk-950/50 z-20 transition-opacity ${isActive ? `opacity-100` : `opacity-0 invisible`}`}
       ></div>
     </>
   );

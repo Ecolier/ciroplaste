@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { articleLoader, storyLoader } from "../pages/story/story-loader";
 import { homeLoader } from "../pages/home/home-loader";
 import Root from "./root";
+import { exploreLoader } from "../pages/explore/explore-loader";
 
 const router = createBrowserRouter(
   [
@@ -15,6 +16,14 @@ const router = createBrowserRouter(
           async lazy() {
             let {default: Home} = await import('../pages/home');
             return {Component: Home};
+          },
+        },
+        {
+          path: "/explore",
+          loader: exploreLoader,
+          async lazy() {
+            let {default: Explore} = await import('../pages/explore');
+            return {Component: Explore};
           },
         },
         {

@@ -1,24 +1,23 @@
 import { Outlet } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useContext } from "react";
 import Footer from "../features/footer/footer";
 import DrawerProvider from "../features/drawer/drawer-provider";
-import ThemeProvider from "../providers/theme-provider";
+import FooterProvider from "../features/footer/footer-provider";
 import HeaderProvider from "../features/header/header-provider";
+import FooterContext from "../features/footer/footer-context";
 
 function Root() {
   return (
-    <ThemeProvider>
-      <DrawerProvider>
-        <HeaderProvider>
-          <div className="flex grow justify-center flex-col">
-            <Suspense>
-              <Outlet />
-            </Suspense>
-          </div>
+    <DrawerProvider>
+      <HeaderProvider>
+        <FooterProvider>
+          <Suspense>
+            <Outlet />
+          </Suspense>
           <Footer />
-        </HeaderProvider>
-      </DrawerProvider>
-    </ThemeProvider>
+        </FooterProvider>
+      </HeaderProvider>
+    </DrawerProvider>
   );
 }
 
