@@ -16,7 +16,7 @@ interface HeadingRefList {
   [key: string]: RefObject<HTMLHeadingElement>;
 }
 
-function Article() {
+function Story() {
   const queryRef = useLoaderData() as QueryRef<{ Article: ArticleModel }>;
   const {
     data: { Article: article },
@@ -53,7 +53,6 @@ function Article() {
   });
   return (
     <>
-      <div className="pt-16"></div>
       <div className="flex flex-col items-center m-2" ref={container}>
         <FloatingOutline
           headings={activeSpiedHeadings}
@@ -122,4 +121,4 @@ function Article() {
   );
 }
 
-export default Article;
+export default Story;

@@ -7,6 +7,7 @@ const GET_STORIES = gql`
       id
       title
       subtitle
+      createdAt
       callout {
         value {
           ... on Media {

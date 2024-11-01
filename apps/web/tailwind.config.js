@@ -37,13 +37,28 @@ export default {
     },
     extend: {
       keyframes: {
-        infiniteScroll: {
+        slideIn: {
+          '0%': { transform: 'translateX(-320px)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        slideOut: {
           '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(calc(-100% - 1rem))' },
+          '100%': { transform: 'translateX(-320px)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
         }
       },
       animation: {
-        marquee: 'infiniteScroll 480s linear infinite',
+        slideIn: 'slideIn .1s linear',
+        slideOut: 'slideOut .1s linear',
+        fadeIn: 'fadeIn .1s linear',
+        fadeOut: 'fadeOut .1s linear',
       }
     },
     fontFamily: {
