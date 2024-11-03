@@ -31,13 +31,12 @@ function Story() {
   // }, []);
 
   useTitle(`${story.title} - ${story.subtitle}`);
-  useTransparentHeader(true);
 
   const CardRef = forwardRef(Card);
   const container = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="flex flex-col items-center" ref={container}>
+    <div className="pt-[72px] flex flex-col items-center" ref={container}>
       <main className="w-full">
         <div className="flex flex-col items-center w-full">
           <CardRef

@@ -14,7 +14,6 @@ function StoryOutline({
   activeHeadingKeys,
   onClick,
 }: StoryOutlineProps) {
-
   return (
     <div className="">
       <p className="text-xs text-chalk-700 dark:text-chalk-400 mb-2">

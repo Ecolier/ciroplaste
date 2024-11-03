@@ -18,7 +18,7 @@ type StoryReaderProps = {
 };
 
 function StoryReader({ content }: StoryReaderProps) {
-  const headings = useRef<Heading[]>([]);
+  const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeHeadingKeys, setActiveHeadingKeys] = useState<
     (string | number)[]
   >([]);
@@ -26,9 +26,9 @@ function StoryReader({ content }: StoryReaderProps) {
   const addHeading = (key: string | number) =>
     useCallback(
       (element: HTMLHeadingElement) => {
-        headings.current = [...headings.current, { key, element }];
+        setHeadings((prevHeadings) => ([...prevHeadings, { key, element }]));
       },
-      [headings],
+      [],
     );
 
   const { containerRef } = useDrawer();
@@ -55,14 +55,14 @@ function StoryReader({ content }: StoryReaderProps) {
 
   useSpy({
     containerRef,
-    elementRefs: headings.current,
+    elementRefs: headings,
     offset: 73,
     onFocus: updateActiveHeadingKeys,
   });
   return (
     <>
       <FloatingOutline
-        headings={headings.current
+        headings={headings
           .filter(({ key }) => activeHeadingKeys.includes(key.toString()))
           .map(({ key, element }) => ({
             key,
@@ -71,7 +71,7 @@ function StoryReader({ content }: StoryReaderProps) {
         onClick={(key) => scrollTo(key)()}
       />
       <StoryOutline
-        headings={headings.current.map(({ key, element }) => ({
+        headings={headings.map(({ key, element }) => ({
           key,
           text: element.childNodes[0].nodeValue!,
         }))}
