@@ -14,7 +14,7 @@ function FloatingOutline({ headings, onClick }: FloatingOutlineProps) {
   }, [headings, containerRef]);
   return (
     <div
-      className={`fixed top-16 left-0 w-full px-6 py-3 text-chalk-900 bg-chalk-100/90 dark:bg-chalk-900/90 backdrop-blur-lg border-t border-t-chalk-100 dark:border-t-chalk-900 ${headings.length !== 0 ? `flex` : `hidden`}`}
+      className={`sticky top-16 left-0 w-full flex px-6 h-12 text-chalk-900 bg-chalk-100/90 dark:bg-chalk-900/90 backdrop-blur-lg ${headings.length !== 0 ? `flex` : `invisible`}`}
     >
       <div
         className="flex scrollbar-hidden overflow-x-scroll"

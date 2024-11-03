@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import useTransparentHeader from "../../features/header/use-transparent-header";
 
 function Landing() {
   const { t } = useTranslation();
@@ -14,9 +15,11 @@ function Landing() {
     }
   }, [videoRef, isUsingVideoFallback]);
 
+  useTransparentHeader(true);
+
   useEffect(() => {
     document.title = `Ciroplaste | Stories from wax`;
-  }, [])
+  }, []);
 
   return (
     <div className="min-h-dvh relative w-full flex flex-col justify-center z-10">

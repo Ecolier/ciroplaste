@@ -11,7 +11,7 @@ function StoriesList({ stories }: StoriesListProps) {
     <>
       {stories?.map((story, index) => (
         <div key={index} className="mb-2 w-full">
-          <Link to={`/story/${story.id}`}>
+          <Link to={`/explore/${story.id}`}>
             <StoryCard
               title={story.title!}
               text={story.subtitle!}

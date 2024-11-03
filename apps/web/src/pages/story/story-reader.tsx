@@ -24,12 +24,9 @@ function StoryReader({ content }: StoryReaderProps) {
   >([]);
 
   const addHeading = (key: string | number) =>
-    useCallback(
-      (element: HTMLHeadingElement) => {
-        setHeadings((prevHeadings) => ([...prevHeadings, { key, element }]));
-      },
-      [],
-    );
+    useCallback((element: HTMLHeadingElement) => {
+      setHeadings((prevHeadings) => [...prevHeadings, { key, element }]);
+    }, []);
 
   const { containerRef } = useDrawer();
   const { contextSafe } = useGSAP({ scope: containerRef });
@@ -59,6 +56,7 @@ function StoryReader({ content }: StoryReaderProps) {
     offset: 73,
     onFocus: updateActiveHeadingKeys,
   });
+
   return (
     <>
       <FloatingOutline
@@ -78,36 +76,38 @@ function StoryReader({ content }: StoryReaderProps) {
         activeHeadingKeys={activeHeadingKeys}
         onClick={(key) => scrollTo(key)()}
       />
-      <RichTextRenderer
-        document={content}
-        components={{
-          heading({ children, key, Tag }) {
-            return (
-              <Tag
-                ref={addHeading(key)}
-                id={`heading_${key}`}
-                key={key}
-                className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "max-md:text-4xl text-6xl font-medium" : "max-md:text-2xl text-4xl"} mb-4`}
-              >
+      <div className="mt-8 mx-6">
+        <RichTextRenderer
+          document={content}
+          components={{
+            heading({ children, key, Tag }) {
+              return (
+                <Tag
+                  ref={addHeading(key)}
+                  id={`heading_${key}`}
+                  key={key}
+                  className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "max-md:text-4xl text-6xl font-medium" : "max-md:text-2xl text-4xl"} mb-4`}
+                >
+                  {children}
+                </Tag>
+              );
+            },
+            paragraph: ({ children, key }) => (
+              <p key={key} className="text-chalk-800 dark:text-chalk-300 mb-8">
                 {children}
-              </Tag>
-            );
-          },
-          paragraph: ({ children, key }) => (
-            <p key={key} className="text-chalk-800 dark:text-chalk-300 mb-8">
-              {children}
-            </p>
-          ),
-          upload: ({ url, alt, key }) => (
-            <div key={key}>
-              <img className="mb-2" src={`${url}`}></img>
-              <p className="text-right text-chalk-600 dark:text-chalk-500 mb-8 text-sm">
-                {alt}
               </p>
-            </div>
-          ),
-        }}
-      />
+            ),
+            upload: ({ url, alt, key }) => (
+              <div key={key}>
+                <img className="mb-2" src={`${url}`}></img>
+                <p className="text-right text-chalk-600 dark:text-chalk-500 mb-8 text-sm">
+                  {alt}
+                </p>
+              </div>
+            ),
+          }}
+        />
+      </div>
     </>
   );
 }
