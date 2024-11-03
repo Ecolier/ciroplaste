@@ -15,7 +15,7 @@ function NavigationList({ links }: NavigationListProps) {
   return (
     <>
       {links.map((link, index) => (
-        <Link key={index} to={link.href} className={`flex h-12 dark:text-chalk-200 px-4 items-center relative ${pathname === link.href && `before:content-[''] before:absolute before:rounded-full before:bottom-0 before:left-0 before:w-full before:h-full before:bg-chalk-200 before:dark:bg-chalk-800 before:-z-10`}`}>
+        <Link key={index} to={link.href} className={`flex h-12 dark:text-chalk-200 px-6 items-center relative ${pathname === link.href && `before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-full before:h-full before:bg-chalk-100 before:dark:bg-chalk-900 before:-z-10`}`}>
           {link.iconElement}
           {link.label}
         </Link>

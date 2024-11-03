@@ -1,0 +1,11 @@
+{
+  "name": "Ciroplaste",
+  "short_name": "Ciroplaste",
+  "icons": [{
+      "src": "logo.svg",
+      "sizes": "256x256"
+  }],
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "display": "fullscreen"
+}

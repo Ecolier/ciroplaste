@@ -4,6 +4,7 @@ import {
   Dispatch,
   RefObject,
   SetStateAction,
+  useContext,
 } from "react";
 
 interface DrawerContextProps {
@@ -12,10 +13,18 @@ interface DrawerContextProps {
   containerRef: RefObject<HTMLDivElement>;
 }
 
-const DrawerContext = createContext<DrawerContextProps>({
+export const DrawerContext = createContext<DrawerContextProps>({
   isActive: false,
   toggle: () => {},
   containerRef: createRef<HTMLDivElement>(),
 });
 
-export default DrawerContext;
+const useDrawer = () => {
+  const context = useContext(DrawerContext);
+  if (context === undefined) {
+    throw new Error("useDrawer() must be called within a DrawerProvider");
+  }
+  return context;
+};
+
+export default useDrawer;

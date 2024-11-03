@@ -6,9 +6,11 @@ import './index.css'
 
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import App from './app';
 
 gsap.registerPlugin(ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 const root = document.getElementById('root');
 if (!root) throw new Error('No root element found');

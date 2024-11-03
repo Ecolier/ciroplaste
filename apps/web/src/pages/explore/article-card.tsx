@@ -17,7 +17,7 @@ function StoryCard({
         className={`flex flex-col w-full relative`}
       >
         <img src={backgroundImageURL} className="min-h-96 object-cover" />
-        <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-chalk-950/75" />
+        <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-t from-[black]/65" />
         <div className="flex flex-col p-4 absolute bottom-0">
           <span className="text-lg font-bold text-chalk-100 font-serif uppercase">{title}</span>
           <span className="text-sm text-chalk-100 mb-4">

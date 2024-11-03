@@ -10,7 +10,7 @@ function Header() {
   return (
     <>
       <header
-        className={`${transparent ? `` : `bg-chalk-50 dark:bg-chalk-950 before:content-[''] before:absolute before:h-[1px] before:left-6 before:right-6 before:bottom-0 before:bg-chalk-100 dark:before:bg-chalk-900`} z-20  fixed flex flex-col justify-between w-full`}
+        className={`${transparent ? `` : `bg-chalk-50/90 dark:bg-chalk-950/90 backdrop-blur-lg`} z-20  fixed flex flex-col justify-between w-full`}
       >
         <div className="flex relative h-16 w-full">
           <HeaderSection>

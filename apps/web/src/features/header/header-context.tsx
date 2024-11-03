@@ -1,11 +1,13 @@
-import { createContext, useContext } from "react";
+import { createContext, Dispatch, SetStateAction, useContext } from "react";
 
-interface HeaderContextProps {
+export interface HeaderContextProps {
   transparent: boolean;
+  setTransparent: Dispatch<SetStateAction<boolean>>;
 }
 
 export const HeaderContext = createContext<HeaderContextProps>({
   transparent: false,
+  setTransparent: () => {},
 });
 
 const useHeader = () => {

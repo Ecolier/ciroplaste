@@ -1,13 +1,11 @@
 import { throttle } from "lodash";
 import { RefObject, useEffect } from "react";
 
-interface ElementRefList {
-  [key: string]: RefObject<HTMLElement>;
-}
+type ElementRefList = { key: string | number; element: HTMLElement }[];
 
 interface ScrollSpyProps {
   containerRef: RefObject<HTMLElement>;
-  elementRefs: ElementRefList;
+  elementRefs: { key: string | number; element: HTMLElement }[];
   onFocus: (elementRefs: KeyedElements) => void;
   offset?: number;
 }
@@ -19,25 +17,30 @@ export interface SpiedElement {
   tag: string;
   y: number;
   element: HTMLElement;
-  ref: RefObject<HTMLElement>;
 }
 
 export type KeyedElements = {
   [key: string]: SpiedElement;
 };
 
-function useSpy({ containerRef, elementRefs, onFocus, offset }: ScrollSpyProps) {
+function useSpy({
+  containerRef,
+  elementRefs,
+  onFocus,
+  offset,
+}: ScrollSpyProps) {
   const formatRefs = (elementRefs: ElementRefList): SpiedElement[] =>
-    Object.entries(elementRefs).map(([key, ref]) => {
-      const element = ref.current as HTMLHeadingElement;
+    elementRefs.map(({ key, element }) => {
       const elementTag = element.tagName;
       const elementBounds = element.getBoundingClientRect();
       return {
-        ref,
-        key: parseInt(key),
-        tag: elementTag,
-        y: elementBounds.y + containerRef.current!.scrollTop - (offset ? offset + 1 : 0),
         element,
+        key: (typeof key === 'string') ? parseInt(key) : key,
+        tag: elementTag,
+        y:
+          elementBounds.y +
+          containerRef.current!.scrollTop -
+          (offset ? offset + 1 : 0),
       };
     });
 
@@ -67,7 +70,7 @@ function useSpy({ containerRef, elementRefs, onFocus, offset }: ScrollSpyProps) 
   const calculateSpiedZones = (
     spiedElements: SpiedElement[],
   ): Map<MinMaxPair, KeyedElements[]> =>
-    spiedElements.reduce((map, { key, tag, y, element, ref }) => {
+    spiedElements.reduce((map, { key, tag, y, element }) => {
       // Get every ancestors of element from its y position
       const ancestors = filterAncestors(spiedElements, y);
 
@@ -96,7 +99,7 @@ function useSpy({ containerRef, elementRefs, onFocus, offset }: ScrollSpyProps) 
 
       map.set([y, endY], {
         ...keyedAncestors,
-        ...{ [`${key}`]: { key, tag, y, element, ref } },
+        ...{ [`${key}`]: { key, tag, y, element } },
       });
       return map;
     }, new Map<MinMaxPair, KeyedElements[]>());
@@ -127,9 +130,11 @@ function useSpy({ containerRef, elementRefs, onFocus, offset }: ScrollSpyProps) 
       "scroll",
       throttle(() => {
 
-        console.log(containerElem.scrollTop)
         // Reset spied elements if we're out of scope
-        if (containerElem.scrollTop < globalMinY || containerElem.scrollTop > globalMaxY) {
+        if (
+          containerElem.scrollTop < globalMinY ||
+          containerElem.scrollTop > globalMaxY
+        ) {
           if (prevZoneIndex === -1) {
             return;
           }
@@ -143,7 +148,8 @@ function useSpy({ containerRef, elementRefs, onFocus, offset }: ScrollSpyProps) 
           return;
         }
         const currZoneIndex = availableSpyZones.findIndex(
-          ([[minY, maxY]]) => containerElem.scrollTop > minY && containerElem.scrollTop < maxY,
+          ([[minY, maxY]]) =>
+            containerElem.scrollTop > minY && containerElem.scrollTop < maxY,
         );
 
         // Don't process event if we haven't changed zones or can't find one
@@ -171,7 +177,7 @@ function useSpy({ containerRef, elementRefs, onFocus, offset }: ScrollSpyProps) 
     );
 
     return () => resizeObserver.disconnect();
-  }, []);
+  }, [elementRefs]);
 }
 
 export default useSpy;

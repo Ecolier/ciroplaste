@@ -1,13 +1,12 @@
-import { useContext } from "react";
-import DrawerContext from "../drawer/drawer-context";
 import HeaderButton from "./header-button";
+import useDrawer from "../drawer/drawer-context";
 
 type DrawerButtonProps = {
   className?: string;
 };
 
 function DrawerButton({ className }: DrawerButtonProps) {
-  const { isActive, toggle } = useContext(DrawerContext);
+  const { isActive, toggle } = useDrawer();
   return (
     <HeaderButton className={className} onClick={() => toggle()}>
       <span className="material-symbols-rounded">
