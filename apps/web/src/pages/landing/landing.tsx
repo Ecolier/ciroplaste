@@ -3,17 +3,19 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import useTransparentHeader from "../../features/header/use-transparent-header";
 
+const assetsUrl = import.meta.env.VITE_ASSETS_BASE_URL;
+
 function Landing() {
   const { t } = useTranslation();
-  const [isUsingVideoFallback, useVideoFallback] = useState(false);
+  const [fallbackToImage, setFallbackToImage] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play().catch(() => {
-        useVideoFallback(true);
+        setFallbackToImage(true);
       });
     }
-  }, [videoRef, isUsingVideoFallback]);
+  }, [videoRef, fallbackToImage]);
 
   useTransparentHeader(true);
 
@@ -22,26 +24,26 @@ function Landing() {
   }, []);
 
   return (
-    <div className="min-h-dvh relative w-full flex flex-col justify-center z-10">
-      <div className="flex flex-col items-center mx-auto px-4 max-w-lg">
-        <span className="text-8xl font-bold mb-4 text-chalk-50 font-serif">
+    <div className="relative z-10 flex min-h-dvh w-full flex-col justify-center">
+      <div className="mx-auto flex max-w-lg flex-col items-center px-4">
+        <span className="text-chalk-50 mb-4 font-serif text-8xl font-bold">
           {t("Purpose of Ciroplaste")}
         </span>
-        <span className="mb-8 text-chalk-50">
+        <span className="text-chalk-50 mb-8">
           {t("Reason for this website")}
         </span>
         <Link
           to={"/explore"}
           role="button"
-          className="text-chalk-50 text-center bg-iris-600 w-full py-4"
+          className="text-chalk-50 bg-iris-600 w-full py-4 text-center"
         >
           {t("Explore")}
         </Link>
       </div>
-      {isUsingVideoFallback ? (
+      {fallbackToImage ? (
         <img
-          src="landing.mp4"
-          className="fixed object-cover h-full w-full bg-chalk-950 -z-10 pointer-events-none"
+          src={`${assetsUrl}/landing.mp4`}
+          className="bg-chalk-950 pointer-events-none fixed -z-10 h-full w-full object-cover"
         />
       ) : (
         <video
@@ -51,8 +53,8 @@ function Landing() {
           playsInline
           muted
           loop
-          src="landing.mp4"
-          className="fixed object-cover h-full w-full bg-chalk-950 -z-10 pointer-events-none"
+          src={`${assetsUrl}/landing.mp4`}
+          className="bg-chalk-950 pointer-events-none fixed -z-10 h-full w-full object-cover"
         />
       )}
     </div>

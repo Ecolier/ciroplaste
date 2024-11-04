@@ -2,13 +2,13 @@ import React from "react";
 import { RichText, RichTextNode } from "../../types/rich-text-node";
 
 interface Components {
-  heading?: (props: {
+  Heading?: (props: {
     children: JSX.Element[];
     key: number;
     Tag: keyof JSX.IntrinsicElements;
   }) => JSX.Element;
-  paragraph?: (props: { children: JSX.Element[]; key: number }) => JSX.Element;
-  upload?: (props: { url: string; alt: string; key: number }) => JSX.Element;
+  Paragraph?: (props: { children: JSX.Element[]; key: number }) => JSX.Element;
+  Upload?: (props: { url: string; alt: string; key: number }) => JSX.Element;
 }
 
 interface RichTextRendererProps {
@@ -49,19 +49,19 @@ const flatten = (nodes: RichTextNode[], components: Components, _level = 0) =>
       const fragments = flatten(children, components, _level);
       switch (node.type) {
         case "heading":
-          if (!components.heading) {
+          if (!components.Heading) {
             return;
           }
-          return components.heading({
+          return components.Heading({
             children: fragments,
             key: index,
             Tag: node.tag,
           });
         case "paragraph":
-          if (!components.paragraph) {
+          if (!components.Paragraph) {
             return;
           }
-          return components.paragraph({ children: fragments, key: index });
+          return components.Paragraph({ children: fragments, key: index });
       }
     }
     return <React.Fragment key={index}></React.Fragment>;

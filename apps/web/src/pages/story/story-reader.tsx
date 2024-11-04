@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { RichText } from "../../types/rich-text-node";
 import RichTextRenderer from "./rich-text-renderer";
 import useSpy, { KeyedElements } from "../../hooks/use-spy";
@@ -23,10 +23,13 @@ function StoryReader({ content }: StoryReaderProps) {
     (string | number)[]
   >([]);
 
-  const addHeading = (key: string | number) =>
-    useCallback((element: HTMLHeadingElement) => {
-      setHeadings((prevHeadings) => [...prevHeadings, { key, element }]);
-    }, []);
+  const useAddHeading = (key: string | number) =>
+    useCallback(
+      (element: HTMLHeadingElement) => {
+        setHeadings((prevHeadings) => [...prevHeadings, { key, element }]);
+      },
+      [key],
+    );
 
   const { containerRef } = useDrawer();
   const { contextSafe } = useGSAP({ scope: containerRef });
@@ -47,7 +50,7 @@ function StoryReader({ content }: StoryReaderProps) {
       );
       setActiveHeadingKeys(keys);
     },
-    [activeHeadingKeys],
+    [],
   );
 
   useSpy({
@@ -76,31 +79,31 @@ function StoryReader({ content }: StoryReaderProps) {
         activeHeadingKeys={activeHeadingKeys}
         onClick={(key) => scrollTo(key)()}
       />
-      <div className="mt-8 mx-6">
+      <div className="mx-6 mt-8">
         <RichTextRenderer
           document={content}
           components={{
-            heading({ children, key, Tag }) {
+            Heading({ children, key, Tag }) {
               return (
                 <Tag
-                  ref={addHeading(key)}
+                  ref={useAddHeading(key)}
                   id={`heading_${key}`}
                   key={key}
-                  className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "max-md:text-4xl text-6xl font-medium" : "max-md:text-2xl text-4xl"} mb-4`}
+                  className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "text-6xl font-medium max-md:text-4xl" : "text-4xl max-md:text-2xl"} mb-4`}
                 >
                   {children}
                 </Tag>
               );
             },
-            paragraph: ({ children, key }) => (
+            Paragraph: ({ children, key }) => (
               <p key={key} className="text-chalk-800 dark:text-chalk-300 mb-8">
                 {children}
               </p>
             ),
-            upload: ({ url, alt, key }) => (
+            Upload: ({ url, alt, key }) => (
               <div key={key}>
                 <img className="mb-2" src={`${url}`}></img>
-                <p className="text-right text-chalk-600 dark:text-chalk-500 mb-8 text-sm">
+                <p className="text-chalk-600 dark:text-chalk-500 mb-8 text-right text-sm">
                   {alt}
                 </p>
               </div>

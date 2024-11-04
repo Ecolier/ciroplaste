@@ -1,9 +1,21 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 interface ThemeContextProps {
-    theme: string;
-    setTheme: React.Dispatch<React.SetStateAction<string>>;
+  theme: string;
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ThemeContext = createContext<ThemeContextProps>({theme: 'dark', setTheme: () => {}});
-export default ThemeContext;
+export const ThemeContext = createContext<ThemeContextProps>({
+  theme: "dark",
+  setTheme: () => {},
+});
+
+const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error("useTheme() must be called within a ThemeProvider");
+  }
+  return context;
+};
+
+export default useTheme;

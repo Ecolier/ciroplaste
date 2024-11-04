@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import useDrawer from "./drawer-context";
 
 type LabeledLink = {
   iconElement: JSX.Element;
@@ -11,14 +12,21 @@ type NavigationListProps = {
 };
 
 function NavigationList({ links }: NavigationListProps) {
-  const { pathname } = useLocation();
+  const drawer = useDrawer();
   return (
     <>
       {links.map((link, index) => (
-        <Link key={index} to={link.href} className={`flex h-12 dark:text-chalk-200 px-6 items-center relative ${pathname === link.href && `before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-full before:h-full before:bg-chalk-100 before:dark:bg-chalk-900 before:-z-10`}`}>
+        <NavLink
+          key={index}
+          onClick={() => drawer.toggle()}
+          to={link.href}
+          className={({ isActive }) =>
+            `dark:text-chalk-200 relative flex h-12 items-center px-6 ${isActive ? `before:bg-chalk-100 before:dark:bg-chalk-900 before:absolute before:bottom-0 before:left-0 before:-z-10 before:h-full before:w-full before:content-['']` : ``}`
+          }
+        >
           {link.iconElement}
           {link.label}
-        </Link>
+        </NavLink>
       ))}
     </>
   );

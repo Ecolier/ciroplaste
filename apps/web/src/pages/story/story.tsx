@@ -22,7 +22,7 @@ function Story() {
   return (
     <div className="flex flex-col items-center" ref={container}>
       <main className="w-full">
-        <div className="flex flex-col items-center w-full">
+        <div className="flex w-full flex-col items-center">
           <Card
             title={story.title!}
             text={story.subtitle!}

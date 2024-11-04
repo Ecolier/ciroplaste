@@ -1,18 +1,35 @@
+const assetsUrl = import.meta.env.VITE_ASSETS_BASE_URL;
+
 function Fragments() {
   return (
     <svg viewBox="0 0 1328 885" fill="none" xmlns="http://www.w3.org/2000/svg">
       <mask id="svgmask1">
-        <circle cx="1101" cy="664" r="215" fill="#fff" />
         <path
-          d="M670.919 436C552.223 436 456 339.741 456 221C456 102.259 552.223 6 670.919 6H1101.08C1219.78 6 1316 102.259 1316 221C1316 339.741 1219.78 436 1101.08 436H670.919Z"
-          fill="#fff"
+          d="M458 16H885C885 16 685.5 16 685.5 221.5C685.5 427 885 427 885 427H458V16Z"
+          fill="#D9D9D9"
         />
+        <path
+          d="M870 870L443 870C443 870 642.5 870 642.5 664.5C642.5 459 443 459 443 459L870 459L870 870Z"
+          fill="#D9D9D9"
+        />
+        <rect x="901" y="16" width="411" height="411" fill="#D9D9D9" />
       </mask>
       <mask id="svgmask2">
-        <circle cx="228" cy="221" r="215" fill="#fff" />
+        <rect
+          x="427"
+          y="870"
+          width="411"
+          height="411"
+          transform="rotate(-180 427 870)"
+          fill="#D9D9D9"
+        />
         <path
-          d="M227.919 879C109.223 879 13 782.741 13 664C13 545.259 109.223 449 227.919 449H658.081C776.777 449 873 545.259 873 664C873 782.741 776.777 879 658.081 879H227.919Z"
-          fill="#fff"
+          d="M1029.5 587.5L901 870L901 459L1312 459L1029.5 587.5Z"
+          fill="#D9D9D9"
+        />
+        <path
+          d="M298.5 298.5L427 16L427 427L16 427L298.5 298.5Z"
+          fill="#D9D9D9"
         />
       </mask>
       <image
@@ -21,7 +38,7 @@ function Fragments() {
         y="-75%"
         preserveAspectRatio="xMinYMin slice"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        xlinkHref="landing_1.jpg"
+        xlinkHref={`${assetsUrl}/fragment_2.webp`}
         mask="url(#svgmask1)"
       ></image>
       <image
@@ -30,7 +47,7 @@ function Fragments() {
         y="-65%"
         preserveAspectRatio="xMinYMin slice"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        xlinkHref="landing_2.jpg"
+        xlinkHref={`${assetsUrl}/fragment_1.webp`}
         mask="url(#svgmask2)"
       ></image>
     </svg>

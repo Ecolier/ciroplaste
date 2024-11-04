@@ -1,4 +1,8 @@
-import { ApolloClient, createQueryPreloader, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  createQueryPreloader,
+  InMemoryCache,
+} from "@apollo/client";
 
 const contentUrl = import.meta.env.VITE_CONTENT_BASE_URL;
 
@@ -9,4 +13,4 @@ const apolloClient = new ApolloClient({
 
 const preloadQuery = createQueryPreloader(apolloClient);
 
-export {apolloClient, preloadQuery}
+export { apolloClient, preloadQuery };

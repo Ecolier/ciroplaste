@@ -8,25 +8,29 @@ const githubUrl = import.meta.env.VITE_GITHUB_LINK;
 function Footer() {
   const { t } = useTranslation();
   return (
-    <div className="flex grow justify-center flex-col mt-32 mx-4">
+    <div className="mx-4 mt-32 flex grow flex-col justify-center">
       <Squiggle />
-      <footer className="px-6 py-16 grid grid-cols-2">
+      <footer className="grid grid-cols-2 px-6 py-16">
         <div className="col-span-3">
-          <span className="font-symbols text-5xl text-chalk-800 dark:text-chalk-300">&#xe900;</span>
-          <p className="my-3 text-sm text-chalk-700 dark:text-chalk-400">{t("Reason for this website")}</p>
+          <span className="font-symbols text-chalk-800 dark:text-chalk-300 text-5xl">
+            &#xe900;
+          </span>
+          <p className="text-chalk-700 dark:text-chalk-400 my-3 text-sm">
+            {t("Reason for this website")}
+          </p>
         </div>
         <FooterColumn
-          title={t('Social')}
+          title={t("Social")}
           links={[
             { label: "Instagram", url: instagramUrl, external: true },
             { label: "Github", url: githubUrl, external: true },
           ]}
         />
         <FooterColumn
-          title={t('About')}
+          title={t("About")}
           links={[
-            { label: t("Our mission"), url: '/mission' },
-            { label: t('Hire me'), url: '/hire' },
+            //{ label: t("Our mission"), url: '/mission' },
+            { label: t("Hire me"), url: "/hire" },
           ]}
         />
       </footer>

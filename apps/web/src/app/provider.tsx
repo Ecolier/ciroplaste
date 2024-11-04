@@ -5,7 +5,7 @@ import ThemeProvider from "../providers/theme-provider";
 function AppProvider({ children }: PropsWithChildren) {
   return (
     <ThemeProvider>
-        <ContentProvider>{children}</ContentProvider>
+      <ContentProvider>{children}</ContentProvider>
     </ThemeProvider>
   );
 }

@@ -11,7 +11,9 @@ function HeaderProvider({
 }: HeaderProviderProps) {
   const [_transparent, setTransparent] = useState<boolean>(transparent);
   return (
-    <HeaderContext.Provider value={{ transparent: _transparent, setTransparent }}>
+    <HeaderContext.Provider
+      value={{ transparent: _transparent, setTransparent }}
+    >
       {children}
     </HeaderContext.Provider>
   );

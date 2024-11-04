@@ -4,19 +4,20 @@ import Backend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 const localesUrl = import.meta.env.VITE_LOCALES_BASE_URL;
+const dev = import.meta.env.DEV;
 
 i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    ns: ['web'],
-    fallbackNS: 'web',
+    ns: ["web"],
+    fallbackNS: "web",
     backend: {
-      loadPath: `${localesUrl}/{{lng}}/{{ns}}.json`
+      loadPath: `${localesUrl}/{{lng}}/{{ns}}.json`,
     },
     fallbackLng: "en",
-    debug: true,
+    debug: dev ? true : false,
     interpolation: {
       escapeValue: false,
     },

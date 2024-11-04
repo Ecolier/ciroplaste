@@ -6,13 +6,13 @@ import ThemeButton from "./theme-button";
 import { Link } from "react-router-dom";
 
 function Header() {
-  const {transparent} = useHeader();
+  const { transparent } = useHeader();
   return (
     <>
       <header
-        className={`${transparent ? `` : `bg-chalk-50/90 dark:bg-chalk-950/90 backdrop-blur-lg`} z-20  fixed flex flex-col justify-between w-full`}
+        className={`${transparent ? `` : `bg-chalk-50/90 dark:bg-chalk-950/90 backdrop-blur-lg`} fixed z-20 flex w-full flex-col justify-between`}
       >
-        <div className="flex relative h-16 w-full">
+        <div className="relative flex h-16 w-full">
           <HeaderSection>
             <DrawerButton />
             <Link to={"/"}>

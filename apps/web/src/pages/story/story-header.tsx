@@ -6,14 +6,14 @@ type StoryHeaderProps = {
 
 function StoryHeader({ title, text, backgroundImageURL }: StoryHeaderProps) {
   return (
-    <div className="sticky top-[calc(-50vh+64px)] h-[50vh] w-full flex flex-col items-center justify-center">
-      <h1 className="font-serif text-chalk-50 text-5xl mb-4">{title}</h1>
+    <div className="sticky top-[calc(-50vh+64px)] flex h-[50vh] w-full flex-col items-center justify-center">
+      <h1 className="text-chalk-50 mb-4 font-serif text-5xl">{title}</h1>
       <p className="text-chalk-50">{text}</p>
       <img
         src={backgroundImageURL}
-        className="absolute -z-10 top-0 object-cover h-full w-full"
+        className="absolute top-0 -z-10 h-full w-full object-cover"
       />
-      <div className="absolute -z-10 left-0 top-0 w-full h-full bg-gradient-to-t from-[black]/50" />
+      <div className="absolute left-0 top-0 -z-10 h-full w-full bg-gradient-to-t from-[black]/50" />
     </div>
   );
 }

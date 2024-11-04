@@ -14,23 +14,23 @@ function FloatingOutline({ headings, onClick }: FloatingOutlineProps) {
   }, [headings, containerRef]);
   return (
     <div
-      className={`sticky top-16 left-0 w-full flex px-6 h-12 text-chalk-900 bg-chalk-100/90 dark:bg-chalk-900/90 backdrop-blur-lg ${headings.length !== 0 ? `flex` : `invisible`}`}
+      className={`text-chalk-900 bg-chalk-100/90 dark:bg-chalk-900/90 sticky left-0 top-16 flex h-12 w-full px-6 backdrop-blur-lg ${headings.length !== 0 ? `flex` : `invisible`}`}
     >
       <div
-        className="flex scrollbar-hidden overflow-x-scroll"
+        className="scrollbar-hidden flex overflow-x-scroll"
         ref={containerRef}
       >
         {headings.map((heading, index) => {
           return (
-            <div key={index} className="flex items-center flex-shrink-0">
+            <div key={index} className="flex flex-shrink-0 items-center">
               <span
-                className={`dark:text-chalk-200 cursor-pointer text-sm text-chalk-900 ${headings[index + 1] ? `` : `font-semibold`} max-w-36 inline-block overflow-ellipsis whitespace-nowrap overflow-hidden`}
+                className={`dark:text-chalk-200 text-chalk-900 cursor-pointer text-sm ${headings[index + 1] ? `` : `font-semibold`} inline-block max-w-36 overflow-hidden overflow-ellipsis whitespace-nowrap`}
                 onClick={() => onClick(heading.key)}
               >
                 {heading.text}
               </span>
               {headings[index + 1] && (
-                <span className="dark:text-chalk-200 text-sm text-chalk-700 material-symbols-rounded">
+                <span className="dark:text-chalk-200 text-chalk-700 material-symbols-rounded text-sm">
                   chevron_right
                 </span>
               )}

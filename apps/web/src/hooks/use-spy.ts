@@ -35,7 +35,7 @@ function useSpy({
       const elementBounds = element.getBoundingClientRect();
       return {
         element,
-        key: (typeof key === 'string') ? parseInt(key) : key,
+        key: typeof key === "string" ? parseInt(key) : key,
         tag: elementTag,
         y:
           elementBounds.y +
@@ -129,7 +129,6 @@ function useSpy({
     containerElem.addEventListener(
       "scroll",
       throttle(() => {
-
         // Reset spied elements if we're out of scope
         if (
           containerElem.scrollTop < globalMinY ||

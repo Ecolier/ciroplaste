@@ -1,15 +1,14 @@
-import { useContext } from "react";
-import ThemeContext from "../../contexts/theme-context";
 import HeaderButton from "./header-button";
+import useTheme from "../../contexts/theme-context";
 
 function ThemeButton() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setTheme } = useTheme();
   return (
     <HeaderButton onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-      <span className="material-symbols-rounded dark:inline-block hidden">
+      <span className="material-symbols-rounded hidden dark:inline-block">
         light_mode
       </span>
-      <span className="material-symbols-rounded dark:hidden inline-block">
+      <span className="material-symbols-rounded inline-block dark:hidden">
         dark_mode
       </span>
     </HeaderButton>

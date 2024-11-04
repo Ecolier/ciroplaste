@@ -14,7 +14,7 @@ function IconButton({
     <div
       role="button"
       onClick={onClick}
-      className={`${className} flex relative items-center justify-center w-12 h-12 rounded-full`}
+      className={`${className} relative flex h-12 w-12 items-center justify-center rounded-full`}
     >
       {children}
     </div>
