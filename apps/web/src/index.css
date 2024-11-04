@@ -7,7 +7,7 @@
     font-family: "Ciroplaste Symbols";
     font-style: normal;
     font-weight: 100 700;
-    src: url(/fonts/ciroplaste-symbols.woff2) format("woff2");
+    src: url(/ciroplaste-symbols.woff2) format("woff2");
   }
 
   .font-symbols {
