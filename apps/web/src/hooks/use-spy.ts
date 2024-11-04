@@ -7,7 +7,8 @@ interface ScrollSpyProps {
   containerRef: RefObject<HTMLElement>;
   elementRefs: { key: string | number; element: HTMLElement }[];
   onFocus: (elementRefs: KeyedElements) => void;
-  offset?: number;
+  staticOffset?: number;
+  dynamicOffset?: () => number | undefined;
 }
 
 type MinMaxPair = [minY: number, maxY: number];
@@ -27,7 +28,8 @@ function useSpy({
   containerRef,
   elementRefs,
   onFocus,
-  offset,
+  staticOffset,
+  dynamicOffset
 }: ScrollSpyProps) {
   const formatRefs = (elementRefs: ElementRefList): SpiedElement[] =>
     elementRefs.map(({ key, element }) => {
@@ -40,7 +42,7 @@ function useSpy({
         y:
           elementBounds.y +
           containerRef.current!.scrollTop -
-          (offset ? offset + 1 : 0),
+          (staticOffset ? staticOffset : 0),
       };
     });
 
@@ -129,10 +131,13 @@ function useSpy({
     containerElem.addEventListener(
       "scroll",
       throttle(() => {
+
+        let offset = dynamicOffset && dynamicOffset() || 0;
+
         // Reset spied elements if we're out of scope
         if (
-          containerElem.scrollTop < globalMinY ||
-          containerElem.scrollTop > globalMaxY
+          containerElem.scrollTop + offset < globalMinY ||
+          containerElem.scrollTop + offset > globalMaxY
         ) {
           if (prevZoneIndex === -1) {
             return;
@@ -146,9 +151,10 @@ function useSpy({
         if (!availableSpyZones) {
           return;
         }
+
         const currZoneIndex = availableSpyZones.findIndex(
           ([[minY, maxY]]) =>
-            containerElem.scrollTop > minY && containerElem.scrollTop < maxY,
+            containerElem.scrollTop + offset > minY && containerElem.scrollTop + offset < maxY,
         );
 
         // Don't process event if we haven't changed zones or can't find one

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { forwardRef, RefObject, useCallback, useRef, useState } from "react";
 import { RichText } from "../../types/rich-text-node";
 import RichTextRenderer from "./rich-text-renderer";
 import useSpy, { KeyedElements } from "../../hooks/use-spy";
@@ -7,6 +7,8 @@ import StoryOutline from "./story-outline";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import FloatingOutline from "./floating-outline";
+import { Article, Media } from "@crp/types";
+import StoryHeader from "./story-header";
 
 type Heading = {
   key: string | number;
@@ -14,10 +16,11 @@ type Heading = {
 };
 
 type StoryReaderProps = {
-  content: RichText;
+  story: Article;
 };
 
-function StoryReader({ content }: StoryReaderProps) {
+function StoryReader({ story }: StoryReaderProps) {
+  const [headerMinHeight, setHeaderMinHeight] = useState(0);
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeHeadingKeys, setActiveHeadingKeys] = useState<
     (string | number)[]
@@ -36,10 +39,10 @@ function StoryReader({ content }: StoryReaderProps) {
 
   const scrollTo = (key: number | string) =>
     contextSafe(() => {
-      gsap.to(containerRef.current, {
-        duration: 0.2,
-        scrollTo: { y: `#heading_${key}`, offsetY: 72 },
-      });
+        gsap.to(containerRef.current, {
+          duration: 0.2,
+          scrollTo: { y: `#heading_${key}`, offsetY: headerMinHeight - 1 },
+        });
     });
 
   const updateActiveHeadingKeys = useCallback(
@@ -53,15 +56,31 @@ function StoryReader({ content }: StoryReaderProps) {
     [],
   );
 
+  const Header = forwardRef(StoryHeader);
+  const headerRef = useCallback((element: HTMLElement) => {
+    if (element) {
+      setHeaderMinHeight(
+        parseFloat(getComputedStyle(element).height) +
+        parseFloat(getComputedStyle(element).top)
+      );
+    }
+  }, []);
+
   useSpy({
     containerRef,
     elementRefs: headings,
-    offset: 73,
+    staticOffset: headerMinHeight,
     onFocus: updateActiveHeadingKeys,
   });
 
   return (
     <>
+      <Header
+        ref={headerRef}
+        title={story.title!}
+        text={story.subtitle!}
+        backgroundImageURL={`${(story.callout!.value as Media).url}`}
+      />
       <FloatingOutline
         headings={headings
           .filter(({ key }) => activeHeadingKeys.includes(key.toString()))
@@ -71,7 +90,7 @@ function StoryReader({ content }: StoryReaderProps) {
           }))}
         onClick={(key) => scrollTo(key)()}
       />
-      <div className="lg:grid lg:grid-cols-3 lg:m-8 lg:gap-4 lg:max-w-5xl">
+      <div className="-mt-12 lg:mx-8 lg:mt-0 lg:grid lg:max-w-5xl lg:grid-cols-3 lg:gap-4">
         <StoryOutline
           headings={headings.map(({ key, element }) => ({
             key,
@@ -80,9 +99,9 @@ function StoryReader({ content }: StoryReaderProps) {
           activeHeadingKeys={activeHeadingKeys}
           onClick={(key) => scrollTo(key)()}
         />
-        <div className="mx-6 mt-8 lg:m-0 lg:col-span-2">
+        <div className="mx-6 mt-8 lg:col-span-2 lg:m-0 lg:mt-8">
           <RichTextRenderer
-            document={content}
+            document={story.content as RichText}
             components={{
               Heading({ children, key, Tag }) {
                 return (

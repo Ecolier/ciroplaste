@@ -7,7 +7,7 @@ function DrawerProvider({ children }: PropsWithChildren) {
   const containerRef = createRef<HTMLDivElement>();
   return (
     <DrawerContext.Provider
-      value={{ isActive, toggle: () => setIsActive(!isActive), containerRef }}
+      value={{ isActive, toggle: () => setIsActive(!isActive), close: () => setIsActive(false), containerRef }}
     >
       <Drawer isActive={isActive} />
       <div ref={containerRef} className="flex h-dvh md:pl-24 grow flex-col overflow-y-auto">

@@ -10,12 +10,14 @@ import {
 interface DrawerContextProps {
   isActive: boolean;
   toggle: Dispatch<SetStateAction<void>>;
+  close: Dispatch<SetStateAction<void>>;
   containerRef: RefObject<HTMLDivElement>;
 }
 
 export const DrawerContext = createContext<DrawerContextProps>({
   isActive: false,
   toggle: () => {},
+  close: () => {},
   containerRef: createRef<HTMLDivElement>(),
 });
 
