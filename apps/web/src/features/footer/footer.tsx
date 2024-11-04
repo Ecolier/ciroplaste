@@ -10,7 +10,7 @@ function Footer() {
   return (
     <div className="mx-4 mt-32 flex grow flex-col justify-center">
       <Squiggle />
-      <footer className="grid grid-cols-2 px-6 py-16">
+      <footer className="grid grid-cols-2 px-6 py-16 lg:max-w-5xl lg:mx-auto">
         <div className="col-span-3">
           <span className="font-symbols text-chalk-800 dark:text-chalk-300 text-5xl">
             &#xe900;

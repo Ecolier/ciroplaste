@@ -11,7 +11,7 @@ function Explore() {
   } = data;
   useTransparentHeader(false);
   return (
-    <div className="flex flex-col pt-[72px]">
+    <div className="flex flex-col pt-[72px] md:m-4 md:grid md:grid-cols-2 md:gap-4 md:pt-0">
       <StoriesList stories={stories} />
     </div>
   );

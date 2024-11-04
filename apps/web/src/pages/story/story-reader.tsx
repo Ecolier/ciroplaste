@@ -71,45 +71,50 @@ function StoryReader({ content }: StoryReaderProps) {
           }))}
         onClick={(key) => scrollTo(key)()}
       />
-      <StoryOutline
-        headings={headings.map(({ key, element }) => ({
-          key,
-          text: element.childNodes[0].nodeValue!,
-        }))}
-        activeHeadingKeys={activeHeadingKeys}
-        onClick={(key) => scrollTo(key)()}
-      />
-      <div className="mx-6 mt-8">
-        <RichTextRenderer
-          document={content}
-          components={{
-            Heading({ children, key, Tag }) {
-              return (
-                <Tag
-                  ref={useAddHeading(key)}
-                  id={`heading_${key}`}
+      <div className="lg:grid lg:grid-cols-3 lg:m-8 lg:gap-4 lg:max-w-5xl">
+        <StoryOutline
+          headings={headings.map(({ key, element }) => ({
+            key,
+            text: element.childNodes[0].nodeValue!,
+          }))}
+          activeHeadingKeys={activeHeadingKeys}
+          onClick={(key) => scrollTo(key)()}
+        />
+        <div className="mx-6 mt-8 lg:m-0 lg:col-span-2">
+          <RichTextRenderer
+            document={content}
+            components={{
+              Heading({ children, key, Tag }) {
+                return (
+                  <Tag
+                    ref={useAddHeading(key)}
+                    id={`heading_${key}`}
+                    key={key}
+                    className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "text-6xl font-medium max-md:text-4xl" : "text-4xl max-md:text-2xl"} mb-4`}
+                  >
+                    {children}
+                  </Tag>
+                );
+              },
+              Paragraph: ({ children, key }) => (
+                <p
                   key={key}
-                  className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "text-6xl font-medium max-md:text-4xl" : "text-4xl max-md:text-2xl"} mb-4`}
+                  className="text-chalk-800 dark:text-chalk-300 mb-8"
                 >
                   {children}
-                </Tag>
-              );
-            },
-            Paragraph: ({ children, key }) => (
-              <p key={key} className="text-chalk-800 dark:text-chalk-300 mb-8">
-                {children}
-              </p>
-            ),
-            Upload: ({ url, alt, key }) => (
-              <div key={key}>
-                <img className="mb-2" src={`${url}`}></img>
-                <p className="text-chalk-600 dark:text-chalk-500 mb-8 text-right text-sm">
-                  {alt}
                 </p>
-              </div>
-            ),
-          }}
-        />
+              ),
+              Upload: ({ url, alt, key }) => (
+                <div key={key}>
+                  <img className="mb-2" src={`${url}`}></img>
+                  <p className="text-chalk-600 dark:text-chalk-500 mb-8 text-right text-sm">
+                    {alt}
+                  </p>
+                </div>
+              ),
+            }}
+          />
+        </div>
       </div>
     </>
   );
