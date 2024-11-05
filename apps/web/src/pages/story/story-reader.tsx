@@ -1,27 +1,18 @@
 import {
-  forwardRef,
-  RefObject,
   useCallback,
   useEffect,
-  useRef,
+  useMemo,
   useState,
 } from "react";
 import { RichText } from "../../types/rich-text-node";
 import RichTextRenderer from "./rich-text-renderer";
-import useSpy, { KeyedElements } from "../../hooks/use-spy";
 import useDrawer from "../../features/drawer/drawer-context";
 import StoryOutline from "./story-outline";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import FloatingOutline from "./floating-outline";
-import { Article, Media } from "@crp/types";
-import StoryHeader from "./story-header";
-import useOutlineSpy from "../../hooks/use-outline-spy";
-
-type Heading = {
-  key: string | number;
-  element: HTMLHeadingElement;
-};
+import { Article } from "@crp/types";
+import useOutlineSpy from "./use-outline-spy";
 
 type StoryReaderProps = {
   story: Article;
@@ -31,20 +22,8 @@ function StoryReader({ story }: StoryReaderProps) {
   const [headings, setHeadings] = useState<Element[]>([]);
   const [activeHeadings, setActiveHeadings] = useState<Element[]>([]);
 
-  // Keep track of the header height to offset intersections accordingly
-  const Header = forwardRef(StoryHeader);
-  const [headerMinHeight, setHeaderMinHeight] = useState<number>(-1);
-  const headerRef = useCallback((element: HTMLElement) => {
-    if (element) {
-      setHeaderMinHeight(
-        parseFloat(getComputedStyle(element).height) +
-          parseFloat(getComputedStyle(element).top),
-      );
-    }
-  }, []);
-
   const { observe } = useOutlineSpy({
-    onChange: setActiveHeadings
+    onChange: setActiveHeadings,
   });
 
   useEffect(() => headings.forEach((element) => observe(element)), [headings]);
@@ -60,23 +39,32 @@ function StoryReader({ story }: StoryReaderProps) {
     contextSafe(() => {
       gsap.to(containerRef.current, {
         duration: 0.2,
-        scrollTo: { y: `#${element.id}`, offsetY: (window.innerHeight / 2) - (element.getBoundingClientRect().height / 2)},
+        scrollTo: {
+          y: `#${element.id}`,
+          offsetY:
+            window.innerHeight / 2 - element.getBoundingClientRect().height / 2,
+        },
       });
     });
 
+  const sortedHeadings = useMemo(
+    () =>
+      activeHeadings.sort(
+        (a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top,
+      ),
+    [activeHeadings],
+  );
+
   return (
     <>
-      <Header
-        ref={headerRef}
-        title={story.title!}
-        text={story.subtitle!}
-        backgroundImageURL={`${(story.callout!.value as Media).url}`}
+      <FloatingOutline
+        headings={sortedHeadings}
+        onClick={(element) => scrollTo(element)()}
       />
-      <FloatingOutline headings={activeHeadings.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)} onClick={(element) => scrollTo(element)()} />
       <div className="-mt-12 lg:mx-8 lg:mt-0 lg:grid lg:max-w-5xl lg:grid-cols-3 lg:gap-4">
         <StoryOutline
           headings={headings}
-          activeHeadings={activeHeadings.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)}
+          activeHeadings={sortedHeadings}
           onClick={(element) => scrollTo(element)()}
         />
         <div className="mx-6 mt-8 lg:col-span-2 lg:m-0 lg:mt-8">
@@ -89,7 +77,7 @@ function StoryReader({ story }: StoryReaderProps) {
                     ref={addHeading}
                     id={`heading_${key}`}
                     key={key}
-                    className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "text-6xl font-medium max-md:text-4xl" : "text-4xl max-md:text-2xl"} mb-4`}
+                    className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "font-medium text-4xl" : "text-2xl"} mb-4`}
                   >
                     {children}
                   </Tag>

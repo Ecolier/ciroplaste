@@ -38,7 +38,7 @@ function Drawer({ isActive }: DrawerProps) {
       {displayRail ? (
         <>
           <aside
-            className={`bg-chalk-100 dark:bg-chalk-900 fixed bottom-0 top-0 z-40 w-24 flex`}
+            className={`bg-chalk-100 dark:bg-chalk-900 fixed bottom-0 top-0 z-40 flex`}
           >
             <nav className="my-2 flex flex-col grow">
               <div className="flex-grow flex flex-col">
@@ -48,7 +48,7 @@ function Drawer({ isActive }: DrawerProps) {
                       label: t("Home"),
                       href: "/",
                       iconElement: (
-                        <span className="font-symbols text-chalk-900 dark:text-chalk-100 max-md:mr-4 md:mb-2">
+                        <span className="font-symbols text-md text-chalk-900 dark:text-chalk-100 max-md:mr-4 md:mb-2">
                           &#xe900;
                         </span>
                       ),
@@ -57,7 +57,7 @@ function Drawer({ isActive }: DrawerProps) {
                       label: t("Explore"),
                       href: "/explore",
                       iconElement: (
-                        <span className="material-symbols-rounded text-chalk-900 dark:text-chalk-100 max-md:mr-4 md:mb-2">
+                        <span className="material-symbols-rounded text-md text-chalk-900 dark:text-chalk-100 max-md:mr-4 md:mb-2">
                           explore
                         </span>
                       ),
