@@ -1,8 +1,8 @@
 import { createRef, useEffect } from "react";
 
 type FloatingOutlineProps = {
-  headings: { key: string | number; text: string }[];
-  onClick: (key: string | number) => void;
+  headings: Element[];
+  onClick: (element: Element) => void;
 };
 
 function FloatingOutline({ headings, onClick }: FloatingOutlineProps) {
@@ -25,9 +25,9 @@ function FloatingOutline({ headings, onClick }: FloatingOutlineProps) {
             <div key={index} className="flex flex-shrink-0 items-center">
               <span
                 className={`dark:text-chalk-200 text-chalk-900 cursor-pointer text-sm ${headings[index + 1] ? `` : `font-semibold`} inline-block max-w-36 overflow-hidden overflow-ellipsis whitespace-nowrap`}
-                onClick={() => onClick(heading.key)}
+                onClick={() => onClick(heading)}
               >
-                {heading.text}
+                {heading.childNodes[0].nodeValue}
               </span>
               {headings[index + 1] && (
                 <span className="dark:text-chalk-200 text-chalk-700 material-symbols-rounded text-sm">
