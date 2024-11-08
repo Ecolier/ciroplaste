@@ -1,106 +1,61 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { RichText } from "../../types/rich-text-node";
-import RichTextRenderer from "./rich-text-renderer";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { RichText, RichTextNode, RootNode } from "../../types/rich-text-node";
 import useDrawer from "../../features/drawer/drawer-context";
-import StoryOutline from "./story-outline";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import FloatingOutline from "./floating-outline";
-import { Article } from "@crp/types";
 import useOutlineSpy from "./use-outline-spy";
+import useRichTextRenderer from "./rich-text-renderer";
+import useStoryParser from "./use-story-renderer";
+import StoryOutline from "./story-outline";
+import FloatingOutline from "./floating-outline";
 
 type StoryReaderProps = {
-  story: Article;
+  rootNode: RootNode;
 };
 
-function StoryReader({ story }: StoryReaderProps) {
-  const [headings, setHeadings] = useState<Element[]>([]);
-  const [activeHeadings, setActiveHeadings] = useState<Element[]>([]);
-
-  const { observe } = useOutlineSpy({
-    onChange: setActiveHeadings,
-  });
-
-  useEffect(() => headings.forEach((element) => observe(element)), [headings]);
-
-  const addHeading = useCallback((element: HTMLHeadingElement) => {
-    setHeadings((prevState) => [...prevState, element]);
-  }, []);
-
+function StoryReader({ rootNode }: StoryReaderProps) {
   const { containerRef } = useDrawer();
   const { contextSafe } = useGSAP({ scope: containerRef });
 
-  const scrollTo = (element: Element) =>
+  const scrollTo = (id: string) =>
     contextSafe(() => {
       gsap.to(containerRef.current, {
         duration: 0.2,
         scrollTo: {
-          y: `#${element.id}`,
+          y: `#${id}`,
           offsetY:
-            window.innerHeight / 2 - element.getBoundingClientRect().height / 2,
+            window.innerHeight / 2 -
+            document.getElementById(id).getBoundingClientRect().height / 2,
         },
       });
     });
 
-  const sortedHeadings = useMemo(
+  const parsedStory = useStoryParser(rootNode);
+  const headings = useMemo(
     () =>
-      activeHeadings.sort(
-        (a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top,
-      ),
-    [activeHeadings],
+      parsedStory
+        .filter(
+          (element) =>
+            typeof element.type === "string" && element.type[0] === "h",
+        )
+        .map((element) => ({
+          text: element.props.children
+            .reduce((arr, curr) => [...arr, curr.props.children], [])
+            .join(""),
+          id: element.props.id,
+        })),
+    [parsedStory],
   );
 
   return (
     <>
-      <FloatingOutline
-        headings={sortedHeadings}
-        onClick={(element) => scrollTo(element)()}
-      />
-      <div className="-mt-12 lg:mx-8 lg:mt-0 lg:grid lg:max-w-5xl lg:grid-cols-3 lg:gap-4">
+      <div className="-mt-12 lg:mx-8 lg:mt-0 lg:grid lg:max-w-5xl lg:grid-cols-3 lg:gap-4 w-full">
         <StoryOutline
           headings={headings}
-          activeHeadings={sortedHeadings}
           onClick={(element) => scrollTo(element)()}
         />
         <div className="mx-6 mt-8 lg:col-span-2 lg:m-0 lg:mt-8">
-          <RichTextRenderer
-            document={story.content as RichText}
-            components={{
-              Heading({ children, key, Tag }) {
-                return (
-                  <Tag
-                    ref={addHeading}
-                    id={`heading_${key}`}
-                    key={key}
-                    className={`text-chalk-800 dark:text-chalk-300 ${Tag === "h1" ? "font-medium text-4xl" : "text-2xl"} mb-4`}
-                  >
-                    {children}
-                  </Tag>
-                );
-              },
-              Paragraph: ({ children, key }) => (
-                <p
-                  key={key}
-                  className="text-chalk-800 dark:text-chalk-300 mb-8"
-                >
-                  {children}
-                </p>
-              ),
-              Upload: ({ url, alt, key }) => (
-                <div key={key}>
-                  <img className="mb-2" src={`${url}`}></img>
-                  <p className="text-chalk-600 dark:text-chalk-500 mb-8 text-right text-sm">
-                    {alt}
-                  </p>
-                </div>
-              ),
-            }}
-          />
+          {parsedStory}
         </div>
       </div>
     </>

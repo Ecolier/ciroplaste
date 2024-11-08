@@ -9,7 +9,7 @@
 export interface Config {
   collections: {
     users: User;
-    articles: Article;
+    stories: Story;
     media: Media;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -35,9 +35,9 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "articles".
+ * via the `definition` "stories".
  */
-export interface Article {
+export interface Story {
   id: string;
   title?: string | null;
   subtitle?: string | null;
@@ -118,4 +118,9 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+
+
+declare module 'payload' {
+  export interface GeneratedTypes extends Config {}
 }

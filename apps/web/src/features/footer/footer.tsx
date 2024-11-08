@@ -26,13 +26,6 @@ function Footer() {
             { label: "Github", url: githubUrl, external: true },
           ]}
         />
-        <FooterColumn
-          title={t("About")}
-          links={[
-            //{ label: t("Our mission"), url: '/mission' },
-            { label: t("Hire me"), url: "/hire" },
-          ]}
-        />
       </footer>
     </div>
   );

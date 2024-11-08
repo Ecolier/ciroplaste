@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 
 type UseOutlineSpyProps = {
-  onChange: (elements: Element[]) => void;
+  onChange: (elements: {text: string, id: string}[]) => void;
 };
 
 const useOutlineSpy = ({ onChange }: UseOutlineSpyProps) => {
@@ -27,7 +27,7 @@ const useOutlineSpy = ({ onChange }: UseOutlineSpyProps) => {
           } else if (!entry.isIntersecting && !disappearsBelow) {
             elementsIn = elementsIn.filter((element) => element.id !== entry.target.id);
           }
-          onChange(elementsIn);
+          onChange(elementsIn.map(element => ({text: element.textContent!, id: element.id})));
         });
       },
       {

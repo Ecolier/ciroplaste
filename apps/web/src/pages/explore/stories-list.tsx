@@ -1,9 +1,9 @@
-import { Article, Media } from "@crp/types";
+import { Story, Media } from "@crp/types";
 import { Link } from "react-router-dom";
-import StoryCard from "./article-card";
+import StoryCard from "./story-card";
 
 type StoriesListProps = {
-  stories: Article[];
+  stories: Story[];
 };
 
 function StoriesList({ stories }: StoriesListProps) {

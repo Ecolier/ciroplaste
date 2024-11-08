@@ -17,7 +17,7 @@ const Media: CollectionConfig = {
       name: "alt",
       type: "text",
     },
-  ]
+  ],
 };
 
 export default Media;

@@ -1,9 +1,10 @@
 import { gql } from "@apollo/client";
 
 const GET_STORY = gql`
-  query Article($id: String!) {
-    Article(id: $id) {
+  query Story($id: String!, $locale: LocaleInputType) {
+    Story(id: $id, locale: $locale) {
       id
+      availableLanguages
       title
       subtitle
       callout {

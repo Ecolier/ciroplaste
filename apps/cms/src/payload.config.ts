@@ -2,7 +2,7 @@ import path from "path";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { buildConfig } from "payload/config";
 import Users from "./collections/Users";
-import Articles from "./collections/Articles";
+import Stories from "./collections/Stories";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import Media from "./collections/Media";
 import webpack from "./webpack";
@@ -18,8 +18,13 @@ export default buildConfig({
     bundler: webpackBundler(),
     webpack
   },
+  localization: {
+    locales: ['en', 'fr'],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   editor: lexicalEditor({}),
-  collections: [Users, Articles, Media],
+  collections: [Users, Stories, Media],
   typescript,
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
