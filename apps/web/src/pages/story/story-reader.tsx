@@ -14,6 +14,7 @@ type StoryReaderProps = {
 };
 
 function StoryReader({ rootNode }: StoryReaderProps) {
+  
   const { containerRef } = useDrawer();
   const { contextSafe } = useGSAP({ scope: containerRef });
 

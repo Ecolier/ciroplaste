@@ -6,7 +6,6 @@ import { Suspense } from "react";
 function ExploreLayout() {
   return (
     <>
-      <Header />
       <Suspense>
         <Outlet />
       </Suspense>

@@ -1,12 +1,10 @@
 import DrawerButton from "./drawer-button";
 import HeaderButton from "./header-button";
-import useHeader from "./header-context";
 import HeaderSection from "./header-section";
 import ThemeButton from "./theme-button";
 import { Link } from "react-router-dom";
 
-function Header() {
-  const { transparent } = useHeader();
+function Header({ transparent = false}) {
   return (
     <>
       <header
@@ -14,15 +12,15 @@ function Header() {
       >
         <div className="relative flex h-16 w-full">
           <HeaderSection>
-            <DrawerButton />
+            <DrawerButton transparent={transparent} />
             <Link to={"/"}>
-              <HeaderButton>
+              <HeaderButton transparent={transparent}>
                 <span className="font-symbols">&#xe900;</span>
               </HeaderButton>
             </Link>
           </HeaderSection>
           <HeaderSection justify="end">
-            <ThemeButton />
+            <ThemeButton transparent={transparent} />
           </HeaderSection>
         </div>
       </header>

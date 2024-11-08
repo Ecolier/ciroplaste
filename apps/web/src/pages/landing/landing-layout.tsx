@@ -4,7 +4,7 @@ import Landing from "./landing";
 function LandingLayout() {
   return (
     <>
-      <Header />
+      <Header transparent={true} />
       <Landing />
     </>
   );

@@ -1,8 +1,6 @@
 import IconButton, { IconButtonProps } from "../../components/icon-button";
-import useHeader from "./header-context";
 
-function HeaderButton({ children, className, ...props }: IconButtonProps) {
-  const { transparent } = useHeader();
+function HeaderButton({ transparent, children, className, ...props }: IconButtonProps & {transparent: boolean}) {
   return (
     <IconButton
       {...props}

@@ -1,5 +1,7 @@
 import { useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
+import storyLanguageVar from "./story-lng";
+import { useReactiveVar } from "@apollo/client";
+import i18n from "../../app/i18n";
 
 type LocaleDropdownProps = {
   onLocaleChanges: (locale: string) => void;
@@ -10,11 +12,9 @@ function LocaleDropdown({
   onLocaleChanges,
   availableLanguages,
 }: LocaleDropdownProps) {
-  const { i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+  const currentLng = useReactiveVar(storyLanguageVar) ?? i18n.language;
   const [open, setOpen] = useState(false);
   const updateLanguage = useCallback((lng: string) => {
-    setCurrentLanguage(lng);
     onLocaleChanges(lng);
   }, []);
   return (
@@ -25,7 +25,7 @@ function LocaleDropdown({
     >
       <div className="bg-chalk-100 text-chalk-600 dark:text-chalk-200 hover:text-chalk-900 dark:hover:text-chalk-50 dark:hover:bg-chalk-800 dark:bg-chalk-900 flex cursor-pointer justify-center px-4 py-2 transition-colors">
         <span className="material-symbols-rounded mr-2">arrow_drop_down</span>
-        {currentLanguage}
+        {currentLng}
       </div>
       {open && (
         <ul className="dark:bg-chalk-900 bg-chalk-100 absolute left-0 top-full flex w-full flex-col items-center py-2">

@@ -14,25 +14,21 @@ import useTitle from "../../hooks/use-title";
 import useTransparentHeader from "../../features/header/use-transparent-header";
 import StoryHeader from "./story-header";
 import LocaleDropdown from "./locale-dropdown";
-import { startTransition, Suspense } from "react";
+import { startTransition, Suspense, useEffect } from "react";
+import useHeader from "../../features/header/header-context";
+import GET_STORY from "../../queries/get-story";
+import storyLanguageVar from "./story-lng";
+import Header from "../../features/header/header";
 
 function Story() {
   const queryRef = useLoaderData();
   const {
     data: { Story: story },
   } = useReadQuery(queryRef);
-  const { refetch } = useQueryRefHandlers(queryRef);
-
-  useTitle(`${story.title} - ${story.subtitle}`);
-  useTransparentHeader(true);
-
-  function handleRefetch(locale: string, id: string) {
-    startTransition(() => {
-      refetch({ locale, id });
-    });
-  }
 
   return (
+    <>
+    <Header transparent={true} />
     <div className="flex flex-col items-center">
       <main className="w-full">
         <div className="flex w-full flex-col items-center">
@@ -43,16 +39,17 @@ function Story() {
             tooltip={
               <LocaleDropdown
                 availableLanguages={story.availableLanguages}
-                onLocaleChanges={(locale: string) =>
-                  handleRefetch(locale, story.id)
-                }
+                onLocaleChanges={(locale: string) => {
+                  storyLanguageVar(locale)
+                }}
               />
             }
           />
-          <StoryReader rootNode={story.content.root} /> 
+          <StoryReader rootNode={story.content.root} />
         </div>
       </main>
     </div>
+    </>
   );
 }
 
