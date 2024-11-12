@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import DrawerProvider from "../features/drawer/drawer-provider";
-import HeaderProvider from "../features/header/header-provider";
+import DrawerProvider from "../components/drawer/drawer-provider";
+import HeaderProvider from "../components/header/header-provider";
 
 function Layout() {
   return (

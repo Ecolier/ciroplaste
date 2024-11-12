@@ -11,14 +11,14 @@ import { useLoaderData } from "react-router-dom";
 import { Story as StoryModel, Media } from "@crp/types";
 import StoryReader from "./story-reader";
 import useTitle from "../../hooks/use-title";
-import useTransparentHeader from "../../features/header/use-transparent-header";
+import useTransparentHeader from "../../components/header/use-transparent-header";
 import StoryHeader from "./story-header";
 import LocaleDropdown from "./locale-dropdown";
 import { startTransition, Suspense, useEffect } from "react";
-import useHeader from "../../features/header/header-context";
+import useHeader from "../../components/header/header-context";
 import GET_STORY from "../../queries/get-story";
 import storyLanguageVar from "./story-lng";
-import Header from "../../features/header/header";
+import Header from "../../components/header/header";
 
 function Story() {
   const queryRef = useLoaderData();

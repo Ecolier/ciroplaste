@@ -1,4 +1,4 @@
-import IconButton, { IconButtonProps } from "../../components/icon-button";
+import IconButton, { IconButtonProps } from "../icon-button";
 
 function HeaderButton({ transparent, children, className, ...props }: IconButtonProps & {transparent: boolean}) {
   return (

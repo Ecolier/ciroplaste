@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import useTransparentHeader from "../../features/header/use-transparent-header";
+import useTransparentHeader from "../../components/header/use-transparent-header";
 
 const assetsUrl = import.meta.env.VITE_ASSETS_BASE_URL;
 

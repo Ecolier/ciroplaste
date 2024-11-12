@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { storyLoader } from "../pages/story/story-loader";
-import { exploreLoader } from "../pages/explore/explore-loader";
+import { storyLoader } from "../features/story/story-loader";
+import { exploreLoader } from "../features/explore/explore-loader";
 import Layout from "./layout";
 
 const router = createBrowserRouter(
@@ -13,7 +13,7 @@ const router = createBrowserRouter(
           index: true,
           async lazy() {
             const { default: LandingLayout } = await import(
-              "../pages/landing/landing-layout"
+              "../features/landing/landing-layout"
             );
             return { Component: LandingLayout };
           },
@@ -22,7 +22,7 @@ const router = createBrowserRouter(
           path: "/explore",
           async lazy() {
             const { default: ExploreLayout } = await import(
-              "../pages/explore/explore-layout"
+              "../features/explore/explore-layout"
             );
             return { Component: ExploreLayout };
           },
@@ -32,7 +32,7 @@ const router = createBrowserRouter(
               loader: exploreLoader,
               async lazy() {
                 const { default: Explore } = await import(
-                  "../pages/explore/explore"
+                  "../features/explore/explore"
                 );
                 return { Component: Explore };
               },
@@ -41,7 +41,7 @@ const router = createBrowserRouter(
               path: ":id",
               loader: storyLoader,
               async lazy() {
-                const { default: Story } = await import("../pages/story/story");
+                const { default: Story } = await import("../features/story/story");
                 return { Component: Story };
               },
             },

@@ -1,9 +1,9 @@
 import { QueryRef, useReadQuery } from "@apollo/client";
 import { useLoaderData } from "react-router-dom";
 import StoriesList from "./stories-list";
-import useTransparentHeader from "../../features/header/use-transparent-header";
+import useTransparentHeader from "../../components/header/use-transparent-header";
 import { useTranslation } from "react-i18next";
-import Header from "../../features/header/header";
+import Header from "../../components/header/header";
 
 function Explore() {
   const queryRef = useLoaderData() as QueryRef;

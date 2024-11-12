@@ -31,5 +31,5 @@ export default buildConfig({
   },
   plugins: [cloudStorage],
   db,
-  cors: ['https://ciroplaste.com']
+  cors: ['https://ciroplaste.com'],
 });

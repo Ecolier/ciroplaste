@@ -6,8 +6,7 @@ import storyLanguageVar from "./story-lng";
 const constructQuery = (language: string, id: string) => {
   storyLanguageVar(language);
   return preloadQuery(GET_STORY, {
-    variables: { id: id.id },
-    refetchWritePolicy: "overwrite",
+    variables: { id: id.id }
   }).toPromise();
 };
 

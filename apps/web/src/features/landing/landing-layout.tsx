@@ -1,4 +1,4 @@
-import Header from "../../features/header/header";
+import Header from "../../components/header/header";
 import Landing from "./landing";
 
 function LandingLayout() {

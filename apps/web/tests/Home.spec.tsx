@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, test } from "vitest";
 import { getByText, render, screen } from "@testing-library/react";
-import Home from "../src/pages/home";
+import Home from "../src/features/home";
 import React from "react";
 import {
   createMemoryRouter,

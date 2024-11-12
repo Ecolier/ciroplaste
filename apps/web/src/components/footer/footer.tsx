@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Squiggle from "../../shapes/squiggle";
+import Squiggle from "../squiggle";
 import FooterColumn from "./footer-column";
 
 const instagramUrl = import.meta.env.VITE_INSTAGRAM_LINK;

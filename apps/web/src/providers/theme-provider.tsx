@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { ThemeContext } from "../contexts/theme-context";
+import { ThemeContext } from "../components/theme-context";
 
 let lastTheme: string;
 

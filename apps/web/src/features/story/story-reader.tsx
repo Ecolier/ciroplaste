@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { RichText, RichTextNode, RootNode } from "../../types/rich-text-node";
-import useDrawer from "../../features/drawer/drawer-context";
+import useDrawer from "../../components/drawer/drawer-context";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import useOutlineSpy from "./use-outline-spy";
