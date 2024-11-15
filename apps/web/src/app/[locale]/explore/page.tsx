@@ -5,6 +5,8 @@ import StoriesList from "./stories-list";
 import { getClient } from "@/lib/apollo";
 import GET_STORIES from "./get-stories";
 
+export const runtime = 'edge';
+
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
 async function getStories(locale: string) {
