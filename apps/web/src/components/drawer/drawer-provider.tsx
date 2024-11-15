@@ -1,16 +1,39 @@
-import { createRef, PropsWithChildren, useState } from "react";
-import { DrawerContext } from "./drawer-context";
+"use client";
+
+import React from "react";
 import Drawer from "./drawer";
 
-function DrawerProvider({ children }: PropsWithChildren) {
-  const [isActive, setIsActive] = useState(false);
-  const containerRef = createRef<HTMLDivElement>();
+interface DrawerContextProps {
+  isActive: boolean;
+  toggle: React.Dispatch<React.SetStateAction<void>>;
+  close: React.Dispatch<React.SetStateAction<void>>;
+  containerRef: React.RefObject<HTMLDivElement>;
+}
+
+export const DrawerContext = React.createContext<DrawerContextProps>({
+  isActive: false,
+  toggle: () => {},
+  close: () => {},
+  containerRef: React.createRef<HTMLDivElement>(),
+});
+
+function DrawerProvider({ children }: React.PropsWithChildren) {
+  const [isActive, setIsActive] = React.useState(false);
+  const containerRef = React.createRef<HTMLDivElement>();
   return (
     <DrawerContext.Provider
-      value={{ isActive, toggle: () => setIsActive(!isActive), close: () => setIsActive(false), containerRef }}
+      value={{
+        isActive,
+        toggle: () => setIsActive(!isActive),
+        close: () => setIsActive(false),
+        containerRef,
+      }}
     >
       <Drawer isActive={isActive} />
-      <div ref={containerRef} className="flex h-dvh md:pl-20 grow flex-col overflow-y-auto">
+      <div
+        ref={containerRef}
+        className="flex h-dvh md:pl-20 grow flex-col overflow-y-auto"
+      >
         {children}
       </div>
     </DrawerContext.Provider>

@@ -1,14 +1,23 @@
+"use client";
+
 import HeaderButton from "./header-button";
-import useDrawer from "../drawer/drawer-context";
+import useDrawer from "../drawer/use-drawer";
 
 type DrawerButtonProps = {
   className?: string;
 };
 
-function DrawerButton({ className, transparent }: DrawerButtonProps & {transparent: boolean}) {
+function DrawerButton({
+  className,
+  transparent,
+}: DrawerButtonProps & { transparent: boolean }) {
   const { isActive, toggle } = useDrawer();
   return (
-    <HeaderButton transparent={transparent} className={className} onClick={() => toggle()}>
+    <HeaderButton
+      transparent={transparent}
+      className={className}
+      onClick={() => toggle()}
+    >
       <span className="material-symbols-rounded">
         {isActive ? <>menu_open</> : <>menu</>}
       </span>

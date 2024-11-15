@@ -1,49 +1,30 @@
 {
   "name": "@crp/web",
-  "type": "module",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
-    "check-types": "tsc --noEmit",
-    "build": "vite build",
-    "lint": "eslint .",
-    "test": "vitest",
-    "preview": "vite preview"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.8",
+    "@apollo/client": "^3.11.10",
+    "@apollo/experimental-nextjs-app-support": "^0.11.6",
     "@gsap/react": "^2.1.1",
-    "autoprefixer": "^10.4.20",
     "graphql": "^16.9.0",
-    "i18next": "23.16.4",
-    "i18next-browser-languagedetector": "8.0.0",
-    "i18next-http-backend": "2.6.2",
-    "lodash": "^4.17.21",
-    "postcss": "^8.4.47",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-i18next": "15.1.0",
-    "react-router-dom": "^6.27.0"
+    "next": "15.0.3",
+    "next-intl": "^3.25.1",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106"
   },
   "devDependencies": {
-    "@crp/types": "workspace:^",
-    "@eslint/js": "^9.13.0",
-    "@testing-library/jest-dom": "6.6.2",
-    "@testing-library/react": "16.0.1",
-    "@testing-library/user-event": "14.5.2",
-    "@types/lodash": "^4.17.12",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
-    "@vitest/browser": "2.1.4",
-    "eslint": "^9.13.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.14",
-    "globals": "^15.11.0",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.12.1",
-    "vite": "^5.4.10",
-    "vitest": "2.1.4",
-    "wrangler": "^3.83.0"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }

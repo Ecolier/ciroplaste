@@ -1,3 +1,5 @@
+"use client";
+
 import { MouseEvent, PropsWithChildren } from "react";
 
 export interface IconButtonProps extends PropsWithChildren {

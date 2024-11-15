@@ -1,9 +1,9 @@
 import DrawerButton from "../header/drawer-button";
-import NavigationList from "./navigation-list";
-import { useTranslation } from "react-i18next";
-import useDrawer from "./drawer-context";
+import NavigationList from "./drawer-list";
+import useDrawer from "./use-drawer";
 import { useEffect, useRef, useState } from "react";
 import ThemeButton from "../header/theme-button";
+import { useTranslations } from "next-intl";
 
 type DrawerProps = {
   isActive: boolean;
@@ -11,7 +11,7 @@ type DrawerProps = {
 
 function Drawer({ isActive }: DrawerProps) {
   const { toggle } = useDrawer();
-  const { t } = useTranslation();
+  const t = useTranslations();
   const [displayRail, setDisplayRail] = useState(false);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function Drawer({ isActive }: DrawerProps) {
             className={`bg-chalk-100 dark:bg-chalk-900 fixed bottom-0 top-0 z-40 w-80 -translate-x-80 shadow-md ${isReset.current ? `transition-none` : `transition-transform`} ${isActive ? `translate-x-0` : `-translate-x-80`}`}
           >
             <nav className="mt-2">
-              <DrawerButton className="mb-2 ml-3 md:invisible" />
+              <DrawerButton transparent={false} className="mb-2 ml-3 md:invisible" />
               <NavigationList
                 links={[
                   {

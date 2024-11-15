@@ -35,9 +35,14 @@ const Stories: CollectionConfig = {
       name: "availableLanguages",
       type: "select",
       hasMany: true,
-      options: ["en", "fr"]
-    }
+      options: ["en", "fr"],
+    },
   ],
+  hooks: {
+    afterChange: [(args) => {
+      fetch(`http://172.20.10.3:8080/api/revalidate?story=${args.doc.id}&locale=${args.req.locale}`)
+    }],
+  },
 };
 
 export default Stories;

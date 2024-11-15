@@ -1,6 +1,11 @@
 import IconButton, { IconButtonProps } from "../icon-button";
 
-function HeaderButton({ transparent, children, className, ...props }: IconButtonProps & {transparent: boolean}) {
+function HeaderButton({
+  transparent,
+  children,
+  className,
+  ...props
+}: IconButtonProps & { transparent: boolean }) {
   return (
     <IconButton
       {...props}

@@ -1,12 +1,14 @@
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 import Squiggle from "../squiggle";
 import FooterColumn from "./footer-column";
+import React from "react";
+import { setRequestLocale } from "next-intl/server";
 
-const instagramUrl = import.meta.env.VITE_INSTAGRAM_LINK;
-const githubUrl = import.meta.env.VITE_GITHUB_LINK;
+const instagramUrl = process.env.NEXT_PUBLIC_INSTAGRAM_LINK;
+const githubUrl = process.env.NEXT_PUBLIC_GITHUB_LINK;
 
 function Footer() {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <div className="mx-4 mt-32 flex grow flex-col justify-center">
       <Squiggle />

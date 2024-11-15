@@ -3,12 +3,16 @@
   "extends": ["//"],
   "tasks": {
     "build": {
-      "outputs": ["dist"]
+      "outputs": [".next"]
     },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
     "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
       "cache": false,
       "persistent": true
     }

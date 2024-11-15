@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/i18n/routing";
 
 type FooterColumnLink = {
   label: string;
@@ -28,7 +28,7 @@ function FooterColumn({ title, links }: FooterColumnProps) {
               {link.label}{" "}
             </a>
           ) : (
-            <Link to={link.url}>
+            <Link href={link.url}>
               <span className="text-iris-500 dark:text-iris-400 underline">
                 {link.label}
               </span>

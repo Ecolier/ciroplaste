@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_drop_down,chevron_right,dark_mode,explore,handshake,hive,light_mode,menu,menu_open");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Ciroplaste Symbols";
+    font-style: normal;
+    font-weight: 100 700;
+    src: url(/ciroplaste-symbols.woff2) format("woff2");
+  }
+
+  .font-symbols {
+    font-family: "Ciroplaste Symbols";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply dark:bg-chalk-950 bg-chalk-50 h-full;
+  }
+
+  html {
+    @apply h-full;
+  }
+}
+
+@layer utilities {
+  .auto-overflow-anchoring {
+    overflow-anchor: auto;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hidden {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+}
+
+video::-webkit-media-controls,
+video::-moz-media-controls,
+video::-o-media-controls,
+video::-ms-media-controls {
+  display: none !important;
+}
