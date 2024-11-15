@@ -12393,7 +12393,7 @@ __metadata:
     supports-preserve-symlinks-flag: "npm:^1.0.0"
   bin:
     resolve: bin/resolve
-  checksum: 10c0/5063e63202e5a941d62534c8acd5541f5004674a286757dd877c43026fe12aa1d0d6ac17a32f6675687108ff42467b1223231a57e051b5b97a6d210204f07d29
+  checksum: 10c0/78ad6edb8309a2bfb720c2c1898f7907a37f858866ce11a5974643af1203a6a6e05b2fa9c53d8064a673a447b83d42569260c306d43628bff5bb101969708355
   languageName: node
   linkType: hard
 
