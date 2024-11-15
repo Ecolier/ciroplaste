@@ -11,6 +11,7 @@ import GET_STORIES from "../get-stories";
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
 export const dynamicParams = false;
+export const runtime = 'edge';
 
 export async function generateStaticParams({ params: { locale } }) {
   console.log(`${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=0`)
