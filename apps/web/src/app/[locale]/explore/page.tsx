@@ -7,9 +7,6 @@ import GET_STORIES from "./get-stories";
 
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
-export const runtime = "nodejs";
-export const dynamic = "force-static";
-
 async function getStories(locale: string) {
   const res = await fetch(
     `${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=1`,

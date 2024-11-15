@@ -64,6 +64,7 @@ export interface Story {
     relationTo: 'users';
     value: string | User;
   } | null;
+  availableLanguages?: ('en' | 'fr')[] | null;
   updatedAt: string;
   createdAt: string;
 }
