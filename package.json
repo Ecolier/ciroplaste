@@ -1,19 +1,19 @@
 {
-  "name": "crp",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "name": "ciroplaste",
+  "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "packageManager": "yarn@4.5.0",
   "devDependencies": {
-    "eslint-config-prettier": "9.1.0",
-    "prettier": "3.3.3",
-    "prettier-plugin-tailwindcss": "0.6.8",
-    "turbo": "^2.2.3"
+    "prettier": "^3.3.3",
+    "turbo": "^2.3.0",
+    "typescript": "5.6.3"
+  },
+  "packageManager": "pnpm@9.13.2",
+  "engines": {
+    "node": ">=18"
   }
 }
