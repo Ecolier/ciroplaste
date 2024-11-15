@@ -5,13 +5,13 @@ import StoriesList from "./stories-list";
 import { getClient } from "@/lib/apollo";
 import GET_STORIES from "./get-stories";
 
-const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
+export const dynamic = "force-static";
 
-export const runtime = 'edge';
+const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
 async function getStories(locale: string) {
   const res = await fetch(
-    `${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=1`
+    `${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=1`,
   );
   const stories = await res.json();
   return stories;
