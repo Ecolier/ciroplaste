@@ -13,6 +13,10 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/:ro
     networks:
       - production
+  
+  database:
+    networks:
+      - production
 
   cms:
     image: ghcr.io/ecolier/ciroplaste-cms:1
