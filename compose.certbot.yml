@@ -13,4 +13,4 @@ services:
 
 secrets:
   dns_cloudflare_api_token:
-    external: true
+    environment: DNS_CLOUDFLARE_API_TOKEN
