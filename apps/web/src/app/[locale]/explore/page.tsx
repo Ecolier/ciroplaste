@@ -2,13 +2,13 @@ import Footer from "@/components/footer/footer";
 import { setRequestLocale } from "next-intl/server";
 import React from "react";
 import StoriesList from "./stories-list";
+import Header from "@/components/header/header";
 
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
 async function getStories(locale: string) {
-  console.log(`${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=1`)
   const res = await fetch(
-    `${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=1`,
+    `${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=1`
   );
   const stories = await res.json();
   return stories;
@@ -20,7 +20,10 @@ export default async function Explore({ params }) {
   const stories = await getStories(locale);
   return (
     <>
-      <StoriesList stories={stories.docs} />
+      <Header />
+      <div className="pt-[64px] md:pt-0 md:m-2">
+        <StoriesList stories={stories.docs} />
+      </div>
       <Footer />
     </>
   );

@@ -16,7 +16,7 @@ function FloatingOutline({ headings, onClick }: FloatingOutlineProps) {
   }, [headings, containerRef]);
   return (
     <div
-      className={`text-chalk-900 bg-chalk-100/90 dark:bg-chalk-900/90 sticky left-0 top-32 flex h-12 w-full px-6 backdrop-blur-lg md:top-[16.665vh] lg:hidden ${
+      className={`text-chalk-900 bg-chalk-100/90 dark:bg-chalk-900/90 sticky left-0 top-[64px] flex h-12 w-full px-6 backdrop-blur-lg md:top-[16.665vh] lg:hidden ${
         headings.length !== 0 ? `flex` : `invisible`
       }`}
     >

@@ -1,16 +1,50 @@
-import { revalidatePath } from "next/cache";
-import { NextRequest } from "next/server";
+import crypto from 'crypto';
+import { revalidatePath } from 'next/cache';
 
-export async function GET(request: NextRequest) {
-  const path = request.nextUrl.searchParams.get("path");
-  const locale = request.nextUrl.searchParams.get("locale");
-  if (!path || !locale) {
-    return Response.json({
-      revalidated: false,
+export async function POST(request: Request) {
+  try {
+    const text = await request.text();
+
+    const key = Buffer.from(process.env.CMS_SECRET || '', "hex");
+
+    const signature = crypto
+      .createHmac('sha256', key)
+      .update(text)
+      .digest('hex');
+
+    const trusted = Buffer.from(`sha256=${signature}`, 'ascii');
+    const untrusted = Buffer.from(
+      request.headers.get('x-hub-signature-256') || '',
+      'ascii'
+    );
+
+    if (!crypto.timingSafeEqual(trusted, untrusted)) {
+      console.log('[Next.js] Invalid signature.', {
+        trusted: trusted.toString('hex'),
+        untrusted: untrusted.toString('hex'),
+      });
+      return new Response('Invalid signature.', {
+        status: 400,
+      });
+    }
+
+    const payload = JSON.parse(text);
+    const {locale, story} = payload;
+
+    console.log(`[Next.js] Revalidating /${locale}/explore`);
+    revalidatePath(`/${locale}/explore`);
+
+    if (story) {
+      console.log(`[Next.js] Revalidating /${locale}/explore/${story}`);
+      revalidatePath(`/${locale}/explore/${story}`);
+    }
+  } catch (error) {
+    return new Response(`Webhook error: ${error.message}`, {
+      status: 400,
     });
   }
-  revalidatePath(`/${locale}${path}`);
-  return Response.json({
-    revalidated: true,
+
+  return new Response('Success!', {
+    status: 200,
   });
 }

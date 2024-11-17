@@ -14,7 +14,7 @@ function StoryHeader({
   tooltip,
 }: StoryHeaderProps) {
   return (
-    <div className="sticky top-[calc(-50vh+128px)] z-10 flex h-[50vh] w-full flex-col items-center justify-center md:-top-[16.665vh] md:h-[33.333vh]">
+    <div className="md:sticky relative flex h-[50vh] w-full flex-col items-center justify-center md:-top-[16.665vh] md:h-[33.333vh]">
       <div className="sticky flex flex-col items-center justify-center md:top-0 md:h-[16.665vh]">
         <h1 className="text-chalk-50 mb-[1.6665vh] text-center font-serif text-5xl text-[4.9998vh]">
           {title}

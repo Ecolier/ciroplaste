@@ -1,15 +1,16 @@
 "use client";
 
-import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { RichText, RichTextNode, RootNode } from "../../../../types/rich-text-node";
-import useDrawer from "../../../../components/drawer/use-drawer";
+import React, { useMemo } from "react";
+import { RootNode } from "@/types/rich-text-node";
+import useDrawer from "@/components/drawer/use-drawer";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import useOutlineSpy from "./use-outline-spy";
-import useRichTextRenderer from "./rich-text-renderer";
 import useStoryParser from "./use-story-renderer";
 import StoryOutline from "./story-outline";
-import FloatingOutline from "./floating-outline";
+import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
+
+
+gsap.registerPlugin(ScrollToPlugin);
 
 type StoryReaderProps = {
   rootNode: RootNode;
@@ -22,6 +23,7 @@ function StoryReader({ rootNode }: StoryReaderProps) {
 
   const scrollTo = (id: string) =>
     contextSafe(() => {
+      console.log(containerRef.current)
       gsap.to(containerRef.current, {
         duration: 0.2,
         scrollTo: {

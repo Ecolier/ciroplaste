@@ -7,6 +7,8 @@ import { setRequestLocale } from "next-intl/server";
 import GET_STORY from "./get-story";
 import { getClient } from "@/lib/apollo";
 import GET_STORIES from "../get-stories";
+import Footer from "@/components/footer/footer";
+import Header from "@/components/header/header";
 
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
@@ -34,7 +36,8 @@ export default async function Story({ params }) {
   const story = await getStory(id, locale);
   return (
     <>
-      <div className="flex flex-col items-center">
+      <Header />
+      <div className="flex flex-col items-center max-md:pt-[64px]">
         <main className="w-full">
           <div className="flex w-full flex-col items-center">
             <StoryHeader
@@ -46,6 +49,7 @@ export default async function Story({ params }) {
           </div>
         </main>
       </div>
+      <Footer />
     </>
   );
 }

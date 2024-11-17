@@ -1,3 +1,4 @@
+import { NodemailerAdapterArgs } from "@payloadcms/email-nodemailer";
 import secrets from "./secrets";
 import getEnv from "./utils/get-env";
 
@@ -15,8 +16,8 @@ const email = {
     secure: false,
     requireTLS: true,
   },
-  fromName: "Ciroplaste",
-  fromAddress: "contact@ciroplaste.com",
-};
+  defaultFromName: "Ciroplaste",
+  defaultFromAddress: "contact@ciroplaste.com",
+} satisfies NodemailerAdapterArgs;
 
 export default email;

@@ -9,6 +9,9 @@ import Stories from './collections/Stories'
 import Media from './collections/Media'
 import db from './database'
 import cloudStorage from './cloud-storage'
+import { defaultLexical } from './fields/defaultLexical'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import email from './email'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -16,6 +19,8 @@ const dirname = path.dirname(filename)
 const {SECRET} = secrets;
 
 export default buildConfig({
+  serverURL: process.env.SERVER_URL,
+  email: nodemailerAdapter(email),
   admin: {
     user: Users.slug,
     importMap: {
@@ -28,7 +33,7 @@ export default buildConfig({
     fallback: true,
   },
   collections: [Users, Stories, Media],
-  editor: lexicalEditor(),
+  editor: defaultLexical,
   secret: SECRET,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

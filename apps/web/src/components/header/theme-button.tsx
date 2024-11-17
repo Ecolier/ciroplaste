@@ -1,6 +1,6 @@
 "use client";
 
-import useTheme from "../theme/use-theme";
+import { useTheme } from "next-themes";
 import HeaderButton from "./header-button";
 
 function ThemeButton({ transparent = false }) {

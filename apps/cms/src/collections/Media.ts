@@ -6,6 +6,7 @@ const Media: CollectionConfig = {
     read: () => true,
   },
   slug: "media",
+  upload: {},
   fields: [
     {
       name: "alt",
