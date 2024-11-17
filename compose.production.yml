@@ -14,17 +14,6 @@ services:
     networks:
       - production
 
-  certbot:
-    build:
-      context: .
-      dockerfile: ./certbot/Dockerfile
-    volumes:
-      - ./certbot/conf/:/etc/letsencrypt/conf/:rw
-    secrets:
-      - dns_cloudflare_api_token
-    environment:
-      - DNS_CLOUDFLARE_API_TOKEN_FILE=/run/secrets/dns_cloudflare_api_token
-
   cms:
     image: ghcr.io/ecolier/ciroplaste-cms:1
     build:
@@ -59,8 +48,6 @@ secrets:
     external: true
   storage_secret:
     external: true
-  dns_cloudflare_api_token:
-    file: ~/.secrets/dns_cloudflare_api_token
 
 networks:
   production:

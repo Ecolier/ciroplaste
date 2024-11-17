@@ -1,0 +1,16 @@
+services:
+
+  certbot:
+    build:
+      context: .
+      dockerfile: ./certbot/Dockerfile
+    volumes:
+      - ./certbot/conf/:/etc/letsencrypt/conf/:rw
+    secrets:
+      - dns_cloudflare_api_token
+    environment:
+      - DNS_CLOUDFLARE_API_TOKEN_FILE=/run/secrets/dns_cloudflare_api_token
+
+secrets:
+  dns_cloudflare_api_token:
+    external: true
