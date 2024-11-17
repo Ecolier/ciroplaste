@@ -1,81 +1,48 @@
-FROM node:22.6-alpine AS base
-
-RUN apk add --no-cache git jq && corepack enable
-
-WORKDIR /app
-
-COPY --link package.json turbo.json ./
-RUN TURBO_VERSION=$(cat package.json | jq '.devDependencies["turbo"]' -r) npm i -g turbo@${TURBO_VERSION}
-
-COPY --link . .
-
-RUN turbo prune --scope=@crp/cms --docker --out-dir=./out/cms
-
-FROM node:22.6-alpine AS development
-
+FROM node:18-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
-
+ 
+FROM base AS builder
+RUN apk update
+RUN apk add --no-cache libc6-compat
+# Set working directory
 WORKDIR /app
-
-COPY --from=base --link /app/out/cms/json/ .
-COPY --from=base --link /app/out/cms/yarn.lock ./yarn.lock
-
-RUN yarn install --inline-builds
-
-COPY --from=base /app/out/cms/full/ .
-COPY --link .gitignore turbo.json ./
-
-EXPOSE 3000
-
-ENTRYPOINT [ "yarn" ]
-
-CMD ["turbo", "run", "dev", "--filter=@crp/cms..."]
-
-FROM base AS build
-
-ENV YARN_ENABLE_GLOBAL_CACHE=false
-ENV YARN_ENABLE_MIRROR=false
-ENV YARN_NODE_LINKER=node-modules
-ENV YARN_NM_MODE=hardlinks-local
-ENV YARN_ENABLE_HARDENED_MODE=0
-ENV YARN_CHECKSUM_BEHAVIOR=reset
-
+# Replace <your-major-version> with the major version installed in your repository. For example:
+# RUN yarn global add turbo@^2
+RUN pnpm add --global turbo@^2
+COPY . .
+ 
+# Generate a partial monorepo with a pruned lockfile for a target workspace.
+# Assuming "web" is the name entered in the project's package.json: { name: "web" }
+RUN turbo prune @crp/cms --docker
+ 
+# Add lockfile and package.json's of isolated subworkspace
+FROM base AS installer
+RUN apk update
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
-
-COPY --link .gitignore ./
-COPY --from=base --link /app/out/cms/json/ .
-COPY --from=base --link /app/out/cms/yarn.lock ./yarn.lock
-
-RUN yarn install --inline-builds
-
-COPY --from=base /app/out/cms/full/ .
-COPY --link .gitignore turbo.json ./
-
-RUN yarn turbo run build --filter=@crp/cms...
-RUN yarn workspaces focus @crp/cms --production
-
-FROM node:23-alpine AS production
-
-ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
-ENV NODE_ENV=production
-
-RUN apk add --no-cache tzdata bash && corepack enable
-
+ 
+# First install the dependencies (as they change less often)
+COPY --from=builder /app/out/json/ .
+RUN pnpm install
+ 
+# Build the project
+COPY --from=builder /app/out/full/ .
+RUN pnpm turbo run build --filter=@crp/cms...
+ 
+FROM base AS production
 WORKDIR /app
-
+ 
+# Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 payloadcms
-
-RUN mkdir media
-RUN chown payloadcms media
-
-USER payloadcms
-
-COPY --from=build --chown=payloadcms:nodejs /app/node_modules ./node_modules
-COPY --from=build --chown=payloadcms:nodejs /app/apps/cms/package.json ./
-COPY --from=build --chown=payloadcms:nodejs /app/apps/cms/build ./build
-COPY --from=build --chown=payloadcms:nodejs /app/apps/cms/dist ./dist
-
-EXPOSE 3000
-
-CMD ["node", "dist/server.js"]
+RUN adduser --system --uid 1001 nextjs
+USER nextjs
+ 
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=installer --chown=nextjs:nodejs /app/apps/cms/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/cms/.next/static ./apps/cms/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/cms/public ./apps/cms/public
+ 
+CMD node apps/cms/server.js

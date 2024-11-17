@@ -3,23 +3,20 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.10",
-    "@apollo/experimental-nextjs-app-support": "^0.11.6",
     "@gsap/react": "^2.1.1",
-    "graphql": "^16.9.0",
+    "gsap": "^3.12.5",
     "next": "15.0.3",
     "next-intl": "^3.25.1",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.5",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

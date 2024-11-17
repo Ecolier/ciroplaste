@@ -10,12 +10,10 @@ import DrawerProvider from "@/components/drawer/drawer-provider";
 import ThemeProvider from "@/components/theme/theme-provider";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./globals.css";
 
 gsap.registerPlugin(ScrollToPlugin);
-gsap.registerPlugin(ScrollTrigger);
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],

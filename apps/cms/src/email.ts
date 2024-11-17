@@ -1,8 +1,8 @@
 import secrets from "./secrets";
-import requireEnv from "./utils/require-env";
+import getEnv from "./utils/get-env";
 
 const {EMAIL_USERNAME, EMAIL_PASSWORD} = secrets;
-const host = requireEnv("EMAIL_HOST");
+const host = getEnv("EMAIL_HOST");
 
 const email = {
   transportOptions: {

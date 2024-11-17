@@ -1,0 +1,25 @@
+services:
+
+  cms:
+    build:
+      context: .
+      dockerfile: apps/cms/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+    volumes:
+      - media:/app/media
+
+  database:
+    image: mongo:latest
+    restart: unless-stopped
+    command:
+      - --storageEngine=wiredTiger
+    volumes:
+      - data:/data/db
+
+volumes:
+  data:
+  media:

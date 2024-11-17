@@ -1,35 +1,59 @@
-import path from "path";
-import { webpackBundler } from "@payloadcms/bundler-webpack";
-import { buildConfig } from "payload/config";
-import Users from "./collections/Users";
-import Stories from "./collections/Stories";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import Media from "./collections/Media";
-import webpack from "./webpack";
-import cloudStorage from "./cloud-storage";
-import db from "./database";
-import typescript from "./typescript";
-import routes from "./routes";
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import path from 'path'
+import { buildConfig } from 'payload'
+import { fileURLToPath } from 'url'
+import sharp from 'sharp'
+import Users from './collections/Users'
+import secrets from './secrets'
+import Stories from './collections/Stories'
+import Media from './collections/Media'
+import db from './database'
+import cloudStorage from './cloud-storage'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+
+const {SECRET} = secrets;
 
 export default buildConfig({
-  routes,
   admin: {
     user: Users.slug,
-    bundler: webpackBundler(),
-    webpack
+    importMap: {
+      baseDir: path.resolve(dirname),
+    },
   },
   localization: {
     locales: ['en', 'fr'],
     defaultLocale: 'en',
     fallback: true,
   },
-  editor: lexicalEditor({}),
   collections: [Users, Stories, Media],
-  typescript,
-  graphQL: {
-    schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
+  editor: lexicalEditor(),
+  secret: SECRET,
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  plugins: [cloudStorage],
   db,
-  cors: ['https://ciroplaste.com'],
-});
+  sharp,
+  plugins: [
+    cloudStorage
+  ],
+})
+
+// export default buildConfig({
+  
+//   localization: {
+//     locales: ['en', 'fr'],
+//     defaultLocale: 'en',
+//     fallback: true,
+//   },
+//   editor: lexicalEditor(),
+//   collections: [Users, Stories, Media],
+//   typescript,
+//   graphQL: {
+//     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
+//   },
+//   plugins: [cloudStorage],
+//   db,
+//   cors: ['https://ciroplaste.com'],
+// });

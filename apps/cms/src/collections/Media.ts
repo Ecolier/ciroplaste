@@ -1,17 +1,11 @@
-import { CollectionConfig } from "payload/types";
+import { CollectionConfig } from "payload";
 import path from "path";
-
-const assetsBaseUrl = process.env.ASSETS_BASE_URL;
 
 const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
   slug: "media",
-  upload: {
-    staticURL: assetsBaseUrl,
-    staticDir: path.resolve(__dirname, "..", "..", "media"),
-  },
   fields: [
     {
       name: "alt",

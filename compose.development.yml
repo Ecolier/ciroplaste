@@ -1,0 +1,18 @@
+services:
+  cms:
+    build:
+      target: development
+    volumes:
+      - ./apps/cms:/app/apps/cms
+    networks:
+      - development
+
+  database:
+    ports:
+      - 27017:27017
+    networks:
+      - development
+
+networks:
+  development:
+    driver: bridge

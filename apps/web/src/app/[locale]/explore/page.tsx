@@ -2,12 +2,11 @@ import Footer from "@/components/footer/footer";
 import { setRequestLocale } from "next-intl/server";
 import React from "react";
 import StoriesList from "./stories-list";
-import { getClient } from "@/lib/apollo";
-import GET_STORIES from "./get-stories";
 
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
 async function getStories(locale: string) {
+  console.log(`${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=1`)
   const res = await fetch(
     `${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=1`,
   );

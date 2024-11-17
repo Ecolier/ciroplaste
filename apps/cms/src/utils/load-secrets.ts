@@ -1,6 +1,4 @@
 import fs from "fs";
-import requireEnv from "./require-env";
-import getEnv from "./get-env";
 
 const loadSecrets = (envs: readonly string[]) => {
   let secrets: {};

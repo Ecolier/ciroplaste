@@ -1,4 +1,6 @@
-import { CollectionConfig } from "payload/types";
+import { CollectionConfig } from "payload";
+
+const webBaseUrl = process.env.WEB_BASE_URL;
 
 const Stories: CollectionConfig = {
   slug: "stories",
@@ -31,16 +33,10 @@ const Stories: CollectionConfig = {
       type: "relationship",
       relationTo: ["users"],
     },
-    {
-      name: "availableLanguages",
-      type: "select",
-      hasMany: true,
-      options: ["en", "fr"],
-    },
   ],
   hooks: {
     afterChange: [(args) => {
-      fetch(`http://172.20.10.3:8080/api/revalidate?story=${args.doc.id}&locale=${args.req.locale}`)
+      fetch(`${webBaseUrl}/api/revalidate?path=/explore&locale=${args.req.locale}`)
     }],
   },
 };
