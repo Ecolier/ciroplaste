@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "beta",
-    "@payloadcms/email-nodemailer": "3.0.0-beta.134",
+    "@payloadcms/email-nodemailer": "beta",
     "@payloadcms/next": "beta",
     "@payloadcms/plugin-cloud-storage": "beta",
     "@payloadcms/richtext-lexical": "beta",
@@ -25,7 +25,6 @@
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.0.3",
-    "nodemailer": "^6.9.16",
     "payload": "beta",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
@@ -33,7 +32,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.5.4",
-    "@types/nodemailer": "^6.4.16",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "eslint": "^9.15.0",
