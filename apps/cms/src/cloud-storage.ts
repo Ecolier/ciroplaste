@@ -1,5 +1,4 @@
 import { s3Storage } from "@payloadcms/storage-s3";
-import Media from "./collections/Media";
 import secrets from "./secrets";
 import getEnv from "./utils/get-env";
 
@@ -8,7 +7,9 @@ const bucket = getEnv("STORAGE_BUCKET");
 const region = getEnv("STORAGE_REGION");
 
 export default s3Storage({
-  collections: [Media.slug],
+  collections: {
+    "media": true,
+  },
   bucket,
   config: {
     endpoint: `https://${STORAGE_ACCOUNT}.r2.cloudflarestorage.com`,
