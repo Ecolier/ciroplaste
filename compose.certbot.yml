@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./certbot/Dockerfile
     volumes:
-      - ./certbot/conf/:/etc/letsencrypt/conf/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
     secrets:
       - dns_cloudflare_api_token
     environment:
