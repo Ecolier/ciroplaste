@@ -1,6 +1,6 @@
 services:
 
-  proxy:
+  nginx:
     image: nginx:1.27
     restart: unless-stopped
     ports:
@@ -10,17 +10,20 @@ services:
       - cms
     volumes:
       - ./nginx/production.conf:/etc/nginx/conf.d/default.conf
-      - ./certbot/www/:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
     networks:
       - production
 
   certbot:
-    image: certbot/certbot:latest
+    build:
+      context: .
+      dockerfile: ./certbot/Dockerfile
     volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-    networks:
-      - production
+      - ./certbot/conf/:/etc/letsencrypt/conf/:rw
+    secrets:
+      - dns_cloudflare_api_token
+    environment:
+      - DNS_CLOUDFLARE_API_TOKEN_FILE=/run/secrets/dns_cloudflare_api_token
 
   cms:
     image: ghcr.io/ecolier/ciroplaste-cms:1
@@ -56,6 +59,8 @@ secrets:
     external: true
   storage_secret:
     external: true
+  dns_cloudflare_api_token:
+    file: ~/.secrets/dns_cloudflare_api_token
 
 networks:
   production:
