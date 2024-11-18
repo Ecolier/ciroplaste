@@ -14,8 +14,7 @@
       "outputs": [".next/**", "!.next/cache/**", "build", "dist"]
     },
     "web#build": {
-      "dependsOn": ["^build"],
-      "passThroughEnv": ["CMS_SECRET"]
+      "env": ["CMS_SECRET"]
     },
     "lint": {
       "dependsOn": ["^lint"]
