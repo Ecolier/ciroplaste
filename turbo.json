@@ -4,34 +4,14 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env.production.local",
-        ".env.local",
-        ".env.production",
-        ".env"
-      ],
-      "outputs": [".next/**", "!.next/cache/**", "build", "dist"]
-    },
-    "web#build": {
-      "env": ["CMS_SECRET"]
-    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "check-types": {
-      "dependsOn": ["^check-types"]
-    },
-    "dev": {
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env.development.local",
-        ".env.local",
-        ".env.development",
-        ".env"
-      ],
-      "cache": false,
-      "persistent": true
+      "outputs": [".next/**", "!.next/cache/**", "build", "dist"],
+      "env": [
+        "CMS_SCRET",
+        "NEXT_PUBLIC_CONTENT_BASE_URL",
+        "NEXT_PUBLIC_ASSETS_BASE_URL",
+        "NEXT_PUBLIC_INSTAGRAM_LINK",
+        "NEXT_PUBLIC_GITHUB_LINK"
+      ]
     }
   }
 }
