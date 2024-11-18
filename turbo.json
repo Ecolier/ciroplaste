@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "build", "dist"],
       "env": [
-        "CMS_SCRET",
+        "REVALIDATE_SECRET",
         "NEXT_PUBLIC_CONTENT_BASE_URL",
         "NEXT_PUBLIC_ASSETS_BASE_URL",
         "NEXT_PUBLIC_INSTAGRAM_LINK",

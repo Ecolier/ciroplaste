@@ -2,16 +2,16 @@ import crypto from "crypto";
 import { revalidatePath } from "next/cache";
 
 export async function POST(request: Request) {
-  
+
   console.log(
-    process.env.CMS_SECRET,
-    process.env.NEXT_PUBLIC_CMS_SECRET
+    process.env.REVALIDATE_SECRET,
+    process.env
   );
 
   try {
     const text = await request.text();
 
-    const key = Buffer.from(process.env.CMS_SECRET || "", "hex");
+    const key = Buffer.from(process.env.REVALIDATE_SECRET || "", "hex");
 
     const signature = crypto
       .createHmac("sha256", key)
