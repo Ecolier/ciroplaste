@@ -1,8 +1,9 @@
 import crypto from "crypto";
 import { revalidatePath } from "next/cache";
 
+export const dynamic = "force_dynamic";
+
 console.log(
-  process.env,
   process.env.CMS_SECRET,
   process.env.NODE_PATH,
   process.env.VERCEL_REGION,
@@ -11,7 +12,6 @@ console.log(
 
 export async function GET(request: Request) {
 console.log(
-  process.env,
   process.env.CMS_SECRET,
   process.env.NODE_PATH,
   process.env.VERCEL_REGION,
