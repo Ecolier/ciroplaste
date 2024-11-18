@@ -14,7 +14,7 @@
       "outputs": [".next/**", "!.next/cache/**", "build", "dist"]
     },
     "web#build": {
-      "env": ["CMS_SECRET"]
+      "env": ["*"]
     },
     "lint": {
       "dependsOn": ["^lint"]
