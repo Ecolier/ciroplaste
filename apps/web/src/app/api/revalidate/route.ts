@@ -2,12 +2,6 @@ import crypto from "crypto";
 import { revalidatePath } from "next/cache";
 
 export async function POST(request: Request) {
-
-  console.log(
-    process.env.REVALIDATE_SECRET,
-    process.env
-  );
-
   try {
     const text = await request.text();
 
