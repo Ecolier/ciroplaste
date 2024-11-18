@@ -11,7 +11,6 @@
         ".env.production",
         ".env"
       ],
-      "env": ["CMS_SECRET"],
       "outputs": [".next/**", "!.next/cache/**", "build", "dist"]
     },
     "lint": {
