@@ -1,11 +1,11 @@
 import crypto from "crypto";
 import { revalidatePath } from "next/cache";
 
-const secret = process.env.CMS_SECRET;
-
 export async function POST(request: Request) {
+  
   console.log(
-    secret
+    process.env.CMS_SECRET,
+    process.env.NEXT_PUBLIC_CMS_SECRET
   );
 
   try {
