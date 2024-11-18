@@ -1,6 +1,8 @@
 import crypto from 'crypto';
 import { revalidatePath } from 'next/cache';
 
+export const dynamic = "force-dynamic"
+
 export async function POST(request: Request) {
   try {
     const text = await request.text();
@@ -11,8 +13,6 @@ export async function POST(request: Request) {
       .createHmac('sha256', key)
       .update(text)
       .digest('hex');
-
-    console.log(key, signature);
 
     const trusted = Buffer.from(`sha256=${signature}`, 'ascii');
     const untrusted = Buffer.from(
