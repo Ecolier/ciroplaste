@@ -7,9 +7,9 @@ export async function POST(request: Request) {
   try {
     const text = await request.text();
 
-    const key = Buffer.from(process.env.CMS_SECRET || '', "hex");
+    const key = Buffer.from(process.env.VERCEL_CMS_SECRET || '', "hex");
 
-    console.log(process.env.CMS_SECRET)
+    console.log(process.env)
 
     const signature = crypto
       .createHmac('sha256', key)
