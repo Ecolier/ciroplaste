@@ -18,6 +18,9 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  env: {
+    'CMS_SECRET': '2IEJ2IEJI2EJIE2JEO2IEJO2E'
   }
 };
 
