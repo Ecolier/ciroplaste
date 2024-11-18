@@ -13,10 +13,6 @@
       ],
       "outputs": [".next/**", "!.next/cache/**", "build", "dist"]
     },
-    "web#build": {
-      "dependsOn": ["^build"],
-      "env": ["CMS_SECRET"]
-    },
     "lint": {
       "dependsOn": ["^lint"]
     },
