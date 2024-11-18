@@ -1,14 +1,35 @@
 import crypto from "crypto";
 import { revalidatePath } from "next/cache";
 
-export async function POST(request: Request) {
+console.log(
+  process.env,
+  process.env.CMS_SECRET,
+  process.env.NODE_PATH,
+  process.env.VERCEL_REGION,
+  process.env.NEXT_PUBLIC_CONTENT_BASE_URL
+);
 
-  console.log(process.env, process.env.CMS_SECRET, process.env["CMS_SECRET"], process.env.NODE_PATH, process.env.VERCEL_REGION, process.env.NEXT_PUBLIC_CONTENT_BASE_URL)
+export async function GET(request: Request) {
+console.log(
+  process.env,
+  process.env.CMS_SECRET,
+  process.env.NODE_PATH,
+  process.env.VERCEL_REGION,
+  process.env.NEXT_PUBLIC_CONTENT_BASE_URL
+);
+}
+
+export async function POST(request: Request) {
+  console.log(
+    process.env,
+    process.env.CMS_SECRET,
+    process.env.NODE_PATH,
+    process.env.VERCEL_REGION,
+    process.env.NEXT_PUBLIC_CONTENT_BASE_URL
+  );
 
   try {
     const text = await request.text();
-
-    
 
     const key = Buffer.from(process.env.CMS_SECRET || "", "hex");
 
