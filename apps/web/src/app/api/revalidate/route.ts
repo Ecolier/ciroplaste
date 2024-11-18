@@ -1,37 +1,46 @@
-import crypto from 'crypto';
-import { revalidatePath } from 'next/cache';
+import crypto from "crypto";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request: Request) {
   try {
     const text = await request.text();
 
-    const key = Buffer.from(process.env.CMS_SECRET || '', "hex");
+    const key = Buffer.from(process.env.CMS_SECRET || "", "hex");
 
     const signature = crypto
-      .createHmac('sha256', key)
+      .createHmac("sha256", key)
       .update(text)
-      .digest('hex');
+      .digest("hex");
 
-    const trusted = Buffer.from(`sha256=${signature}`, 'ascii');
+    const trusted = Buffer.from(`sha256=${signature}`, "ascii");
     const untrusted = Buffer.from(
-      request.headers.get('x-hub-signature-256') || '',
-      'ascii'
+      request.headers.get("x-hub-signature-256") || "",
+      "ascii"
     );
 
-    console.log('text', text, 'signature', signature, 'key', key, 'headers', request.headers.get('x-hub-signature-256'))
+    console.log(
+      "text",
+      text,
+      "signature",
+      signature,
+      "key",
+      process.env.CMS_SECRET,
+      "headers",
+      request.headers.get("x-hub-signature-256")
+    );
 
     if (!crypto.timingSafeEqual(trusted, untrusted)) {
-      console.log('[Next.js] Invalid signature.', {
-        trusted: trusted.toString('hex'),
-        untrusted: untrusted.toString('hex'),
+      console.log("[Next.js] Invalid signature.", {
+        trusted: trusted.toString("hex"),
+        untrusted: untrusted.toString("hex"),
       });
-      return new Response('Invalid signature.', {
+      return new Response("Invalid signature.", {
         status: 400,
       });
     }
 
     const payload = JSON.parse(text);
-    const {locale, story} = payload;
+    const { locale, story } = payload;
 
     console.log(`[Next.js] Revalidating /${locale}/explore`);
     revalidatePath(`/${locale}/explore`);
@@ -46,7 +55,7 @@ export async function POST(request: Request) {
     });
   }
 
-  return new Response('Success!', {
+  return new Response("Success!", {
     status: 200,
   });
 }
