@@ -12,6 +12,17 @@
         "NEXT_PUBLIC_INSTAGRAM_LINK",
         "NEXT_PUBLIC_GITHUB_LINK"
       ]
+    },
+    "dev": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.development.local",
+        ".env.local",
+        ".env.development",
+        ".env"
+      ],
+      "cache": false,
+      "persistent": true
     }
   }
 }
