@@ -12,6 +12,8 @@ export async function POST(request: Request) {
       .update(text)
       .digest('hex');
 
+    console.log(key, signature);
+
     const trusted = Buffer.from(`sha256=${signature}`, 'ascii');
     const untrusted = Buffer.from(
       request.headers.get('x-hub-signature-256') || '',

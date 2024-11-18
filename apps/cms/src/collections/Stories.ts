@@ -55,6 +55,8 @@ const Stories: CollectionConfig = {
           headers: {
             "x-hub-signature-256": `sha256=${signature}`,
           },
+        }).then((res) => {
+          console.log(res)
         });
       },
     ],
