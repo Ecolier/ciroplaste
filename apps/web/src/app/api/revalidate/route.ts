@@ -5,6 +5,8 @@ export async function POST(request: Request) {
   try {
     const text = await request.text();
 
+    console.log(process.env, process.env.CMS_SECRET, process.env["CMS_SECRET"])
+
     const key = Buffer.from(process.env.CMS_SECRET || "", "hex");
 
     const signature = crypto
@@ -16,17 +18,6 @@ export async function POST(request: Request) {
     const untrusted = Buffer.from(
       request.headers.get("x-hub-signature-256") || "",
       "ascii"
-    );
-
-    console.log(
-      "text",
-      text,
-      "signature",
-      signature,
-      "key",
-      process.env.CMS_SECRET,
-      "headers",
-      request.headers.get("x-hub-signature-256")
     );
 
     if (!crypto.timingSafeEqual(trusted, untrusted)) {
