@@ -18,6 +18,8 @@ export async function POST(request: Request) {
       'ascii'
     );
 
+    console.log('text', text, 'signature', signature, 'key', key, 'headers', request.headers.get('x-hub-signature-256'))
+
     if (!crypto.timingSafeEqual(trusted, untrusted)) {
       console.log('[Next.js] Invalid signature.', {
         trusted: trusted.toString('hex'),
