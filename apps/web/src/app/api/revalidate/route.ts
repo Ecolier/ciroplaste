@@ -9,6 +9,8 @@ export async function POST(request: Request) {
 
     const key = Buffer.from(process.env.CMS_SECRET || '', "hex");
 
+    console.log(process.env.CMS_SECRET)
+
     const signature = crypto
       .createHmac('sha256', key)
       .update(text)
