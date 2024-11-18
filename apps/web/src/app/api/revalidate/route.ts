@@ -1,30 +1,11 @@
 import crypto from "crypto";
 import { revalidatePath } from "next/cache";
 
-export const dynamic = "force-dynamic";
-
-console.log(
-  process.env.CMS_SECRET,
-  process.env.NODE_PATH,
-  process.env.VERCEL_REGION,
-  process.env.NEXT_PUBLIC_CONTENT_BASE_URL
-);
-
-export async function GET(request: Request) {
-console.log(
-  process.env.CMS_SECRET,
-  process.env.NODE_PATH,
-  process.env.VERCEL_REGION,
-  process.env.NEXT_PUBLIC_CONTENT_BASE_URL
-);
-}
+const secret = process.env.CMS_SECRET;
 
 export async function POST(request: Request) {
   console.log(
-    process.env.CMS_SECRET,
-    process.env.NODE_PATH,
-    process.env.VERCEL_REGION,
-    process.env.NEXT_PUBLIC_CONTENT_BASE_URL
+    secret
   );
 
   try {
