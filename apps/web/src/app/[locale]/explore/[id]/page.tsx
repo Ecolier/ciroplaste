@@ -1,24 +1,28 @@
 import React from "react";
-import LocaleDropdown from "./locale-dropdown";
 import StoryHeader from "./story-header";
-import storyLanguageVar from "./story-lng";
 import StoryReader from "./story-reader";
 import { setRequestLocale } from "next-intl/server";
-import GET_STORY from "./get-story";
-import { getClient } from "@/lib/apollo";
-import GET_STORIES from "../get-stories";
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+import { Story } from "@/types/story";
+import { Media } from "@/types/media";
+import { RootNode } from "@/types/rich-text-node";
 
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
 export const dynamicParams = false;
 
-export async function generateStaticParams({ params: { locale } }) {
+type GenerateStaticParamsProps = {
+  params: { locale: string };
+};
+
+export async function generateStaticParams({
+  params: { locale },
+}: GenerateStaticParamsProps) {
   const res = await fetch(
     `${contentBaseUrl}/api/stories/?locale=${locale}&draft=false&depth=0`
   );
-  const stories = await res.json();
+  const stories = (await res.json()) as { docs: Story[] };
   return stories.docs.map(({ id }) => ({ id }));
 }
 
@@ -26,11 +30,15 @@ async function getStory(id: string, locale: string) {
   const res = await fetch(
     `${contentBaseUrl}/api/stories/${id}?locale=${locale}&draft=false&depth=1`
   );
-  const story = await res.json();
+  const story = (await res.json()) as Story;
   return story;
 }
 
-export default async function Story({ params }) {
+export type StoryProps = {
+  params: Promise<{ locale: string; id: string }>;
+};
+
+export default async function StoryPage({ params }: StoryProps) {
   const { locale, id } = await params;
   setRequestLocale(locale);
   const story = await getStory(id, locale);
@@ -45,7 +53,7 @@ export default async function Story({ params }) {
               text={story.subtitle!}
               backgroundImageURL={`${(story.callout!.value as Media).url}`}
             />
-            <StoryReader rootNode={story.content.root} />
+            <StoryReader rootNode={story.content!.root as RootNode} />
           </div>
         </main>
       </div>

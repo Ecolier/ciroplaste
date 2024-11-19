@@ -1,23 +1,19 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import storyLanguageVar from "./story-lng";
-import { useReactiveVar } from "@apollo/client";
+import { useRouter } from "next/router";
 
 type LocaleDropdownProps = {
-  onLocaleChanges: (locale: string) => void;
+  locale: string;
   availableLanguages: string[];
 };
 
-function LocaleDropdown({
-  onLocaleChanges,
-  availableLanguages,
-}: LocaleDropdownProps) {
-  const currentLng = useReactiveVar(storyLanguageVar);
+function LocaleDropdown({ locale, availableLanguages }: LocaleDropdownProps) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   const updateLanguage = useCallback((lng: string) => {
-    onLocaleChanges(lng);
-  }, []);
+    router.push(`/${lng}`);
+  }, [router]);
   return (
     <div
       rel="button"
@@ -26,7 +22,7 @@ function LocaleDropdown({
     >
       <div className="bg-chalk-100 text-chalk-600 dark:text-chalk-200 hover:text-chalk-900 dark:hover:text-chalk-50 dark:hover:bg-chalk-800 dark:bg-chalk-900 flex cursor-pointer justify-center px-4 py-2 transition-colors">
         <span className="material-symbols-rounded mr-2">arrow_drop_down</span>
-        {currentLng}
+        {locale}
       </div>
       {open && (
         <ul className="dark:bg-chalk-900 bg-chalk-100 absolute left-0 top-full flex w-full flex-col items-center py-2">

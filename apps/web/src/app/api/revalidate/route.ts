@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       revalidatePath(`/${locale}/explore/${story}`);
     }
   } catch (error) {
-    return new Response(`Webhook error: ${error.message}`, {
+    return new Response(`Webhook error: ${error}`, {
       status: 400,
     });
   }

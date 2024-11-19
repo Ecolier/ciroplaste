@@ -14,7 +14,11 @@ async function getStories(locale: string) {
   return stories;
 }
 
-export default async function Explore({ params }) {
+type ExploreProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function Explore({ params }: ExploreProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const stories = await getStories(locale);

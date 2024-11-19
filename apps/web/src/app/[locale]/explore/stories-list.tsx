@@ -1,7 +1,13 @@
 import { Link } from "@/i18n/routing";
 import StoryCard from "./story-card";
+import { Story } from "@/types/story";
+import { Media } from "@/types/media";
 
-function StoriesList({ stories }) {
+type StoriesListProps = {
+  stories: Story[];
+};
+
+function StoriesList({ stories }: StoriesListProps) {
   return (
     <>
       {stories?.map((story, index) => (

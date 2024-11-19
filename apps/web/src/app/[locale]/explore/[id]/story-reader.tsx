@@ -7,8 +7,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import useStoryParser from "./use-story-renderer";
 import StoryOutline from "./story-outline";
-import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
-
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -17,20 +16,18 @@ type StoryReaderProps = {
 };
 
 function StoryReader({ rootNode }: StoryReaderProps) {
-  
   const { containerRef } = useDrawer();
   const { contextSafe } = useGSAP({ scope: containerRef });
 
   const scrollTo = (id: string) =>
     contextSafe(() => {
-      console.log(containerRef.current)
       gsap.to(containerRef.current, {
         duration: 0.2,
         scrollTo: {
           y: `#${id}`,
           offsetY:
             window.innerHeight / 2 -
-            document.getElementById(id).getBoundingClientRect().height / 2,
+            document.getElementById(id)!.getBoundingClientRect().height / 2,
         },
       });
     });
@@ -41,15 +38,15 @@ function StoryReader({ rootNode }: StoryReaderProps) {
       parsedStory
         .filter(
           (element) =>
-            typeof element.type === "string" && element.type[0] === "h",
+            typeof element.type === "string" && element.type[0] === "h"
         )
         .map((element) => ({
-          text: element.props.children
-            .reduce((arr, curr) => [...arr, curr.props.children], [])
+          text: (element.props.children as React.JSX.Element[])
+            .reduce((arr, curr) => [...arr, curr.props.children], [] as React.JSX.Element[])
             .join(""),
           id: element.props.id,
         })),
-    [parsedStory],
+    [parsedStory]
   );
 
   return (

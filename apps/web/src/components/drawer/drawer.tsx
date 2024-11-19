@@ -18,7 +18,7 @@ function Drawer({ isActive }: DrawerProps) {
     setDisplayRail(
       window.matchMedia("(min-width: 768px)").matches ? true : false,
     );
-  });
+  }, [setDisplayRail]);
 
   useEffect(() => {
     window

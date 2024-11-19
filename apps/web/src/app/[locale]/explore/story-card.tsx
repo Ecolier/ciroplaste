@@ -7,8 +7,6 @@ interface StoryCardProps {
   backgroundImageURL: string;
 }
 
-const assetsBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
-
 function StoryCard({
   title,
   text,
@@ -19,7 +17,14 @@ function StoryCard({
     <>
       <div className={`relative flex w-full flex-col`}>
         <div className="min-h-96 relative">
-          <Image alt="@todo" src={`${backgroundImageURL}`} className="object-cover" fill={true} priority={true} unoptimized />
+          <Image
+            alt="@todo"
+            src={`${backgroundImageURL}`}
+            className="object-cover"
+            fill={true}
+            priority={true}
+            unoptimized
+          />
         </div>
         <div className="absolute left-0 top-0 h-full w-full bg-gradient-to-t from-[black]/65" />
         <div className="absolute bottom-0 flex flex-col p-4">

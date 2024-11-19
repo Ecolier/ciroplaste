@@ -16,6 +16,23 @@ COPY . .
 # Generate a partial monorepo with a pruned lockfile for a target workspace.
 # Assuming "web" is the name entered in the project's package.json: { name: "web" }
 RUN turbo prune @crp/cms --docker
+
+FROM node:22.6-alpine AS development
+
+RUN corepack enable
+
+WORKDIR /app
+
+COPY --from=builder --link /app/out/json/ .
+RUN pnpm install
+
+COPY --from=builder /app/out/full/ .
+
+EXPOSE 3000
+
+ENTRYPOINT [ "pnpm" ]
+
+CMD ["dev", "--filter=@crp/cms..."]
  
 # Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer

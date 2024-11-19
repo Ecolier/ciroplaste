@@ -13,22 +13,21 @@ function StoryOutline({ headings, onClick }: StoryOutlineProps) {
   >([]);
 
   const { observe } = useOutlineSpy({
-    onChange: setActiveHeadings,
+    onChange: (elements) => setActiveHeadings(() => elements),
   });
 
-  useEffect(
-    () => headings.forEach(({ id }) => observe(document.getElementById(id))),
-    [headings],
-  );
+  useEffect(() => {
+    headings.forEach(({ id }) => observe(document.getElementById(id)!));
+  }, [headings]);
 
   const sortedHeadings = useMemo(
     () =>
       activeHeadings.sort(
         (a, b) =>
-          document.getElementById(a.id).getBoundingClientRect().top -
-          document.getElementById(b.id).getBoundingClientRect().top,
+          document.getElementById(a.id)!.getBoundingClientRect().top -
+          document.getElementById(b.id)!.getBoundingClientRect().top
       ),
-    [activeHeadings],
+    [activeHeadings]
   );
 
   return (

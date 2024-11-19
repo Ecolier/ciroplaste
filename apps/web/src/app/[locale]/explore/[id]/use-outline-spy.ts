@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 
 type UseOutlineSpyProps = {
   onChange: (elements: {text: string, id: string}[]) => void;
@@ -11,7 +11,7 @@ const useOutlineSpy = ({ onChange }: UseOutlineSpyProps) => {
   useEffect(() => {
     if (intersectionObserver.current) {
       targets.forEach((element) =>
-        intersectionObserver.current.observe(element),
+        intersectionObserver.current!.observe(element),
       );
     }
   }, [targets]);
@@ -34,7 +34,7 @@ const useOutlineSpy = ({ onChange }: UseOutlineSpyProps) => {
         rootMargin: `0px 0px -50% 0px`,
       },
     );
-    return () => intersectionObserver.current.disconnect();
+    return () => intersectionObserver.current!.disconnect();
   });
 
   return {

@@ -2,7 +2,7 @@ import { Link } from "@/i18n/routing";
 import useDrawer from "./use-drawer";
 
 type LabeledLink = {
-  iconElement: JSX.Element;
+  iconElement: React.JSX.Element;
   label: string;
   href: string;
 };

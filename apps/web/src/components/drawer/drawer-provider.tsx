@@ -7,7 +7,7 @@ interface DrawerContextProps {
   isActive: boolean;
   toggle: React.Dispatch<React.SetStateAction<void>>;
   close: React.Dispatch<React.SetStateAction<void>>;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export const DrawerContext = React.createContext<DrawerContextProps>({
@@ -19,7 +19,7 @@ export const DrawerContext = React.createContext<DrawerContextProps>({
 
 function DrawerProvider({ children }: React.PropsWithChildren) {
   const [isActive, setIsActive] = React.useState(false);
-  const containerRef = React.createRef<HTMLDivElement>();
+  const containerRef = React.useRef<HTMLDivElement>(null);
   return (
     <DrawerContext.Provider
       value={{

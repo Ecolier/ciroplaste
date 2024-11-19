@@ -1,7 +1,28 @@
 services:
+  cms:
+    build:
+      target: development
+    volumes:
+      - ./apps/cms/src:/app/apps/cms/src
+    networks:
+      - development
+
   database:
     ports:
       - 27017:27017
+    networks:
+      - development
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: development
+    restart: unless-stopped
+    ports:
+      - 3001:3001
+    volumes:
+      - ./apps/web/src:/app/apps/web/src
     networks:
       - development
 

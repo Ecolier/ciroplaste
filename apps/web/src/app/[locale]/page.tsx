@@ -5,7 +5,11 @@ import React from "react";
 import { Link } from "@/i18n/routing";
 import Header from "@/components/header/header";
 
-export default function Home({ params }) {
+type LandingProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export default function Home({ params }: LandingProps) {
   const { locale } = React.use(params);
   setRequestLocale(locale);
   const t = useTranslations();

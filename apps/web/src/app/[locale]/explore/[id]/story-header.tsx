@@ -4,14 +4,12 @@ type StoryHeaderProps = {
   title: string;
   text: string;
   backgroundImageURL: string;
-  tooltip: JSX.Element;
 };
 
 function StoryHeader({
   title,
   text,
   backgroundImageURL,
-  tooltip,
 }: StoryHeaderProps) {
   return (
     <div className="md:sticky relative flex h-[50vh] w-full flex-col items-center justify-center md:-top-[16.665vh] md:h-[33.333vh]">
@@ -21,7 +19,6 @@ function StoryHeader({
         </h1>
         <p className="text-chalk-50 text-[2.083vh]">{text}</p>
       </div>
-      <div className="absolute bottom-0 right-0 m-3">{tooltip}</div>
       <div className="absolute top-0 -z-10 h-full w-full">
         <Image
           alt="@todo"

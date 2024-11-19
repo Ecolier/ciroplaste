@@ -2,10 +2,9 @@ import { useTranslations } from "next-intl";
 import Squiggle from "../squiggle";
 import FooterColumn from "./footer-column";
 import React from "react";
-import { setRequestLocale } from "next-intl/server";
 
-const instagramUrl = process.env.NEXT_PUBLIC_INSTAGRAM_LINK;
-const githubUrl = process.env.NEXT_PUBLIC_GITHUB_LINK;
+const instagramUrl = process.env.NEXT_PUBLIC_INSTAGRAM_LINK ?? '';
+const githubUrl = process.env.NEXT_PUBLIC_GITHUB_LINK ?? '';
 
 function Footer() {
   const t = useTranslations();
