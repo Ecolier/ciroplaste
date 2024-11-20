@@ -11,8 +11,6 @@ import { Profile } from "@/types/profile";
 
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
-export const dynamicParams = false;
-
 type GenerateStaticParamsProps = {
   params: { locale: string };
 };
