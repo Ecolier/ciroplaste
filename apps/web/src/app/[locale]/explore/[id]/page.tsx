@@ -7,6 +7,7 @@ import Header from "@/components/header/header";
 import { Story } from "@/types/story";
 import { Media } from "@/types/media";
 import { RootNode } from "@/types/rich-text-node";
+import { Profile } from "@/types/profile";
 
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
@@ -15,6 +16,27 @@ export const dynamicParams = false;
 type GenerateStaticParamsProps = {
   params: { locale: string };
 };
+
+async function getStory(id: string, locale: string) {
+  const res = await fetch(
+    `${contentBaseUrl}/api/stories/${id}?locale=${locale}&draft=false&depth=1`
+  );
+  const story = (await res.json()) as Story;
+  return story;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; id: string }>;
+}) {
+  const { locale, id } = await params;
+  const story = await getStory(id, locale);
+  return {
+    title: story.title,
+    description: story.subtitle,
+  };
+}
 
 export async function generateStaticParams({
   params: { locale },
@@ -26,14 +48,6 @@ export async function generateStaticParams({
   return stories.docs.map(({ id }) => ({ id }));
 }
 
-async function getStory(id: string, locale: string) {
-  const res = await fetch(
-    `${contentBaseUrl}/api/stories/${id}?locale=${locale}&draft=false&depth=1`
-  );
-  const story = (await res.json()) as Story;
-  return story;
-}
-
 export type StoryProps = {
   params: Promise<{ locale: string; id: string }>;
 };
@@ -42,6 +56,23 @@ export default async function StoryPage({ params }: StoryProps) {
   const { locale, id } = await params;
   setRequestLocale(locale);
   const story = await getStory(id, locale);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    name: story.title,
+    description: story.subtitle,
+    image: [(story.callout?.value as Media).url],
+    datePublished: story.createdAt,
+    dateModified: story.updatedAt,
+    author: [
+      {
+        "@type": "Person",
+        name: (story.author!.value as Profile).name,
+        url: (story.author!.value as Profile).url,
+      },
+    ],
+  };
+
   return (
     <>
       <Header />
@@ -58,6 +89,10 @@ export default async function StoryPage({ params }: StoryProps) {
         </main>
       </div>
       <Footer />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Fragment } from "react/jsx-runtime";
-import { RichTextNode } from "../../../../types/rich-text-node";
+import { RichTextNode } from "@/types/rich-text-node";
 import Image from "next/image";
 
 const useStoryParser = (root: RichTextNode) =>
@@ -41,11 +41,19 @@ const useStoryParser = (root: RichTextNode) =>
           const fragments = children.flatMap(loop);
           switch (node.type) {
             case "heading":
+              const fontSizeForTag = {
+                h1: "text-6xl",
+                h2: "text-5xl",
+                h3: "text-4xl",
+                h4: "text-3xl",
+                h5: "text-2xl",
+                h6: "text-xl",
+              };
               return (
                 <node.tag
                   id={`heading_${index}`}
                   key={index}
-                  className={`text-chalk-800 dark:text-chalk-300 ${node.tag === "h1" ? "text-4xl font-medium" : "text-2xl"} mb-4`}
+                  className={`text-chalk-800 dark:text-chalk-300 ${fontSizeForTag[node.tag]} mb-4`}
                 >
                   {fragments}
                 </node.tag>
@@ -63,7 +71,7 @@ const useStoryParser = (root: RichTextNode) =>
         }
         return <Fragment key={index}></Fragment>;
       }),
-    [root],
+    [root]
   );
 
 export default useStoryParser;

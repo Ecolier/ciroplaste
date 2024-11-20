@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import React from "react";
 import StoriesList from "./stories-list";
 import Header from "@/components/header/header";
+import { getTranslations } from "next-intl/server";
 
 const contentBaseUrl = process.env.NEXT_PUBLIC_CONTENT_BASE_URL;
 
@@ -18,6 +19,13 @@ type ExploreProps = {
   params: Promise<{ locale: string }>;
 };
 
+export async function generateMetadata() {
+  const t = await getTranslations();
+  return {
+    title: t('Explore'),
+  }
+}
+
 export default async function Explore({ params }: ExploreProps) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -25,7 +33,7 @@ export default async function Explore({ params }: ExploreProps) {
   return (
     <>
       <Header />
-      <div className="pt-[64px] md:pt-0 md:m-2">
+      <div className="pt-[64px] md:pt-0 m-2">
         <StoriesList stories={stories.docs} />
       </div>
       <Footer />

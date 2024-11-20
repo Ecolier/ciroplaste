@@ -11,7 +11,7 @@ function StoriesList({ stories }: StoriesListProps) {
   return (
     <>
       {stories?.map((story, index) => (
-        <div key={index} className="mb-2 w-full">
+        <div key={index} className="mb-2 w-full rounded-3xl overflow-hidden">
           <Link href={`/explore/${story.id}`}>
             <StoryCard
               title={story.title!}

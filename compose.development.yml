@@ -3,7 +3,7 @@ services:
     build:
       target: development
     volumes:
-      - ./apps/cms/src:/app/apps/cms/src
+      - ./apps/cms:/app/apps/cms
     networks:
       - development
 
@@ -22,7 +22,7 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - ./apps/web/src:/app/apps/web/src
+      - ./apps/web:/app/apps/web
     networks:
       - development
 

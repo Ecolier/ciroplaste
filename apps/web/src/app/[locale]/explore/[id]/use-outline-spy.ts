@@ -9,7 +9,7 @@ const useOutlineSpy = ({ onChange }: UseOutlineSpyProps) => {
   const intersectionObserver = useRef<IntersectionObserver>(null);
 
   useEffect(() => {
-    if (intersectionObserver.current) {
+    if (intersectionObserver.current !== null) {
       targets.forEach((element) =>
         intersectionObserver.current!.observe(element),
       );
@@ -35,7 +35,7 @@ const useOutlineSpy = ({ onChange }: UseOutlineSpyProps) => {
       },
     );
     return () => intersectionObserver.current!.disconnect();
-  });
+  }, [intersectionObserver]);
 
   return {
     observe(target: Element) {

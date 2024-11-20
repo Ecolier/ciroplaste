@@ -1,12 +1,12 @@
-import { User } from './user';
 import { Media } from './media';
+import { Profile } from './profile';
 
 export interface Story {
   id: string;
   title?: string | null;
   subtitle?: string | null;
   callout?: {
-    relationTo: "media";
+    relationTo: 'media';
     value: string | Media;
   } | null;
   content?: {
@@ -17,16 +17,16 @@ export interface Story {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
     [k: string]: unknown;
   } | null;
   author?: {
-    relationTo: "users";
-    value: string | User;
+    relationTo: 'profiles';
+    value: string | Profile;
   } | null;
   updatedAt: string;
   createdAt: string;

@@ -64,7 +64,7 @@ export default {
     },
     fontFamily: {
       sans: ["var(--font-noto-sans)", "sans-serif"],
-      serif: ["var(--font-lora)", "serif"],
+      serif: ["var(--font-playfair_display)", "serif"],
       symbols: ["var(--font-symbols)"],
     },
   },

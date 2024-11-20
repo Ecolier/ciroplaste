@@ -16,7 +16,7 @@ function Drawer({ isActive }: DrawerProps) {
 
   useEffect(() => {
     setDisplayRail(
-      window.matchMedia("(min-width: 768px)").matches ? true : false,
+      window.matchMedia("(min-width: 768px)").matches ? true : false
     );
   }, [setDisplayRail]);
 
@@ -74,10 +74,13 @@ function Drawer({ isActive }: DrawerProps) {
       ) : (
         <>
           <aside
-            className={`bg-chalk-100 dark:bg-chalk-900 fixed bottom-0 top-0 z-40 w-80 -translate-x-80 shadow-md ${isReset.current ? `transition-none` : `transition-transform`} ${isActive ? `translate-x-0` : `-translate-x-80`}`}
+            className={`bg-chalk-100 rounded-r-3xl dark:bg-chalk-900 fixed bottom-0 top-0 z-40 w-80 -translate-x-80 shadow-md ${isReset.current ? `transition-none` : `transition-transform`} ${isActive ? `translate-x-0` : `-translate-x-80`}`}
           >
             <nav className="mt-2">
-              <DrawerButton transparent={false} className="mb-2 ml-3 md:invisible" />
+              <DrawerButton
+                transparent={false}
+                className="mb-2 ml-3 md:invisible"
+              />
               <NavigationList
                 links={[
                   {
