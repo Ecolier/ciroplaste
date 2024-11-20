@@ -7,6 +7,7 @@ import Users from './collections/Users'
 import secrets from './secrets'
 import Stories from './collections/Stories'
 import Media from './collections/Media'
+import Profile from './collections/Profiles'
 import db from './database'
 import cloudStorage from './cloud-storage'
 import { defaultLexical } from './fields/defaultLexical'
@@ -32,7 +33,7 @@ export default buildConfig({
     defaultLocale: 'en',
     fallback: true,
   },
-  collections: [Users, Stories, Media],
+  collections: [Users, Stories, Media, Profile],
   editor: defaultLexical,
   secret: SECRET,
   typescript: {

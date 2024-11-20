@@ -34,7 +34,7 @@ const Stories: CollectionConfig = {
     {
       name: "author",
       type: "relationship",
-      relationTo: ["users"],
+      relationTo: ["profiles"],
     },
   ],
   hooks: {
@@ -55,8 +55,6 @@ const Stories: CollectionConfig = {
           headers: {
             "x-hub-signature-256": `sha256=${signature}`,
           },
-        }).then((res) => {
-          console.log(res)
         });
       },
     ],
